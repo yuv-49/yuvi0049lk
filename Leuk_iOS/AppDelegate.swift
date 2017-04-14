@@ -10,13 +10,32 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
 	var window: UIWindow?
 
-
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
+
+		
+
+		// Mark:- Google configuration.
+		
+		var configureError: NSError?
+		GGLContext.sharedInstance().configureWithError(&configureError)
+		if (configureError != nil){
+			print("error: \(configureError)")
+		}
+		
+//		if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+//			
+//						
+//			let sb = UIStoryboard(name: "Main", bundle: nil)
+//			if let tabBarVC = sb.instantiateViewController(withIdentifier: "googledone") as? UIViewController {
+//				window?.rootViewController = tabBarVC
+//			}
+//			
+//		}
+		
 		return true
 	}
 
@@ -89,5 +108,82 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	    }
 	}
 
+	
+		
+//	func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//		return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+//	}
+	
+	
+	
+	
+	
+	
+	//MARK:- Google Signup
+	
+	func application(_ application: UIApplication,
+	                 open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+		
+		let googleDidHandle = GIDSignIn.sharedInstance().handle(url,
+		                                                        sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+		                                                        annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+		
+//		let facebookDidHandle = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+		
+		
+		return googleDidHandle // || facebookDidHandle
+		
+	}
 }
+
+	
+
+//MARK: - colour extension
+
+extension UIColor {
+	
+	static func candyGreen() -> UIColor {
+		return UIColor(red: 156.0/255.0, green: 229.0/255.0, blue: 124.0/255.0, alpha: 1.0)
+	}
+	
+	static func myGreen() -> UIColor {
+		return UIColor(red: 133.0/255.0, green: 190.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+	}
+	static func black() -> UIColor {
+		return UIColor(red: 36.0/255.0, green: 36.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+	}
+	
+	static func darkRed() -> UIColor {
+		return UIColor(red: 101/255.0, green: 13/255.0, blue: 0/255.0, alpha:1.0)
+	}
+	
+	static func lightRed() -> UIColor {
+		return UIColor(red: 120/255.0, green: 13/255.0, blue: 20/255.0, alpha:1.0)
+	}
+	
+	static func leukRed() -> UIColor {
+		return UIColor(red: 245/255.0, green: 83/255.0, blue: 80/255.0, alpha:1.0)
+	}
+	
+	static func pageControlColor() -> UIColor {
+		return UIColor(red: 190/255.0, green: 30/255.0, blue: 45/255.0, alpha:1.0)
+	}
+	
+}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 

@@ -7,14 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15F1B9D488105E12459141B8 /* Pods_Leuk_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5963E9E60EC73E325FDD52E7 /* Pods_Leuk_iOS.framework */; };
+		2809E2F41E9D30D300F2ED34 /* PlacesFirstTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809E2F31E9D30D300F2ED34 /* PlacesFirstTVC.swift */; };
+		2809E2F61E9D30FE00F2ED34 /* PlacesFirstTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809E2F51E9D30FE00F2ED34 /* PlacesFirstTVCell.swift */; };
+		2809E2F81E9D4BF800F2ED34 /* PlacesSecondaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2809E2F71E9D4BF800F2ED34 /* PlacesSecondaryVC.swift */; };
+		281E60701E9ECF120051423C /* LoadingDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281E606F1E9ECF120051423C /* LoadingDataVC.swift */; };
+		28248B301EA051C400BEC756 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28248B2F1EA051C400BEC756 /* Constants.swift */; };
 		2837CE461E8BBECA000AF281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE451E8BBECA000AF281 /* AppDelegate.swift */; };
-		2837CE481E8BBECA000AF281 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE471E8BBECA000AF281 /* ViewController.swift */; };
+		2837CE481E8BBECA000AF281 /* HomeFirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE471E8BBECA000AF281 /* HomeFirstVC.swift */; };
 		2837CE4B1E8BBECA000AF281 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2837CE491E8BBECA000AF281 /* Main.storyboard */; };
 		2837CE4E1E8BBECA000AF281 /* Leuk_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE4C1E8BBECA000AF281 /* Leuk_iOS.xcdatamodeld */; };
 		2837CE501E8BBECA000AF281 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2837CE4F1E8BBECA000AF281 /* Assets.xcassets */; };
 		2837CE531E8BBECA000AF281 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2837CE511E8BBECA000AF281 /* LaunchScreen.storyboard */; };
 		2837CE5E1E8BBECA000AF281 /* Leuk_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE5D1E8BBECA000AF281 /* Leuk_iOSTests.swift */; };
 		2837CE691E8BBECA000AF281 /* Leuk_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE681E8BBECA000AF281 /* Leuk_iOSUITests.swift */; };
+		2837CE771E8BC0BE000AF281 /* HomeFirstCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE761E8BC0BE000AF281 /* HomeFirstCVCell.swift */; };
+		2837CE7C1E8BD492000AF281 /* HomeSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE7B1E8BD492000AF281 /* HomeSecondVC.swift */; };
+		2837CE7E1E8BD4B2000AF281 /* HomeThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE7D1E8BD4B2000AF281 /* HomeThirdVC.swift */; };
+		2837CE801E8BD53F000AF281 /* HomeSecondCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE7F1E8BD53F000AF281 /* HomeSecondCVCell.swift */; };
+		28F54FBD1E9FF1E700AAAB3E /* DiscoverTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FBC1E9FF1E700AAAB3E /* DiscoverTVC.swift */; };
+		28F54FBF1E9FF20400AAAB3E /* DiscoverTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FBE1E9FF20400AAAB3E /* DiscoverTVCell.swift */; };
+		28F54FC31EA0110100AAAB3E /* EventsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC21EA0110100AAAB3E /* EventsTVC.swift */; };
+		28F54FC51EA0111C00AAAB3E /* EventsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC41EA0111C00AAAB3E /* EventsTVCell.swift */; };
+		28F54FC71EA01A6100AAAB3E /* OffersCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC61EA01A6100AAAB3E /* OffersCVC.swift */; };
+		28F54FCA1EA01AA300AAAB3E /* OffersCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC91EA01AA300AAAB3E /* OffersCVCell.swift */; };
+		28FC33611E9F824800F4A813 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FC33601E9F824800F4A813 /* GoogleService-Info.plist */; };
+		28FC33681E9F86C900F4A813 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC33671E9F86C900F4A813 /* SignInVC.swift */; };
+		28FC336B1E9FA6F400F4A813 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FC336A1E9FA6F400F4A813 /* SWRevealViewController.m */; };
+		28FC336E1E9FAB4F00F4A813 /* MenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC336D1E9FAB4F00F4A813 /* MenuTableVC.swift */; };
+		28FC33701E9FAB6F00F4A813 /* MenuTableVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC336F1E9FAB6F00F4A813 /* MenuTableVCell.swift */; };
+		28FC33731E9FCA7200F4A813 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC33721E9FCA7200F4A813 /* ProfileVC.swift */; };
+		28FC33751E9FCDCF00F4A813 /* TicketsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC33741E9FCDCF00F4A813 /* TicketsVC.swift */; };
+		28FC33771E9FCDE500F4A813 /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC33761E9FCDE500F4A813 /* OrderVC.swift */; };
+		28FC33791E9FCDFF00F4A813 /* CouponsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC33781E9FCDFF00F4A813 /* CouponsVC.swift */; };
+		28FC337B1E9FCE2A00F4A813 /* TicketsVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337A1E9FCE2A00F4A813 /* TicketsVCell.swift */; };
+		28FC337D1E9FCE3C00F4A813 /* OrderVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337C1E9FCE3C00F4A813 /* OrderVCell.swift */; };
+		28FC337F1E9FCE5100F4A813 /* CouponsVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337E1E9FCE5100F4A813 /* CouponsVCell.swift */; };
+		63568D8ED0141A383566FDCB /* Pods_Leuk_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82957FACEEC3C232CBFAF92 /* Pods_Leuk_iOSTests.framework */; };
+		ECF75B855BE7C90C92A17F5D /* Pods_Leuk_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63D3DBC6FA9A13D06C6C3CA /* Pods_Leuk_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +65,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2809E2F31E9D30D300F2ED34 /* PlacesFirstTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesFirstTVC.swift; sourceTree = "<group>"; };
+		2809E2F51E9D30FE00F2ED34 /* PlacesFirstTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesFirstTVCell.swift; sourceTree = "<group>"; };
+		2809E2F71E9D4BF800F2ED34 /* PlacesSecondaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesSecondaryVC.swift; sourceTree = "<group>"; };
+		281E606F1E9ECF120051423C /* LoadingDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingDataVC.swift; sourceTree = "<group>"; };
+		28248B2F1EA051C400BEC756 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2837CE421E8BBECA000AF281 /* Leuk_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leuk_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2837CE451E8BBECA000AF281 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2837CE471E8BBECA000AF281 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2837CE471E8BBECA000AF281 /* HomeFirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFirstVC.swift; sourceTree = "<group>"; };
 		2837CE4A1E8BBECA000AF281 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2837CE4D1E8BBECA000AF281 /* Leuk_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Leuk_iOS.xcdatamodel; sourceTree = "<group>"; };
 		2837CE4F1E8BBECA000AF281 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +84,39 @@
 		2837CE641E8BBECA000AF281 /* Leuk_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Leuk_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2837CE681E8BBECA000AF281 /* Leuk_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leuk_iOSUITests.swift; sourceTree = "<group>"; };
 		2837CE6A1E8BBECA000AF281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2837CE761E8BC0BE000AF281 /* HomeFirstCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFirstCVCell.swift; sourceTree = "<group>"; };
+		2837CE7B1E8BD492000AF281 /* HomeSecondVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSecondVC.swift; sourceTree = "<group>"; };
+		2837CE7D1E8BD4B2000AF281 /* HomeThirdVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeThirdVC.swift; sourceTree = "<group>"; };
+		2837CE7F1E8BD53F000AF281 /* HomeSecondCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSecondCVCell.swift; sourceTree = "<group>"; };
+		28F54FBC1E9FF1E700AAAB3E /* DiscoverTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTVC.swift; sourceTree = "<group>"; };
+		28F54FBE1E9FF20400AAAB3E /* DiscoverTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTVCell.swift; sourceTree = "<group>"; };
+		28F54FC21EA0110100AAAB3E /* EventsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTVC.swift; sourceTree = "<group>"; };
+		28F54FC41EA0111C00AAAB3E /* EventsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTVCell.swift; sourceTree = "<group>"; };
+		28F54FC61EA01A6100AAAB3E /* OffersCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersCVC.swift; sourceTree = "<group>"; };
+		28F54FC91EA01AA300AAAB3E /* OffersCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersCVCell.swift; sourceTree = "<group>"; };
+		28FC33601E9F824800F4A813 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28FC33621E9F832A00F4A813 /* Leuk_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Leuk_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		28FC33671E9F86C900F4A813 /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		28FC33691E9FA6F400F4A813 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		28FC336A1E9FA6F400F4A813 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		28FC336D1E9FAB4F00F4A813 /* MenuTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableVC.swift; sourceTree = "<group>"; };
+		28FC336F1E9FAB6F00F4A813 /* MenuTableVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableVCell.swift; sourceTree = "<group>"; };
+		28FC33721E9FCA7200F4A813 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		28FC33741E9FCDCF00F4A813 /* TicketsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsVC.swift; sourceTree = "<group>"; };
+		28FC33761E9FCDE500F4A813 /* OrderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
+		28FC33781E9FCDFF00F4A813 /* CouponsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponsVC.swift; sourceTree = "<group>"; };
+		28FC337A1E9FCE2A00F4A813 /* TicketsVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsVCell.swift; sourceTree = "<group>"; };
+		28FC337C1E9FCE3C00F4A813 /* OrderVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderVCell.swift; sourceTree = "<group>"; };
+		28FC337E1E9FCE5100F4A813 /* CouponsVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponsVCell.swift; sourceTree = "<group>"; };
+		2B99307884C85FF1561A381D /* Pods-Leuk_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		35644FC66C827AF22EB2E51C /* Pods-Leuk_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5963E9E60EC73E325FDD52E7 /* Pods_Leuk_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B82957FACEEC3C232CBFAF92 /* Pods_Leuk_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C63D3DBC6FA9A13D06C6C3CA /* Pods_Leuk_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D730674BD5E9ED76EBC9ED81 /* Pods-Leuk_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOS/Pods-Leuk_iOS.release.xcconfig"; sourceTree = "<group>"; };
+		E0F675ECF1E5243C42DCE3BE /* Pods-Leuk_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSTests/Pods-Leuk_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB40E9E15E170EF5E979B115 /* Pods-Leuk_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOS/Pods-Leuk_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FDF5EA74B4F6320FC36806BC /* Pods-Leuk_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSTests/Pods-Leuk_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15F1B9D488105E12459141B8 /* Pods_Leuk_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63568D8ED0141A383566FDCB /* Pods_Leuk_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +140,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF75B855BE7C90C92A17F5D /* Pods_Leuk_iOSUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2809E2F21E9D306500F2ED34 /* PlacesVC */ = {
+			isa = PBXGroup;
+			children = (
+				2809E2F31E9D30D300F2ED34 /* PlacesFirstTVC.swift */,
+				2809E2F51E9D30FE00F2ED34 /* PlacesFirstTVCell.swift */,
+				2809E2F71E9D4BF800F2ED34 /* PlacesSecondaryVC.swift */,
+			);
+			name = PlacesVC;
+			sourceTree = "<group>";
+		};
 		2837CE391E8BBEC9000AF281 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +164,8 @@
 				2837CE5C1E8BBECA000AF281 /* Leuk_iOSTests */,
 				2837CE671E8BBECA000AF281 /* Leuk_iOSUITests */,
 				2837CE431E8BBECA000AF281 /* Products */,
+				BCCF875DC71482F4FE6C9772 /* Pods */,
+				BE4D60495710BB367A530D94 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,12 +182,13 @@
 		2837CE441E8BBECA000AF281 /* Leuk_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				28248B2F1EA051C400BEC756 /* Constants.swift */,
 				2837CE451E8BBECA000AF281 /* AppDelegate.swift */,
-				2837CE471E8BBECA000AF281 /* ViewController.swift */,
 				2837CE491E8BBECA000AF281 /* Main.storyboard */,
+				2837CE7A1E8BD45C000AF281 /* Supporting */,
+				2837CE781E8BD42A000AF281 /* Controller */,
 				2837CE4F1E8BBECA000AF281 /* Assets.xcassets */,
 				2837CE511E8BBECA000AF281 /* LaunchScreen.storyboard */,
-				2837CE541E8BBECA000AF281 /* Info.plist */,
 				2837CE4C1E8BBECA000AF281 /* Leuk_iOS.xcdatamodeld */,
 			);
 			path = Leuk_iOS;
@@ -128,6 +212,127 @@
 			path = Leuk_iOSUITests;
 			sourceTree = "<group>";
 		};
+		2837CE781E8BD42A000AF281 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				28F54FC81EA01A6900AAAB3E /* OffersAndShop */,
+				28F54FC11EA010E200AAAB3E /* Events */,
+				28FC33711E9FC8AD00F4A813 /* Profile */,
+				28FC336C1E9FAB2700F4A813 /* SWReveal */,
+				28FC33661E9F869900F4A813 /* BeforeLaunchVCs */,
+				2809E2F21E9D306500F2ED34 /* PlacesVC */,
+				2837CE791E8BD43D000AF281 /* HomeVC */,
+				28F54FC01E9FF20B00AAAB3E /* DiscoverVC */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2837CE791E8BD43D000AF281 /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				2837CE471E8BBECA000AF281 /* HomeFirstVC.swift */,
+				2837CE761E8BC0BE000AF281 /* HomeFirstCVCell.swift */,
+				2837CE7B1E8BD492000AF281 /* HomeSecondVC.swift */,
+				2837CE7F1E8BD53F000AF281 /* HomeSecondCVCell.swift */,
+				2837CE7D1E8BD4B2000AF281 /* HomeThirdVC.swift */,
+			);
+			name = HomeVC;
+			sourceTree = "<group>";
+		};
+		2837CE7A1E8BD45C000AF281 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				28FC33691E9FA6F400F4A813 /* SWRevealViewController.h */,
+				28FC336A1E9FA6F400F4A813 /* SWRevealViewController.m */,
+				28FC33621E9F832A00F4A813 /* Leuk_iOS-Bridging-Header.h */,
+				2837CE541E8BBECA000AF281 /* Info.plist */,
+				28FC33601E9F824800F4A813 /* GoogleService-Info.plist */,
+			);
+			name = Supporting;
+			sourceTree = "<group>";
+		};
+		28F54FC01E9FF20B00AAAB3E /* DiscoverVC */ = {
+			isa = PBXGroup;
+			children = (
+				28F54FBC1E9FF1E700AAAB3E /* DiscoverTVC.swift */,
+				28F54FBE1E9FF20400AAAB3E /* DiscoverTVCell.swift */,
+			);
+			name = DiscoverVC;
+			sourceTree = "<group>";
+		};
+		28F54FC11EA010E200AAAB3E /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				28F54FC21EA0110100AAAB3E /* EventsTVC.swift */,
+				28F54FC41EA0111C00AAAB3E /* EventsTVCell.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		28F54FC81EA01A6900AAAB3E /* OffersAndShop */ = {
+			isa = PBXGroup;
+			children = (
+				28F54FC61EA01A6100AAAB3E /* OffersCVC.swift */,
+				28F54FC91EA01AA300AAAB3E /* OffersCVCell.swift */,
+			);
+			name = OffersAndShop;
+			sourceTree = "<group>";
+		};
+		28FC33661E9F869900F4A813 /* BeforeLaunchVCs */ = {
+			isa = PBXGroup;
+			children = (
+				281E606F1E9ECF120051423C /* LoadingDataVC.swift */,
+				28FC33671E9F86C900F4A813 /* SignInVC.swift */,
+			);
+			name = BeforeLaunchVCs;
+			sourceTree = "<group>";
+		};
+		28FC336C1E9FAB2700F4A813 /* SWReveal */ = {
+			isa = PBXGroup;
+			children = (
+				28FC336D1E9FAB4F00F4A813 /* MenuTableVC.swift */,
+				28FC336F1E9FAB6F00F4A813 /* MenuTableVCell.swift */,
+			);
+			name = SWReveal;
+			sourceTree = "<group>";
+		};
+		28FC33711E9FC8AD00F4A813 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				28FC33721E9FCA7200F4A813 /* ProfileVC.swift */,
+				28FC33741E9FCDCF00F4A813 /* TicketsVC.swift */,
+				28FC337A1E9FCE2A00F4A813 /* TicketsVCell.swift */,
+				28FC33761E9FCDE500F4A813 /* OrderVC.swift */,
+				28FC337C1E9FCE3C00F4A813 /* OrderVCell.swift */,
+				28FC33781E9FCDFF00F4A813 /* CouponsVC.swift */,
+				28FC337E1E9FCE5100F4A813 /* CouponsVCell.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		BCCF875DC71482F4FE6C9772 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB40E9E15E170EF5E979B115 /* Pods-Leuk_iOS.debug.xcconfig */,
+				D730674BD5E9ED76EBC9ED81 /* Pods-Leuk_iOS.release.xcconfig */,
+				E0F675ECF1E5243C42DCE3BE /* Pods-Leuk_iOSTests.debug.xcconfig */,
+				FDF5EA74B4F6320FC36806BC /* Pods-Leuk_iOSTests.release.xcconfig */,
+				2B99307884C85FF1561A381D /* Pods-Leuk_iOSUITests.debug.xcconfig */,
+				35644FC66C827AF22EB2E51C /* Pods-Leuk_iOSUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BE4D60495710BB367A530D94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5963E9E60EC73E325FDD52E7 /* Pods_Leuk_iOS.framework */,
+				B82957FACEEC3C232CBFAF92 /* Pods_Leuk_iOSTests.framework */,
+				C63D3DBC6FA9A13D06C6C3CA /* Pods_Leuk_iOSUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +340,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2837CE6D1E8BBECA000AF281 /* Build configuration list for PBXNativeTarget "Leuk_iOS" */;
 			buildPhases = (
+				DF0430F279215FFA52332CCE /* [CP] Check Pods Manifest.lock */,
 				2837CE3E1E8BBECA000AF281 /* Sources */,
 				2837CE3F1E8BBECA000AF281 /* Frameworks */,
 				2837CE401E8BBECA000AF281 /* Resources */,
+				6F068DF097D0F84D1CE95AEB /* [CP] Embed Pods Frameworks */,
+				F27A080F6540A2C306A38C4D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +360,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2837CE701E8BBECA000AF281 /* Build configuration list for PBXNativeTarget "Leuk_iOSTests" */;
 			buildPhases = (
+				0257125DA268DA013AEAC620 /* [CP] Check Pods Manifest.lock */,
 				2837CE551E8BBECA000AF281 /* Sources */,
 				2837CE561E8BBECA000AF281 /* Frameworks */,
 				2837CE571E8BBECA000AF281 /* Resources */,
+				06985C988C8042741976369F /* [CP] Embed Pods Frameworks */,
+				DD5D76D9AB2FF60585958BDA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +381,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2837CE731E8BBECA000AF281 /* Build configuration list for PBXNativeTarget "Leuk_iOSUITests" */;
 			buildPhases = (
+				529B4B69EECFBF7F7EF59012 /* [CP] Check Pods Manifest.lock */,
 				2837CE601E8BBECA000AF281 /* Sources */,
 				2837CE611E8BBECA000AF281 /* Frameworks */,
 				2837CE621E8BBECA000AF281 /* Resources */,
+				32105DF7EC2D4B099C2E7AF9 /* [CP] Embed Pods Frameworks */,
+				790E7878DD7574ADCF1B5579 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +411,7 @@
 					2837CE411E8BBECA000AF281 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = 22E3QU5W9V;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					2837CE581E8BBECA000AF281 = {
@@ -239,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2837CE531E8BBECA000AF281 /* LaunchScreen.storyboard in Resources */,
+				28FC33611E9F824800F4A813 /* GoogleService-Info.plist in Resources */,
 				2837CE501E8BBECA000AF281 /* Assets.xcassets in Resources */,
 				2837CE4B1E8BBECA000AF281 /* Main.storyboard in Resources */,
 			);
@@ -260,14 +476,178 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0257125DA268DA013AEAC620 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		06985C988C8042741976369F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Leuk_iOSTests/Pods-Leuk_iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		32105DF7EC2D4B099C2E7AF9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		529B4B69EECFBF7F7EF59012 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6F068DF097D0F84D1CE95AEB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Leuk_iOS/Pods-Leuk_iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		790E7878DD7574ADCF1B5579 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD5D76D9AB2FF60585958BDA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Leuk_iOSTests/Pods-Leuk_iOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF0430F279215FFA52332CCE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F27A080F6540A2C306A38C4D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Leuk_iOS/Pods-Leuk_iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2837CE3E1E8BBECA000AF281 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2837CE481E8BBECA000AF281 /* ViewController.swift in Sources */,
+				28FC337F1E9FCE5100F4A813 /* CouponsVCell.swift in Sources */,
+				28FC336B1E9FA6F400F4A813 /* SWRevealViewController.m in Sources */,
+				28FC33771E9FCDE500F4A813 /* OrderVC.swift in Sources */,
+				28FC337D1E9FCE3C00F4A813 /* OrderVCell.swift in Sources */,
+				28FC33751E9FCDCF00F4A813 /* TicketsVC.swift in Sources */,
+				28248B301EA051C400BEC756 /* Constants.swift in Sources */,
+				2837CE7C1E8BD492000AF281 /* HomeSecondVC.swift in Sources */,
+				28FC33791E9FCDFF00F4A813 /* CouponsVC.swift in Sources */,
+				28F54FBD1E9FF1E700AAAB3E /* DiscoverTVC.swift in Sources */,
+				28F54FBF1E9FF20400AAAB3E /* DiscoverTVCell.swift in Sources */,
+				2837CE481E8BBECA000AF281 /* HomeFirstVC.swift in Sources */,
+				28FC33681E9F86C900F4A813 /* SignInVC.swift in Sources */,
+				28F54FCA1EA01AA300AAAB3E /* OffersCVCell.swift in Sources */,
+				28FC33731E9FCA7200F4A813 /* ProfileVC.swift in Sources */,
 				2837CE461E8BBECA000AF281 /* AppDelegate.swift in Sources */,
+				2809E2F81E9D4BF800F2ED34 /* PlacesSecondaryVC.swift in Sources */,
+				28F54FC51EA0111C00AAAB3E /* EventsTVCell.swift in Sources */,
+				28F54FC71EA01A6100AAAB3E /* OffersCVC.swift in Sources */,
+				2837CE801E8BD53F000AF281 /* HomeSecondCVCell.swift in Sources */,
+				2809E2F41E9D30D300F2ED34 /* PlacesFirstTVC.swift in Sources */,
+				28F54FC31EA0110100AAAB3E /* EventsTVC.swift in Sources */,
+				28FC33701E9FAB6F00F4A813 /* MenuTableVCell.swift in Sources */,
+				28FC336E1E9FAB4F00F4A813 /* MenuTableVC.swift in Sources */,
+				2837CE771E8BC0BE000AF281 /* HomeFirstCVCell.swift in Sources */,
+				281E60701E9ECF120051423C /* LoadingDataVC.swift in Sources */,
+				2809E2F61E9D30FE00F2ED34 /* PlacesFirstTVCell.swift in Sources */,
 				2837CE4E1E8BBECA000AF281 /* Leuk_iOS.xcdatamodeld in Sources */,
+				2837CE7E1E8BD4B2000AF281 /* HomeThirdVC.swift in Sources */,
+				28FC337B1E9FCE2A00F4A813 /* TicketsVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,32 +797,40 @@
 		};
 		2837CE6E1E8BBECA000AF281 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB40E9E15E170EF5E979B115 /* Pods-Leuk_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 22E3QU5W9V;
 				INFOPLIST_FILE = Leuk_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.webloomsolutions.Leuk-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Leuk_iOS/Leuk_iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		2837CE6F1E8BBECA000AF281 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D730674BD5E9ED76EBC9ED81 /* Pods-Leuk_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 22E3QU5W9V;
 				INFOPLIST_FILE = Leuk_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.webloomsolutions.Leuk-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Leuk_iOS/Leuk_iOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		2837CE711E8BBECA000AF281 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0F675ECF1E5243C42DCE3BE /* Pods-Leuk_iOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -458,6 +846,7 @@
 		};
 		2837CE721E8BBECA000AF281 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDF5EA74B4F6320FC36806BC /* Pods-Leuk_iOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -473,6 +862,7 @@
 		};
 		2837CE741E8BBECA000AF281 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B99307884C85FF1561A381D /* Pods-Leuk_iOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 22E3QU5W9V;
@@ -487,6 +877,7 @@
 		};
 		2837CE751E8BBECA000AF281 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35644FC66C827AF22EB2E51C /* Pods-Leuk_iOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 22E3QU5W9V;
@@ -518,6 +909,7 @@
 				2837CE6F1E8BBECA000AF281 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2837CE701E8BBECA000AF281 /* Build configuration list for PBXNativeTarget "Leuk_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +918,7 @@
 				2837CE721E8BBECA000AF281 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2837CE731E8BBECA000AF281 /* Build configuration list for PBXNativeTarget "Leuk_iOSUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +927,7 @@
 				2837CE751E8BBECA000AF281 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
