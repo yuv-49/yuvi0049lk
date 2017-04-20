@@ -11,7 +11,6 @@ import UIKit
 class PlacesSecondaryVC: UIViewController {
 	
 	
-	
 	var name: String!
 	var address: String!
 	var placeDescriptionValue: String!
@@ -20,15 +19,36 @@ class PlacesSecondaryVC: UIViewController {
 	var placeTypeValue: String!
 	var placePhoneNumber: String!
 	var mapURL: String!
+	var titleNotification: String!
 	var placeImageImg: UIImage!
 	var placeImgDesc: UIImage!
+	var photoLink: String!
+	var mainUrl: URL!
+	var secondaryUrl: URL!
 
 	
+	
+	
+//	@IBOutlet weak var callTabBarTapped: UITabBarItem!
+//	@IBOutlet weak var mainTabBar: UITabBar!
+	
+	@IBOutlet weak var placeImage: UIImageView!
+	@IBOutlet weak var placeName: UILabel!
+	@IBOutlet weak var placeAddress: UILabel!
+	@IBOutlet weak var placeDescription: UILabel!
+	@IBOutlet weak var placeDistance: UILabel!
+	@IBOutlet weak var placeRating: UILabel!
+	@IBOutlet weak var placeType: UILabel!
+	@IBOutlet weak var placeImageDescription: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+//	self.title = titleNotification
+	 insertValues()
+	
+	
+	
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +56,91 @@ class PlacesSecondaryVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+	func insertValues(){
+		
+		
+		
+		
+		
+	 self.placeName.text = name
+	 self.placeAddress.text = address
+	 self.placeDescription.text = placeDescriptionValue
+		
+	 self.placeDistance.text = distance
+	 self.placeDistance.text?.append(" away from your location")
+	 self.placeRating.text = rating
+	 self.placeType.text = placeTypeValue
+	 self.placeImage.image = placeImageImg
+	 self.placeImageDescription.image = placeImgDesc
+		
+		fetchImage()
+		
+	}
 
+	func fetchImage(){
+		self.placeImage.kf.setImage(with: mainUrl)
+		self.placeImageDescription.kf.setImage(with: secondaryUrl)
+
+	}
+	
+	
+
+	
+	
+	@IBAction func callButtonPressed(_ sender: Any) {
+		callNumber(phoneNumber: placePhoneNumber)
+	}
+	
+	private func callNumber(phoneNumber:String) {
+		if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+			let application:UIApplication = UIApplication.shared
+			if (application.canOpenURL(phoneCallURL)) {
+				application.open(phoneCallURL, options: [:], completionHandler: nil)
+			}
+		}
+	}
+
+	
+	
+	@IBAction func messageButtonPressed(_ sender: Any) {
+	}
+	
+	//MARK:- work on location of place
+	
+	@IBAction func shareButtonPressed(_ sender: Any) {
+		shareMessage()
+		
+	}
+	
+	func shareMessage(){
+		
+		//Set the default sharing message.
+		let message = "hey! check out \(name!) on Leuk!"
+		//Set the link to share.
+		if let link = NSURL(string: "https://play.google.com/store/apps/details?id=com.webloominc.leuk&ah=gtJ_axVWQtb6CxEeLC5ypDB3LB8&hl=en-GB")
+		{
+			let objectsToShare = [message,link] as [Any]
+			let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+			activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+			self.present(activityVC, animated: true, completion: nil)
+		}
+		
+	}
+	
+	
+	@IBAction func reviewButtonPressed(_ sender: Any) {
+	}
+	
+	
+	
+	@IBAction func locationButtonPressed(_ sender: Any) {
+		//UIApplication.shared.open(NSURL(string: mapURL)! as URL, options: [:], completionHandler: nil)
+		UIApplication.shared.openURL(URL(string:mapURL)!)
+	}
+	
+	
+	
+	
     /*
     // MARK: - Navigation
 

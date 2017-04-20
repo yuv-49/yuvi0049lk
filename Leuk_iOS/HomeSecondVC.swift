@@ -18,6 +18,12 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	var indexValueSecond: Int!
 
 	var firstView = ["SHOP","OFFERS","EVENTS","PLACES","Ask Leuk","Discover","Contests","Subscriptions","Profile"]
+	var orderNowImageForDefault = ["foodandbeverage","groceries","medicines","stationary"]
+	var offersImageForDefault = ["happyhours","apparels","foodandbeverage","pubsandbar","spaandsalons","sports"]
+	var eventsImageForDefault = ["foodandbeverage","social","startup","sports","meetups","parties"]
+	var placesImageForDefault = ["foodandbeverage","entertainment","pubsandbar","cafe","store","medicalstores"]
+	
+	
 	
 	
 	var secondOrderView = ["Food & Beverages","Groceries","Medicine","Stationary"]
@@ -99,15 +105,19 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCell", for: indexPath) as! HomeSecondCVCell
 		if indexValue == 0{
 			cell.secondlabel.text = secondOrderView[indexPath.row]
+			cell.secondImage.image = UIImage(named: orderNowImageForDefault[indexPath.row] )
 		}
 		else if indexValue == 1{
 			cell.secondlabel.text = secondOffersView[indexPath.row]
+			cell.secondImage.image = UIImage(named: offersImageForDefault[indexPath.row] )
 		}
 		else if indexValue == 2{
 			cell.secondlabel.text = secondEventsView[indexPath.row]
+			cell.secondImage.image = UIImage(named: eventsImageForDefault[indexPath.row] )
 		}
 		else if indexValue == 3{
 			cell.secondlabel.text = secondPlacesView[indexPath.row]
+			cell.secondImage.image = UIImage(named: placesImageForDefault[indexPath.row] )
 		}
 
 		
@@ -123,15 +133,20 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 			     indexValueSecond = indexPath.row
 			     self.performSegue(withIdentifier: "PlacesFirstTVC", sender: self)
 			
+			
 		}
 		else if (indexValue == 2) {
 			
 			indexValueSecond = indexPath.row
 			self.performSegue(withIdentifier: "maineventsegue", sender: self)
 		}
-		else if ((indexValue == 0) || (indexValue == 1) ){
+		else if (indexValue == 1) {
 			indexValueSecond = indexPath.row
 			self.performSegue(withIdentifier: "mainoffersegue", sender: self)
+		} else if (indexValue == 0) {
+			indexValueSecond = indexPath.row
+			self.performSegue(withIdentifier: "foodcvc", sender: self)
+
 		}
 	}
 	
@@ -147,7 +162,7 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 
 		let placesFirstTVC = segue.destination as! PlacesFirstTVC
 		placesFirstTVC.indexValueSecond = indexValueSecond
-		
+		//placesFirstTVC.indexValue = indexValue
 		
 	}
 	else if(segue.identifier == "maineventsegue"){
@@ -160,7 +175,16 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 			let offersCVC = segue.destination as! OffersCVC
 			offersCVC.indexValue = indexValue
 			offersCVC.indexValueSecond = indexValueSecond
-			
+	}
+	else if(segue.identifier == "foodcvc"){
+		
+		let foodCVC = segue.destination as! FoodCVC
+		//FoodCVC.indexValues = indexValue
+		foodCVC.indexValueSecond = indexValueSecond
+		
+		
+		
+		
 		
 		
 	}

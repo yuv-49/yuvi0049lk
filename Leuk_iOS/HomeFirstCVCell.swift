@@ -16,6 +16,13 @@ class HomeFirstCVCell: UICollectionViewCell {
 	@IBOutlet weak var firstLabel: UILabel!
 	
 	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		let view = UIView(frame: frame)
+		view.layer.borderWidth = 1
+		view.layer.borderColor = UIColor.black.cgColor
+	}
 	
-    
+	
 }

@@ -53,17 +53,67 @@ class OffersCVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 4
+	if(indexValueSecond == 0){
+		return homeOffersHappy.count
+	}
+	else if(indexValueSecond == 1){
+		return homeOfferesApparels.count
+	}
+	else if(indexValueSecond == 2){
+		return homeOffersF_B.count
+	}
+	else if(indexValueSecond == 3){
+		return homeOffersBars.count
+	}
+	else if(indexValueSecond == 4){
+		return homeOffersSpa.count
+	}
+	else {
+		return homeOffersSports.count
+	}
+	
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)  as! OffersCVCell
     
-        // Configure the cell
-    
-        return cell
-    }
-
+	if(indexValueSecond == 0){
+		updateValues(homeOffersHappy, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 1){
+		updateValues(homeOfferesApparels, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 2){
+		updateValues(homeOffersF_B, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 3){
+		updateValues(homeOffersBars, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 4){
+		updateValues(homeOffersSpa, cellForRow: indexPath, TableCell: cell)
+	}
+	else {
+		updateValues(homeOffersSports, cellForRow: indexPath, TableCell: cell)
+	}
+	
+	return cell
+	}
+	
+	
+	func updateValues(_ valueForPlaces:[HomeOffers],cellForRow indexPath: IndexPath, TableCell TVcell:OffersCVCell ){
+		
+		
+		
+		TVcell.offerPlaceName.text = valueForPlaces[indexPath.row].offerBy
+		TVcell.offerDiscount.text = valueForPlaces[indexPath.row].offerDiscount
+		TVcell.offerCouponDeal.text = valueForPlaces[indexPath.row].offerDeal
+		TVcell.offerPlaceImage.image = valueForPlaces[indexPath.row].offerImageOriginal
+	
+	}
+	
+	
+	
+	
     // MARK: UICollectionViewDelegate
 
     /*

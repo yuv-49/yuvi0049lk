@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 
 
-class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate {
+class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate ,iCarouselDelegate, iCarouselDataSource {
 
 	var indexValue: Int!
-
+	var sliderCount: Int!
+	var numberOfEvent: Int!
+	var valueForList: Int!
+	
 	@IBOutlet weak var open: UIBarButtonItem!
 	
+	@IBOutlet weak var carouselView: iCarousel!
+	@IBOutlet weak var hotNowImage: UIImageView!
 	
 	
 	
@@ -23,7 +29,6 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 	
 	var firstView = ["Order Now","Offers","Events","Places","Ask Leuk","Discover","Contests","Subscriptions","Profile"]
-		
 	
 	
 	override func viewDidLoad() {
@@ -35,8 +40,19 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		revealControllerToggle()
 		
+		carouselView.type = .linear
+		
+		
+		if(firstPageNews.count == 0){
+		
+		
+		firstpageNewsApi()
+		}
+		
+		
 		
 	}
+	
 	
 	func revealControllerToggle(){
 		
@@ -50,12 +66,191 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	
 	
-
+	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
 	}
 
+	
+	func firstpageNewsApi(){
+		
+		
+		
+		//MARK:- FIRST PAGE NEWS
+		
+		var newsRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPopularNews")!)
+		newsRequest.httpMethod = "POST"
+		let postStringForNews="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		print("\(postStringForNews)")
+		
+		
+		newsRequest.httpBody = postStringForNews.data(using: .utf8)
+		
+		let task2 = URLSession.shared.dataTask(with: newsRequest) { data, response, error in
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				//print("response = \(response)")
+			}
+				
+			else {
+				
+				
+				
+				
+				
+				
+				var json = JSON(data: data!)
+				let numberOfEvents =  json["response"]["data"].count
+				print(numberOfEvents)
+				if numberOfEvents > 0
+				{
+					for index in 0...numberOfEvents - 1 {
+						
+						let getNewsArray = PopularNews()
+						
+						getNewsArray.newsId = json["response"]["data"][index]["id"].string!
+						print(getNewsArray.newsId)
+						getNewsArray.imageLink = json["response"]["data"][index]["image_link"].string!
+						getNewsArray.newsTitle = json["response"]["data"][index]["source"].string!
+						getNewsArray.hits = json["response"]["data"][index]["hits"].string!
+						
+						if let strImage = getNewsArray.imageLink {
+							
+							
+							if let data = NSData(contentsOf: NSURL(string:strImage )! as URL) {
+								getNewsArray.imageLinkOriginal = UIImage(data: data as Data)
+							}
+						}
+		
+						
+						
+						firstPageNews.append(getNewsArray)
+			
+						
+					}
+				}
+			}
+			
+			
+			
+		}
+		
+
+		
+		task2.resume()
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//MARK:- iCarouselView
+	
+	
+	
+	func numberOfItems(in carousel: iCarousel) -> Int {
+		
+		return firstPageNews.count
+	}
+	
+	
+	
+	
+	
+	
+	override func viewDidAppear(_ animated: Bool) {
+		sliderCount = 0
+		super.viewDidAppear(animated)
+		
+		Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.runMethod), userInfo: nil, repeats: true)
+		
+	
+	}
+	func runMethod() {
+		carouselView.scrollToItem(at: sliderCount, animated: true)
+		if sliderCount == firstPageNews.count {
+			sliderCount = 0
+		}
+		else {
+			sliderCount = sliderCount + 1
+		}
+	}
+	
+	
+	func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
+		
+
+			let tempView = UIView(frame: CGRect(x:0,y:0,width: self.view.frame.width,height: self.view.frame.height/2.5))
+			tempView.backgroundColor = UIColor.blue
+			
+			
+		
+		let link = URL(string: firstPageNews[index].imageLink)!
+		hotNowImage.kf.setImage(with: link)
+			
+		
+			
+			tempView.addSubview(hotNowImage)
+			
+			
+			
+			
+			return tempView
+
+
+		
+		
+
+	}
+	
+	
+	
+	func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+		if option == iCarouselOption.spacing{
+			return value * 1.1
+		}
+		return value
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// MARK: UICollectionViewDataSource
@@ -128,6 +323,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		if (segue.identifier == "FirstFourCell") {
 			let homeSecondVC = segue.destination as! HomeSecondVC
 			homeSecondVC.indexValue = indexValue
+			
 			
 			
 		}

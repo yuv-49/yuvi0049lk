@@ -14,13 +14,38 @@ class EventsTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-	self.title = "EVENTS"
+	
+	setTitleForNotification()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+
+	
+	func setTitleForNotification(){
+		
+		if(indexValueSecond == 0){
+			self.title = "F&B"
+		}
+		else if(indexValueSecond == 1){
+			self.title = "SOCIAL"
+		}
+		else if(indexValueSecond == 2){
+			self.title = "STARTUPS"
+		}
+		else if(indexValueSecond == 3){
+			self.title = "SPORTS"
+		}
+		else if(indexValueSecond == 4){
+			self.title = "MEETUPS"
+		}
+		else {
+			self.title = "PARTIES"
+		}
+		
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -36,17 +61,76 @@ class EventsTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+	if(indexValueSecond == 0){
+		return foodValues.count
+	}
+	else if(indexValueSecond == 1){
+		return socialValues.count
+	}
+	else if(indexValueSecond == 2){
+		return startupValues.count
+	}
+	else if(indexValueSecond == 3){
+		return sportsValues.count
+	}
+	else if(indexValueSecond == 4){
+		return meetupValues.count
+	}
+	else {
+		return partyValues.count
+	}
+
     }
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventstvcell", for: indexPath) as! EventsTVCell
 
-        // Configure the cell...
+	if(indexValueSecond == 0){
+		updateValues(foodValues, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 1){
+		updateValues(socialValues, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 2){
+		updateValues(startupValues, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 3){
+		updateValues(sportsValues, cellForRow: indexPath, TableCell: cell)
+	}
+	else if(indexValueSecond == 4){
+		updateValues(meetupValues, cellForRow: indexPath, TableCell: cell)
+	}
+	else {
+		updateValues(partyValues, cellForRow: indexPath, TableCell: cell)
+	}
+
 
         return cell
     }
+	
+	func updateValues(_ valueForPlaces:[homeEvents],cellForRow indexPath: IndexPath, TableCell TVcell:EventsTVCell ){
+		
+		
+		
+		TVcell.name.text = valueForPlaces[indexPath.row].eventName
+		TVcell.hostedBy.text = valueForPlaces[indexPath.row].eventHostedBy
+		TVcell.date.text = valueForPlaces[indexPath.row].eventDate
+		TVcell.time.text = valueForPlaces[indexPath.row].eventTime
+		TVcell.imageLink.image = valueForPlaces[indexPath.row].eventImageOriginal
+		let link = URL(string: valueForPlaces[indexPath.row].eventImageLink)!
+		TVcell.imageLink.kf.setImage(with: link)
+		let link2 = URL(string: valueForPlaces[indexPath.row].eventLogo)!
+		TVcell.logo.kf.setImage(with: link2)
+		
+		
+		
+
+		
+		
+		
+	}
+	
 	
 
     /*

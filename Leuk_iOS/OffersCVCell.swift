@@ -9,5 +9,14 @@
 import UIKit
 
 class OffersCVCell: UICollectionViewCell {
+	
+	@IBOutlet weak var offerPlaceImage: UIImageView!
+	@IBOutlet weak var offerCouponDeal: UILabel!
+	@IBOutlet weak var offerDiscount: UILabel!
+	@IBOutlet weak var offerPlaceName: UILabel!
+	
+	
+	
+	
     
 }

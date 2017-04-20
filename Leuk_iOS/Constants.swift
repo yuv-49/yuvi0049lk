@@ -22,29 +22,41 @@ var profileImages: String!
 var totalCredits: String!
 var remainingCredits: String!
 
+var userLatitude: Double!
+var userLongitude: Double!
 
-class homeOffers{
-	var left : String!
-	var discountPercentage : String!
-	var title : String!
-	var image : String!
-	var type: String!
+
+
+
+
+class HomeOffers{
+	var offerBy : String!
+	var offerDiscount : String!
+	var offerTitle : String!
+	var offerImage : String!
+	var offerDeal: String!
+	var offerCategory: String!
+	var offerImageOriginal: UIImage!
 	
 }
 
 
-var homeOffersBars = [homeOffers]()
-var homeOffersF_B = [homeOffers]()
-var homeOfferesApparels = [homeOffers]()
-var homeOffersHappy = [homeOffers]()
-var homeOffersSports = [homeOffers]()
+
+var homeOffersBars = [HomeOffers]()
+var homeOffersF_B = [HomeOffers]()
+var homeOfferesApparels = [HomeOffers]()
+var homeOffersHappy = [HomeOffers]()
+var homeOffersSports = [HomeOffers]()
+var homeOffersSpa = [HomeOffers]()
 
 
 
 class Places {
 	
 	var placeId: String!
+	var placeImageFullLink: String!
 	var placeImage: UIImage!
+	var placeImageLink: String!
 	var placeName: String!
 	var placeType: String!
 	var placeDistance: String!
@@ -55,10 +67,26 @@ class Places {
 	var placeDescription: String!
 	var phoneNumber: String!
 	var mapURL: String!
+	var placeArea: String!
+	var photoLink: String!
 	
 	var image1: UIImage!
+	var image1Link: String!
+	
+	var lastUpdate: String!
+	
+	var placeFirstImageUrl: URL!
+	var placeSecondImageUrl: URL!
+	
+	var service: String!
+	var orderType: String!
+	
+	
 }
 
+
+
+// places
 
 var restaurantValues = [Places]()
 var storesValues = [Places]()
@@ -66,6 +94,84 @@ var pubsValues = [Places]()
 var EntertainmentValues = [Places]()
 var cafeValues = [Places]()
 var MedicalValues = [Places]()
+
+// order now
+
+var restaurantOrder = [Places]()
+var GroceriesOrder = [Places]()
+var MedicineOrder = [Places]()
+var staitionaryOrder = [Places]()
+
+
+
+
+
+class homeEvents{
+	var eventId : String!
+	var eventLogo : String!
+	var eventName : String!
+	var eventImageLink : String!
+	var eventHostedBy : String!
+	var eventDate : String!
+	var eventTime : String!
+	var eventDifference: String!
+	var eventCategory: String!
+	var eventTicketBasecode: String!
+	var eventImageOriginal: UIImage!
+	var eventLogoOriginal: UIImage!
+	
+	
+	
+}
+
+
+var foodValues = [homeEvents]()
+var socialValues = [homeEvents]()
+var startupValues = [homeEvents]()
+var sportsValues = [homeEvents]()
+var meetupValues = [homeEvents]()
+var partyValues = [homeEvents]()
+
+
+
+
+
+class PopularNews{
+	
+	var newsId: String!
+	var hits: String!
+	var newsTitle: String!
+	var imageLink: String!
+	var pageLink: String!
+	var newsLocation: String!
+	var newsSource: String!
+	var newsStatus: String!
+	var newsType: String!
+	
+	var imageLinkOriginal: UIImage!
+
+	
+}
+
+var firstPageNews = [PopularNews]()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

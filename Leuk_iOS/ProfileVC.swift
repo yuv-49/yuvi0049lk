@@ -101,16 +101,15 @@ class ProfileVC: UIViewController {
 	//getUserDetails()
 	
 	
+	profileApi()
 	
 	
-	fetchImage()
-	customerName.text = Name
-	customerArea.text = area
-	customerRefCode.text = referalCode
-	customerLevel.text = level
-	custCreditsLeft.text = "\(remainingCredits!) credits left"
-	
-	
+	if (Name == nil){
+		profileApi()
+
+	}else {
+		profileUpdate()
+	}
 	
 
 	if(indexValue == 1) {
@@ -129,6 +128,74 @@ class ProfileVC: UIViewController {
     }
 	
 	
+	func profileUpdate(){
+		
+		
+		fetchImage()
+		customerName.text = Name
+		customerArea.text = area
+		customerRefCode.text = referalCode
+		customerLevel.text = level
+		custCreditsLeft.text = "\(remainingCredits!) credits left"
+
+	}
+	
+	
+	
+	func profileApi(){
+		
+		
+		//MARK:- PROFILE
+		
+		var profileRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getUserInfo")!)
+		profileRequest.httpMethod = "POST"
+		let postString1="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		print("\(postString1)")
+		
+		
+		profileRequest.httpBody = postString1.data(using: .utf8)
+		
+		let task2 = URLSession.shared.dataTask(with: profileRequest) { data, response, error in
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				//print("response = \(response)")
+			}
+				
+			else {
+				//print("RFcss")
+				//let responseString = String(data: data!, encoding: .utf8)
+				//print("responseString = \(responseString!)")
+				
+				
+				
+				
+				
+				var json = JSON(data: data!)
+				Name = json["response"]["data"]["name"].string!
+				area = json["response"]["data"]["location"].string!
+				referalCode = json["response"]["data"]["referral_code"].string!
+				level = json["response"]["data"]["level"].string!
+				profileImages = json["response"]["data"]["profile_img"].string!
+				totalCredits = json["response"]["data"]["total_credits"].string!
+				remainingCredits = json["response"]["data"]["remaining_credits"].string!
+				self.profileUpdate()
+			}
+			
+		}
+		
+		task2.resume()
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	private func fetchImage() {
@@ -141,7 +208,7 @@ class ProfileVC: UIViewController {
 				//All UI operations has to run on main thread.
 				DispatchQueue.main.async {
 					if imageData != nil {
-						image = UIImage(data: imageData as! Data)
+						image = UIImage(data: imageData! as Data)
 						self.profileImg.image = image
 						
 					} else {

@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 		var configureError: NSError?
 		GGLContext.sharedInstance().configureWithError(&configureError)
 		if (configureError != nil){
-			print("error: \(configureError)")
+			print("error: \(String(describing: configureError))")
 		}
 		
 //		if GIDSignIn.sharedInstance().hasAuthInKeychain() {
