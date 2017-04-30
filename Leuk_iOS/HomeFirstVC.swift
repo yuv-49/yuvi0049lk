@@ -46,7 +46,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		if(firstPageNews.count == 0){
 		
 		
-		firstpageNewsApi()
+			firstpageNewsApi()
 		}
 		
 		
@@ -221,30 +221,6 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		}
 		return value
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

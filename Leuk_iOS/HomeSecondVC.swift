@@ -183,7 +183,7 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 		foodCVC.indexValueSecond = indexValueSecond
 		
 		
-		
+		 
 		
 		
 		

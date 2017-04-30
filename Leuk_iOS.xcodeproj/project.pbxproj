@@ -29,6 +29,12 @@
 		2837CE7E1E8BD4B2000AF281 /* HomeThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE7D1E8BD4B2000AF281 /* HomeThirdVC.swift */; };
 		2837CE801E8BD53F000AF281 /* HomeSecondCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE7F1E8BD53F000AF281 /* HomeSecondCVCell.swift */; };
 		28EB90A71EA33BA5004BBB61 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EB90A51EA33BA5004BBB61 /* iCarousel.m */; };
+		28F20F3C1EB4C1E700ED8194 /* InsiderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F3B1EB4C1E700ED8194 /* InsiderConstants.swift */; };
+		28F20F3E1EB4D0A100ED8194 /* ShopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F3D1EB4D0A100ED8194 /* ShopMenu.swift */; };
+		28F20F421EB5A79A00ED8194 /* LoadingForItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F411EB5A79A00ED8194 /* LoadingForItems.swift */; };
+		28F20F441EB5F20900ED8194 /* ShopMenuTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */; };
+		28F20F471EB602F700ED8194 /* ItemsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F461EB602F700ED8194 /* ItemsTVCell.swift */; };
+		28F20F491EB6032A00ED8194 /* ItemsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F481EB6032A00ED8194 /* ItemsTVC.swift */; };
 		28F54FBD1E9FF1E700AAAB3E /* DiscoverTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FBC1E9FF1E700AAAB3E /* DiscoverTVC.swift */; };
 		28F54FBF1E9FF20400AAAB3E /* DiscoverTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FBE1E9FF20400AAAB3E /* DiscoverTVCell.swift */; };
 		28F54FC31EA0110100AAAB3E /* EventsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC21EA0110100AAAB3E /* EventsTVC.swift */; };
@@ -97,6 +103,12 @@
 		2837CE7F1E8BD53F000AF281 /* HomeSecondCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSecondCVCell.swift; sourceTree = "<group>"; };
 		28EB90A51EA33BA5004BBB61 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		28EB90A61EA33BA5004BBB61 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		28F20F3B1EB4C1E700ED8194 /* InsiderConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsiderConstants.swift; sourceTree = "<group>"; };
+		28F20F3D1EB4D0A100ED8194 /* ShopMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopMenu.swift; sourceTree = "<group>"; };
+		28F20F411EB5A79A00ED8194 /* LoadingForItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingForItems.swift; sourceTree = "<group>"; };
+		28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopMenuTVCell.swift; sourceTree = "<group>"; };
+		28F20F461EB602F700ED8194 /* ItemsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTVCell.swift; sourceTree = "<group>"; };
+		28F20F481EB6032A00ED8194 /* ItemsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTVC.swift; sourceTree = "<group>"; };
 		28F54FBC1E9FF1E700AAAB3E /* DiscoverTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTVC.swift; sourceTree = "<group>"; };
 		28F54FBE1E9FF20400AAAB3E /* DiscoverTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTVCell.swift; sourceTree = "<group>"; };
 		28F54FC21EA0110100AAAB3E /* EventsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTVC.swift; sourceTree = "<group>"; };
@@ -200,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				28248B2F1EA051C400BEC756 /* Constants.swift */,
+				28F20F3B1EB4C1E700ED8194 /* InsiderConstants.swift */,
 				2837CE451E8BBECA000AF281 /* AppDelegate.swift */,
 				2837CE491E8BBECA000AF281 /* Main.storyboard */,
 				2837CE7A1E8BD45C000AF281 /* Supporting */,
@@ -232,6 +245,7 @@
 		2837CE781E8BD42A000AF281 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				28F20F451EB6006D00ED8194 /* Shop */,
 				28F54FC81EA01A6900AAAB3E /* OffersAndShop */,
 				28F54FC11EA010E200AAAB3E /* Events */,
 				28FC33711E9FC8AD00F4A813 /* Profile */,
@@ -287,6 +301,20 @@
 			name = iCarousel;
 			sourceTree = "<group>";
 		};
+		28F20F451EB6006D00ED8194 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				280FB7421EA30C3D0024F445 /* FoodCVC.swift */,
+				280FB7441EA30C5E0024F445 /* FoodCVCell.swift */,
+				28F20F411EB5A79A00ED8194 /* LoadingForItems.swift */,
+				28F20F3D1EB4D0A100ED8194 /* ShopMenu.swift */,
+				28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */,
+				28F20F481EB6032A00ED8194 /* ItemsTVC.swift */,
+				28F20F461EB602F700ED8194 /* ItemsTVCell.swift */,
+			);
+			name = Shop;
+			sourceTree = "<group>";
+		};
 		28F54FC01E9FF20B00AAAB3E /* DiscoverVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,8 +338,6 @@
 			children = (
 				28F54FC61EA01A6100AAAB3E /* OffersCVC.swift */,
 				28F54FC91EA01AA300AAAB3E /* OffersCVCell.swift */,
-				280FB7421EA30C3D0024F445 /* FoodCVC.swift */,
-				280FB7441EA30C5E0024F445 /* FoodCVCell.swift */,
 			);
 			name = OffersAndShop;
 			sourceTree = "<group>";
@@ -659,6 +685,7 @@
 			files = (
 				28FC337F1E9FCE5100F4A813 /* CouponsVCell.swift in Sources */,
 				280FB7451EA30C5E0024F445 /* FoodCVCell.swift in Sources */,
+				28F20F471EB602F700ED8194 /* ItemsTVCell.swift in Sources */,
 				28FC336B1E9FA6F400F4A813 /* SWRevealViewController.m in Sources */,
 				28FC33771E9FCDE500F4A813 /* OrderVC.swift in Sources */,
 				28FC337D1E9FCE3C00F4A813 /* OrderVCell.swift in Sources */,
@@ -667,6 +694,7 @@
 				2837CE7C1E8BD492000AF281 /* HomeSecondVC.swift in Sources */,
 				28FC33791E9FCDFF00F4A813 /* CouponsVC.swift in Sources */,
 				280FB7431EA30C3D0024F445 /* FoodCVC.swift in Sources */,
+				28F20F3E1EB4D0A100ED8194 /* ShopMenu.swift in Sources */,
 				28F54FBD1E9FF1E700AAAB3E /* DiscoverTVC.swift in Sources */,
 				28F54FBF1E9FF20400AAAB3E /* DiscoverTVCell.swift in Sources */,
 				2837CE481E8BBECA000AF281 /* HomeFirstVC.swift in Sources */,
@@ -679,14 +707,18 @@
 				28F54FC51EA0111C00AAAB3E /* EventsTVCell.swift in Sources */,
 				28F54FC71EA01A6100AAAB3E /* OffersCVC.swift in Sources */,
 				2837CE801E8BD53F000AF281 /* HomeSecondCVCell.swift in Sources */,
+				28F20F421EB5A79A00ED8194 /* LoadingForItems.swift in Sources */,
 				2809E2F41E9D30D300F2ED34 /* PlacesFirstTVC.swift in Sources */,
 				28F54FC31EA0110100AAAB3E /* EventsTVC.swift in Sources */,
+				28F20F3C1EB4C1E700ED8194 /* InsiderConstants.swift in Sources */,
 				28FC33701E9FAB6F00F4A813 /* MenuTableVCell.swift in Sources */,
 				28FC336E1E9FAB4F00F4A813 /* MenuTableVC.swift in Sources */,
+				28F20F441EB5F20900ED8194 /* ShopMenuTVCell.swift in Sources */,
 				282A9B651EA4F11D00FE84BF /* ASHorizontalScrollView.swift in Sources */,
 				2837CE771E8BC0BE000AF281 /* HomeFirstCVCell.swift in Sources */,
 				281E60701E9ECF120051423C /* LoadingDataVC.swift in Sources */,
 				2809E2F61E9D30FE00F2ED34 /* PlacesFirstTVCell.swift in Sources */,
+				28F20F491EB6032A00ED8194 /* ItemsTVC.swift in Sources */,
 				2837CE4E1E8BBECA000AF281 /* Leuk_iOS.xcdatamodeld in Sources */,
 				2837CE7E1E8BD4B2000AF281 /* HomeThirdVC.swift in Sources */,
 				28FC337B1E9FCE2A00F4A813 /* TicketsVCell.swift in Sources */,
