@@ -19,6 +19,7 @@ class ItemsTVCell: UITableViewCell {
 	@IBOutlet weak var itemSpicy: UIImageView!
 	@IBOutlet weak var itemQuantity: UILabel!
 	
+//	@IBOutlet weak var AddCart: UIButton!
 	
 	
 	@IBOutlet weak var substract: UIButton!
@@ -72,8 +73,9 @@ class ItemsTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-	itemQuantityInNumber = 0
-	itemQuantity.text = "0"
+	//itemQuantityInNumber = 0
+	//itemQuantity.text = "0"
+	
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

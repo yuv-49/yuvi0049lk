@@ -17,14 +17,10 @@ class LoadingForItems: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-//	foodForShop.removeAll()
-//	groceriesForShop.removeAll()
-//	medicineForShop.removeAll()
-//	stationaryForShop.removeAll()
+
+	// MARK:-  remove cart values here
+	cartValues.removeAll()
 	
-	getTotalLength()
-	
-	//_ = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.getSegue), userInfo: nil, repeats: false);
 	getSegue()
     }
 
@@ -35,28 +31,28 @@ class LoadingForItems: UIViewController {
 	
 	
 	
-	func getTotalLength(){
-		index1 = 0
-		for cat in categoryOfItem {
-			
-			//secondGetLength(commonForShop, catVal: cat)
-			var indexInside = 0
-			for indexval in commonForShop {
-				if indexval.itemCategory == cat {
-					shopValuesByCategory[index1]!.append(indexval)
-					//idValues[index1][indexInside] = idString!
-					indexInside += 1
-				}
-			}
-			
-			index1 = index1 + 1
-		}
-		
-		
-		
-		
-		
-	}
+//	func getTotalLength(){
+//		index1 = 0
+//		for cat in categoryOfItem {
+//			
+//			//secondGetLength(commonForShop, catVal: cat)
+//			var indexInside = 0
+//			for indexval in commonForShop {
+//				if indexval.itemCategory == cat {
+//					shopValuesByCategory[index1]!.append(indexval)
+//					//idValues[index1][indexInside] = idString!
+//					indexInside += 1
+//				}
+//			}
+//			
+//			index1 = index1 + 1
+//		}
+//		
+//		
+//		
+//		
+//		
+//	}
 	
 	
 //	func secondGetLength(_ arrayItem: [shopMenuItem],catVal category: String!){

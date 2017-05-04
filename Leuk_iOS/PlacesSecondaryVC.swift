@@ -135,7 +135,8 @@ class PlacesSecondaryVC: UIViewController {
 	
 	@IBAction func locationButtonPressed(_ sender: Any) {
 		//UIApplication.shared.open(NSURL(string: mapURL)! as URL, options: [:], completionHandler: nil)
-		UIApplication.shared.openURL(URL(string:mapURL)!)
+		//UIApplication.shared.openURL(URL(string:mapURL)!)
+		UIApplication.shared.open(URL(string:mapURL)!, options: [:], completionHandler: nil)
 	}
 	
 	

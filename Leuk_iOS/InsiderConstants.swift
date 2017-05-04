@@ -28,6 +28,7 @@ class shopMenuItem {
 	
 	
 	var rows : Int!
+	
 
 	
 	var itemImageUrl: URL!
@@ -42,7 +43,9 @@ var medicineForShop = [shopMenuItem]()
 var stationaryForShop = [shopMenuItem]()
 var commonForShop = [shopMenuItem]()
 var commonInCategory = [shopMenuItem]()
-var commonForShopAtLast = [shopMenuItem]()
+//var commonForShopAtLast = [shopMenuItem]()
+
+var commonForShopAtlast1 = [shopMenuItem]()
 
 
 class shopCategory {
@@ -53,13 +56,53 @@ var categoryOfItem = [String]()
 
 
 var idValues = [[String]]()
-var shopValuesByCategory = [Int : [shopMenuItem]]()
+//var shopValuesByCategory = [Int : [shopMenuItem]]()
 
 
 
 var itemQuantityInNumber: Int!
 var cartValues = [shopMenuItem]()
 //var cartValue = [shopMenuItem]()
+
+
+
+var quantityMeasurer  =  [[Int]]()
+var quantityMeasured = [String: Int]()
+
+
+
+
+
+
+
+
+var idValue: [String]!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

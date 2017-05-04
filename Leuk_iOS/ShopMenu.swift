@@ -15,7 +15,7 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
        var indexValueShop: Int!
 	var totalValueHere: [Int]!
 	var menuFoodId: String!
-	
+	var indexValueSender : Int!
 	
 
     override func viewDidLoad() {
@@ -66,8 +66,25 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 		
 		
 		let categoryVal = categoryOfItem[indexPath.row]
-		
+		indexValueSender = indexPath.row
 		apiCall(categoryVal)
+		//addArray(categoryVal)
+		
+		
+	}
+	
+	func addArray(_ category: String){
+		
+		for values in commonForShop {
+			if values.itemCategory == category {
+				commonForShopAtlast1.append(values)
+				print(values.itemCategory)
+			}
+		}
+		print("YSYSYSYSY\(commonForShopAtlast1)")
+		
+		self.performSegue(withIdentifier: "shopconnect", sender: self)
+
 		
 		
 	}
@@ -100,10 +117,18 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 				var json = JSON(data: data!)
 				print(json)
 				let numberOfItems = json["response"]["data"].count
-				print(numberOfItems)
+				print("YSYSYSYSY\(numberOfItems)")
+				
+//				for value in 0..<numberOfItems{
+//					
+////					quantity[value] = 0
+//					
+//				}
+
+				
 				if numberOfItems > 0
 				{
-					commonForShopAtLast.removeAll()
+					//commonForShopAtLast.removeAll()
 					for index in 0...numberOfItems-1 {
 						let menuList = shopMenuItem()
 						menuList.itemId = json["response"]["data"][index]["id"].string!
@@ -120,12 +145,8 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 						menuList.itemImageLink = json["response"]["data"][index]["image"].string!
 						menuList.itemPlaceId = json["response"]["data"][index]["place_id"].string!
 						menuList.itemRegularCost = json["response"]["data"][index]["regular_cost"].string!
-						
-						
-						
-						commonForShopAtLast.append(menuList)
-						
-						
+						menuList.rows = 0
+						commonForShopAtlast1.append(menuList)
 						
 					}
 				}
@@ -144,7 +165,7 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	}
 	
        override func viewDidAppear(_ animated: Bool) {
-		commonForShopAtLast.removeAll()
+		commonForShopAtlast1.removeAll()
 	}
 	
 	
@@ -157,14 +178,34 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	
 	
-    /*
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+	
+	
+	if segue.identifier == "shopconnect" {
+		let shopmenu = segue.destination as! ItemsTVC
+		
+		shopmenu.indexValueReceiver = indexValueSender
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     }
-    */
+	
 
 }
