@@ -146,6 +146,12 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 						menuList.itemPlaceId = json["response"]["data"][index]["place_id"].string!
 						menuList.itemRegularCost = json["response"]["data"][index]["regular_cost"].string!
 						menuList.rows = 0
+						menuList.minimumSpending = json["response"]["data"][index]["minimum_spending"].string!
+						menuList.convFee = json["response"]["data"][index]["conv_fee"].string!
+						menuList.deliveryCharge = json["response"]["data"][index]["delivery_charge"].string!
+
+						
+						
 						commonForShopAtlast1.append(menuList)
 						
 					}

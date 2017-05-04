@@ -30,6 +30,13 @@ class shopMenuItem {
 	var rows : Int!
 	
 
+	var minimumSpending: String!
+	var convFee: String!
+	var deliveryCharge: String!
+	
+	
+	
+	
 	
 	var itemImageUrl: URL!
 	

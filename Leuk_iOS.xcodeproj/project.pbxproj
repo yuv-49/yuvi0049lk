@@ -15,6 +15,7 @@
 		280FB7451EA30C5E0024F445 /* FoodCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280FB7441EA30C5E0024F445 /* FoodCVCell.swift */; };
 		281E60701E9ECF120051423C /* LoadingDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281E606F1E9ECF120051423C /* LoadingDataVC.swift */; };
 		2821977F1EB6ADFB002C4915 /* CartTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2821977E1EB6ADFB002C4915 /* CartTVCell.swift */; };
+		2822B5821EBBAACD000A0B3F /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2822B5811EBBAACD000A0B3F /* CartVC.swift */; };
 		28248B301EA051C400BEC756 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28248B2F1EA051C400BEC756 /* Constants.swift */; };
 		282A9B651EA4F11D00FE84BF /* ASHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A9B641EA4F11D00FE84BF /* ASHorizontalScrollView.swift */; };
 		2837CE461E8BBECA000AF281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE451E8BBECA000AF281 /* AppDelegate.swift */; };
@@ -83,6 +84,7 @@
 		280FB7441EA30C5E0024F445 /* FoodCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCVCell.swift; sourceTree = "<group>"; };
 		281E606F1E9ECF120051423C /* LoadingDataVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingDataVC.swift; sourceTree = "<group>"; };
 		2821977E1EB6ADFB002C4915 /* CartTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTVCell.swift; sourceTree = "<group>"; };
+		2822B5811EBBAACD000A0B3F /* CartVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		28248B2F1EA051C400BEC756 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		282A9B641EA4F11D00FE84BF /* ASHorizontalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASHorizontalScrollView.swift; sourceTree = "<group>"; };
 		2837CE421E8BBECA000AF281 /* Leuk_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leuk_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -313,6 +315,7 @@
 				28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */,
 				28F20F481EB6032A00ED8194 /* ItemsTVC.swift */,
 				28F20F461EB602F700ED8194 /* ItemsTVCell.swift */,
+				2822B5811EBBAACD000A0B3F /* CartVC.swift */,
 				2821977E1EB6ADFB002C4915 /* CartTVCell.swift */,
 			);
 			name = Shop;
@@ -700,6 +703,7 @@
 				28F20F3E1EB4D0A100ED8194 /* ShopMenu.swift in Sources */,
 				28F54FBD1E9FF1E700AAAB3E /* DiscoverTVC.swift in Sources */,
 				28F54FBF1E9FF20400AAAB3E /* DiscoverTVCell.swift in Sources */,
+				2822B5821EBBAACD000A0B3F /* CartVC.swift in Sources */,
 				2837CE481E8BBECA000AF281 /* HomeFirstVC.swift in Sources */,
 				28EB90A71EA33BA5004BBB61 /* iCarousel.m in Sources */,
 				28FC33681E9F86C900F4A813 /* SignInVC.swift in Sources */,

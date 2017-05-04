@@ -13,6 +13,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
        @IBOutlet weak var myTable: UITableView!
 	@IBOutlet weak var cartSum: UILabel!
 	
+	@IBOutlet weak var cartShow: UIView!
 	
 	
 	var indexValueReceiver : Int!
@@ -26,50 +27,49 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
 
 	
+		let gestureForView = UITapGestureRecognizer(target: self, action:  #selector (self.showCart (_:)))
+		self.cartShow.addGestureRecognizer(gestureForView)
+		
+		
+		
+		
 	addBtnClicked = false
-	totalCartValue = 0
-
+	
+		getTotalCartValue()
+		
+		
+	
+	}
+	
+	func getTotalCartValue(){
+		
+		totalCartValue = 0
+		
 		cartSum.text = "0"
 		if cartValues.count != 0 {
-		    totalCartValue = 0
+			totalCartValue = 0
 			
-		    for val in cartValues {
-			    totalCartValue = totalCartValue + (val.rows * Int(val.itemOfferCost)!)
-//			if commonForShopAtlast1.count != 0 {
-//				for val2 in commonForShopAtlast1 {
-//					if val2.itemId == val.itemId {
-//						val2.rows = val.rows
-//					}
-//				}
-//			
-//			
-//			
-//			
-//			
-//		    }
+			for val in cartValues {
+				totalCartValue = totalCartValue + (val.rows * Int(val.itemOfferCost)!)
+				
 			}
 			
-		    cartSum.text = "\(totalCartValue!)"
+			cartSum.text = "\(totalCartValue!)"
 		}
-	
-	//MARK:- navigationbar
-	
-	let btn1 = UIButton(type: .custom)
-	btn1.setImage(UIImage(named: "parties"), for: .normal)
-	btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-	btn1.addTarget(self, action: #selector(self.callCartScene), for: .touchUpInside)
-	let item1 = UIBarButtonItem(customView: btn1)
-	self.navigationItem.setRightBarButtonItems([item1], animated: true)
-	
-	
-	
-      }
-	func callCartScene(){
-		
 	}
 
-	
+	func showCart(_ sender:UITapGestureRecognizer){
+		
+		if totalCartValue != 0 {
 
+			self.performSegue(withIdentifier: "CartVC", sender: self)
+		}
+
+		
+	}
+	
+	
+	
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -85,18 +85,9 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 		}
 		
 	}
-	
-	
-	
-	
-	
 	return commonForShopAtlast1.count
-	
-
 	}
 	
-	
-
 	func reload(){
 		
 		if commonForShopAtlast1.count != 0 {
@@ -112,14 +103,8 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			}
 		}
 		
-		
-		
-		
-		
 		myTable.reloadData()
 	}
-	
-	
 	
 	
 	
@@ -170,16 +155,6 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	}
 	
 	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	func addItem(_ button: UIButton) {
 		let clicked = button.tag
@@ -196,13 +171,11 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 		for val in cartValues {
 			if val.itemId == commonForShopAtlast1[clicked].itemId {
 				val.rows = commonForShopAtlast1[clicked].rows
-				//totalCartValue = totalCartValue + Int(commonForShopAtlast1[clicked].itemOfferCost)!
 				sum = 1
 			}
 		}
 		if sum == 0{
 			cartValues.append(commonForShopAtlast1[clicked])
-			//totalCartValue = totalCartValue + Int(commonForShopAtlast1[clicked].itemOfferCost)!
 		}
 		totalCartValue = 0
 		for val in cartValues {
@@ -226,8 +199,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 		if commonForShopAtlast1[clicked].rows <= 0 {
 			commonForShopAtlast1[clicked].rows = 0
 		} else {
-//			totalCartValue = totalCartValue - Int(commonForShopAtlast1[clicked].itemOfferCost)!
-//			cartSum.text = "\(totalCartValue!)"
+//			do something but not now
 		}
 		
 		
@@ -265,6 +237,8 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		
+		getTotalCartValue()
+		myTable.reloadData()
 	
 	}
 	

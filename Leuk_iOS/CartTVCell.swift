@@ -23,6 +23,17 @@ class CartTVCell: UITableViewCell {
 	
 	
 	
+	@IBOutlet weak var itemImage: UIImageView!
+	@IBOutlet weak var itemName: UILabel!
+	@IBOutlet weak var itemCost: UILabel!
+	@IBOutlet weak var numberOfItems: UILabel!
+	@IBOutlet weak var addItem: UIButton!
+	@IBOutlet weak var substractItem: UIButton!
+	
+	
+	
+	
+	
 	
 
     override func awakeFromNib() {
