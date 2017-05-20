@@ -26,7 +26,8 @@ class CouponsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 	apiCall()
 	
 	
-	
+	print("Your coupon here")
+
 	
 	
 	
@@ -38,7 +39,7 @@ class CouponsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 		
 		// MARK:- PROFILE MYCOUPONS
 		
-		var myCoupon = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=myOrders")!)
+		var myCoupon = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=myCoupons")!)
 		myCoupon.httpMethod = "POST"
 		let postStringForCoupon="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
 		print("\(postStringForCoupon)")

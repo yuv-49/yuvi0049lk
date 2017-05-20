@@ -173,17 +173,33 @@ extension UIColor {
 
 	
 	
+
+extension String {
+	var asDate: NSDate {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd"
+		return formatter.date(from: self)! as NSDate
+	}
+}
+
+extension NSDate {
+	func daysFrom(date:NSDate) -> Int {
+		//return NSCalendar.currentCalendar.components(.CalendarUnitDay, fromDate: date, toDate: self, options: nil).day
+		return Calendar.current.component(.calendar, from: date as Date)
+		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

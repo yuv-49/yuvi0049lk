@@ -25,6 +25,10 @@ class shopMenuItem {
 	var itemVeg: String!
 	var itemNonVeg: String!
 	var itemLimit: String!
+	var placeId: String!
+	var paymentType: String!
+	
+	
 	
 	
 	var rows : Int!
@@ -55,21 +59,16 @@ var commonInCategory = [shopMenuItem]()
 var commonForShopAtlast1 = [shopMenuItem]()
 
 
-class shopCategory {
-	var count: Int!
-	//var
-}
+
 var categoryOfItem = [String]()
 
 
 var idValues = [[String]]()
-//var shopValuesByCategory = [Int : [shopMenuItem]]()
 
 
 
 var itemQuantityInNumber: Int!
 var cartValues = [shopMenuItem]()
-//var cartValue = [shopMenuItem]()
 
 
 

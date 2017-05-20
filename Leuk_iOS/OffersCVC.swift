@@ -15,6 +15,8 @@ class OffersCVC: UICollectionViewController {
 	
 	var indexValue: Int!
 	var indexValueSecond: Int!
+	var idValuetoPass: String!
+	var offerClassToPass = HomeOffers()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,42 +109,136 @@ class OffersCVC: UICollectionViewController {
 		TVcell.offerPlaceName.text = valueForPlaces[indexPath.row].offerBy
 		TVcell.offerDiscount.text = valueForPlaces[indexPath.row].offerDiscount
 		TVcell.offerCouponDeal.text = valueForPlaces[indexPath.row].offerDeal
-		TVcell.offerPlaceImage.image = valueForPlaces[indexPath.row].offerImageOriginal
+		
+		let url = URL(string: valueForPlaces[indexPath.row].offerImage)
+		TVcell.offerPlaceImage.kf.setImage(with: url)
+		
+		
+		
+		//TVcell.offerPlaceImage.image = valueForPlaces[indexPath.row].offerImageOriginal
 	
 	}
 	
 	
 	
 	
-    // MARK: UICollectionViewDelegate
+	
+	
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		
+		//	let indexPathValues = collectionView.indexPathsForSelectedItems
+		
+		
+		
+		if(indexValueSecond == 0){
+			
+			
+			
+			addValueToSegue(homeOffersHappy[indexPath.row])
+			
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
+		}
+		else if(indexValueSecond == 1){
+			
+			addValueToSegue(homeOfferesApparels[indexPath.row])
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
+			
+		}
+		else if(indexValueSecond == 2){
+			
+			addValueToSegue(homeOffersF_B[indexPath.row])
 
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
+			
+		}
+		else if(indexValueSecond == 3){
+			
+			addValueToSegue(homeOffersBars[indexPath.row])
 
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
+		}
+		else if(indexValueSecond == 4){
+			
+			addValueToSegue(homeOffersSpa[indexPath.row])
 
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
+		}
+		else if(indexValueSecond == 5){
+			
+			addValueToSegue(homeOffersSports[indexPath.row])
+
+		}
+		self.performSegue(withIdentifier: "OffersIndividualVC", sender: self)
+
+
+
+		
+	}
+	
+	
+	func addValueToSegue(_ homeOffer: HomeOffers){
+		
+		
+		offerClassToPass.offerBy = homeOffer.offerBy
+		offerClassToPass.offerById = homeOffer.offerById
+		offerClassToPass.offerCategory = homeOffer.offerCategory
+		offerClassToPass.offerDeal = homeOffer.offerDeal
+		offerClassToPass.offerImage = homeOffer.offerImage
+		offerClassToPass.offerDiscount = homeOffer.offerDiscount
+		offerClassToPass.offerTitle = homeOffer.offerTitle
+		offerClassToPass.offerImageOriginal = homeOffer.offerImageOriginal
+		offerClassToPass.offerDesc = homeOffer.offerDesc
+		offerClassToPass.offerExpiry = homeOffer.offerExpiry
+		offerClassToPass.offerTiming = homeOffer.offerTiming
+		
+		
+	}
+	
+	
+	
+	
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		
+		if (segue.identifier == "OffersIndividualVC") {
+			let offersSecondaryVC = segue.destination as! OffersIndividualVC
+			
+			
+			
+			
+			
+			
+			offersSecondaryVC.homeOfferReceived.offerBy = offerClassToPass.offerBy
+			offersSecondaryVC.homeOfferReceived.offerById = offerClassToPass.offerById
+			offersSecondaryVC.homeOfferReceived.offerCategory = offerClassToPass.offerCategory
+			offersSecondaryVC.homeOfferReceived.offerDeal = offerClassToPass.offerDeal
+			offersSecondaryVC.homeOfferReceived.offerImage = offerClassToPass.offerImage
+			offersSecondaryVC.homeOfferReceived.offerDiscount = offerClassToPass.offerDiscount
+			offersSecondaryVC.homeOfferReceived.offerTitle = offerClassToPass.offerTitle
+			offersSecondaryVC.homeOfferReceived.offerImageOriginal = offerClassToPass.offerImageOriginal
+			offersSecondaryVC.homeOfferReceived.offerDesc = offerClassToPass.offerDesc
+			offersSecondaryVC.homeOfferReceived.offerExpiry = offerClassToPass.offerExpiry
+			offersSecondaryVC.homeOfferReceived.offerTiming = offerClassToPass.offerTiming
+			
+			
+		}
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
 
 }

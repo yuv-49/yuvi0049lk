@@ -9,6 +9,14 @@
 import Foundation
 
 
+
+var YOUR_PUBLIC_KEY =  /* "rzp_test_Jq60z50TZrtFeL"*/  "rzp_live_chMEONGnMsyuTW"
+
+
+
+
+
+
 var token: String!
 var tokenId : String!
 var sessionId: String!
@@ -31,12 +39,16 @@ var userLongitude: Double!
 
 class HomeOffers{
 	var offerBy : String!
+	var offerById: String!
 	var offerDiscount : String!
 	var offerTitle : String!
 	var offerImage : String!
 	var offerDeal: String!
 	var offerCategory: String!
 	var offerImageOriginal: UIImage!
+	var offerDesc: String!
+	var offerExpiry: String!
+	var offerTiming: String!
 	
 }
 
@@ -48,6 +60,11 @@ var homeOfferesApparels = [HomeOffers]()
 var homeOffersHappy = [HomeOffers]()
 var homeOffersSports = [HomeOffers]()
 var homeOffersSpa = [HomeOffers]()
+
+
+
+var offerToPlaceTransition = 0
+var placeTransitionArray = Places()
 
 
 
@@ -82,6 +99,8 @@ class Places {
 	var orderType: String!
 	
 	
+	
+	
 }
 
 
@@ -102,7 +121,9 @@ var GroceriesOrder = [Places]()
 var MedicineOrder = [Places]()
 var staitionaryOrder = [Places]()
 
+// Profile
 
+var orderDetailsForUser = Places()
 
 
 
@@ -119,6 +140,26 @@ class homeEvents{
 	var eventTicketBasecode: String!
 	var eventImageOriginal: UIImage!
 	var eventLogoOriginal: UIImage!
+	
+	
+	var eventWebsite: String!
+	
+	
+	var eventPhoneNumber: String!
+	var eventFee: String!
+	var eventDesc : String!
+	var eventAddress: String!
+	
+	
+	var eventTicketSales: String!
+	var eventTicketLimit: String!
+	
+	var eventSingleLimit: String!
+	
+	
+	var eventLat: String!
+	var eventLong: String!
+	
 	
 	
 	
@@ -157,10 +198,12 @@ var firstPageNews = [PopularNews]()
 
 
 
+let userDefaults = UserDefaults.standard
 
 
 
 
+var countOfPagesForFirstPage: Int!
 
 
 

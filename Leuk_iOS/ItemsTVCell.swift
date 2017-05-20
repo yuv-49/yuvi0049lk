@@ -18,6 +18,7 @@ class ItemsTVCell: UITableViewCell {
 	@IBOutlet weak var realCost: UILabel!
 	@IBOutlet weak var itemSpicy: UIImageView!
 	@IBOutlet weak var itemQuantity: UILabel!
+	@IBOutlet weak var itemImage: UIImageView!
 	
 //	@IBOutlet weak var AddCart: UIButton!
 	

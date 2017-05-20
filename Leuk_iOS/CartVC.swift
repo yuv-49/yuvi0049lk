@@ -8,10 +8,11 @@
 
 import UIKit
 
-class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, RazorpayPaymentCompletionProtocol {
 
 	
 	
+	@IBOutlet weak var checkout: UIView!
 	
 	@IBOutlet weak var myTable: UITableView!
 	@IBOutlet weak var minimalOrder: UILabel!
@@ -22,13 +23,22 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	var addBtnClicked: Bool!
 	var showHere : Int!
 
-	
+	private var razorpay : Razorpay!
 	
 	
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+	
+	print(YOUR_PUBLIC_KEY)
+	
+	 razorpay = Razorpay.initWithKey("YOUR_PUBLIC_KEY", andDelegate: self)
+	
+	
+	
+	let gestureForCheckout = UITapGestureRecognizer(target: self, action:  #selector (self.checkOut1 (_:)))
+	self.checkout.addGestureRecognizer(gestureForCheckout)
 	
 	addBtnClicked = false
 	
@@ -40,7 +50,56 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	
 	}
 
+	func checkOut1(_ sender:UITapGestureRecognizer){
+		
+		self.performSegue(withIdentifier: "ConfirmOrderVC", sender: self)
+
+		
+		
+	}
+	func checkOut(_ sender:UITapGestureRecognizer){
+		
+		
+		
+		
+		getGrandTotal()
+		let min = cartValues[0].minimumSpending!
+
+		if showHere > Int(min)! {
+			let amount = showHere * 100
+			print(amount)
+			let options: [AnyHashable: Any] = ["amount": "\(amount)",     // mandatory, in paise
+				// all optional other than amount.
+				// "image": "https://url-to-image.png",
+				"name": "webloom solutions",
+				"description": "food",
+				"prefill": ["email": "shashankjha1994@gmail.com",
+				            "contact": "7795122355"],
+				"theme": ["color": "#F37254"]]
+			razorpay.open(options)
+			
+		} else {
+			print("select minimum atleast")
+			
+		}
+		
+		
+		
 	
+		
+		
+		
+	}
+	
+	//MARK:- Razorpay delegates
+	
+	func onPaymentSuccess(_ payment_id: String) {
+		UIAlertView.init(title: "Payment Successful", message: payment_id, delegate: self, cancelButtonTitle: "OK").show()
+	}
+	
+	func onPaymentError(_ code: Int32, description str: String) {
+		UIAlertView.init(title: "Error", message: str, delegate: self, cancelButtonTitle: "OK").show()
+	}
 	
 	
 	
@@ -60,7 +119,7 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 		
 		if showHere > Int(min)! {
 			minimalOrder.isHidden = true
-			subtotal.text = "\(showHere!)"
+			//subtotal.text = "\(showHere!)"
 			print(showHere)
 			
 		} else {
@@ -91,13 +150,17 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 		
 		
 		cell.itemName.text = cartValues[indexPath.row].itemName
-	//	cell.itemImage.image =
 		cell.itemCost.text = cartValues[indexPath.row].itemOfferCost
 		
 		cell.addItem.tag = indexPath.row
 		cell.addItem.addTarget(self, action: #selector(self.addItem(_:)), for: .touchUpInside)
 		cell.substractItem.tag = indexPath.row
 		cell.substractItem.addTarget(self, action: #selector(self.deleteItem(_:)), for: .touchUpInside)
+		
+		let link = URL(string: cartValues[indexPath.row].itemImageLink)!
+		cell.itemImage.kf.setImage(with: link)
+
+		
 		
 		cell.numberOfItems.text = "\(cartValues[indexPath.row].rows!)"
 
@@ -182,14 +245,34 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	
 	
 
-    /*
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	
+	
+	if (segue.identifier == "ConfirmOrderVC") {
+		
+		let shopMenuVC = segue.destination as! ConfirmOrderVC
+		shopMenuVC.entryPoint = 1
+		
+		
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
 
 }

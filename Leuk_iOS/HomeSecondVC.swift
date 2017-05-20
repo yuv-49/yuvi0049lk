@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate{
+class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
 
 	@IBOutlet weak var homeSecCollectionView: UICollectionView!
 	
@@ -27,7 +27,7 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	
 	
 	var secondOrderView = ["Food & Beverages","Groceries","Medicine","Stationary"]
-	var secondOffersView = ["Happy Hours","Apperals","Food & Beverages","Bars & Pubs","Spa & Salons","Sports"]
+	var secondOffersView = ["Happy Hours","Apparels","Food & Beverages","Bars & Pubs","Spa & Salons","Sports"]
 	var secondEventsView = ["Food & Beverages","Social","Startups","Sports","Meetups","Parties"]
 	var secondPlacesView = ["Food & Beverages","Entertainment","Pubs","Cafe","Stores","Medical"]
 
@@ -90,19 +90,28 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	}
 	
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-		if indexValue == 0{
-			// initiate the value once again after  implementing the pagingview
-			
-			return CGSize(width: collectionView.frame.width * 0.5, height: collectionView.frame.height * 0.5)
-		}
-		else {
-			return CGSize(width: collectionView.frame.width * 0.5, height: collectionView.frame.height * 0.33)
-		}
-	}
+//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//		if indexValue == 0{
+//			// initiate the value once again after  implementing the pagingview
+//			
+//			return CGSize(width: collectionView.frame.width * 0.48, height: collectionView.frame.height * 0.55)
+//		}
+//		else {
+//			return CGSize(width: collectionView.frame.width * 0.48, height: collectionView.frame.height * 0.28)
+//		}
+//	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCell", for: indexPath) as! HomeSecondCVCell
+		
+		cell.layer.shadowColor = UIColor.gray.cgColor
+		cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+		cell.layer.shadowRadius = 2.0
+		cell.layer.shadowOpacity = 0.6
+		cell.layer.masksToBounds = false
+		cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+		
+		
 		if indexValue == 0{
 			cell.secondlabel.text = secondOrderView[indexPath.row]
 			cell.secondImage.image = UIImage(named: orderNowImageForDefault[indexPath.row] )
@@ -125,6 +134,16 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	}
 	
 
+	
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		return CGSize(width: collectionView.frame.width * 0.485, height: collectionView.frame.height * 0.30)
+	}
+	
+	
+	
+	
+	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 		if (indexValue == 3)

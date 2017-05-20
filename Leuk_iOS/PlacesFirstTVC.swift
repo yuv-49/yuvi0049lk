@@ -60,42 +60,42 @@ class PlacesFirstTVC: UITableViewController {
 	
 	
 		
-		
-		
-	func getImageFromArray(_ placeArrayForImage: [Places]){
-		
-		
-		for index in 0..<restaurantValues.count {
-			var photoLinkArray = restaurantValues[index].photoLink.characters.split{$0 == ","}.map(String.init)
-			if(photoLinkArray.count > 0){
-			let imageURL = URL(string: "https://leuk.xyz/leukapi12345/images/gurgaon/\(restaurantValues[index].placeId ?? "")/\(photoLinkArray[0] ).png")
-			if let url = imageURL {
-				var image: UIImage!
-				//All network operations has to run on different thread(not on main thread).
-				DispatchQueue.global(qos: .userInitiated).async {
-					let imageData = NSData(contentsOf: url)
-					//All UI operations has to run on main thread.
-					DispatchQueue.main.async {
-						if imageData != nil {
-							image = UIImage(data: imageData! as Data)
-							restaurantValues[index].placeImage = image
-							//self.do_table_refresh()
-							
-						} else {
-							image = nil
-						}
-					}
-				}
-				
-			}
-		}
-		}
-		DispatchQueue.main.async(execute: {self.do_table_refresh()})
-
-		
-		
-	
-	}
+//		
+//		
+//	func getImageFromArray(_ placeArrayForImage: [Places]){
+//		
+//		
+//		for index in 0..<restaurantValues.count {
+//			var photoLinkArray = restaurantValues[index].photoLink.characters.split{$0 == ","}.map(String.init)
+//			if(photoLinkArray.count > 0){
+//			let imageURL = URL(string: "https://leuk.xyz/leukapi12345/images/gurgaon/\(restaurantValues[index].placeId ?? "")/\(photoLinkArray[0] ).png")
+//			if let url = imageURL {
+//				var image: UIImage!
+//				//All network operations has to run on different thread(not on main thread).
+//				DispatchQueue.global(qos: .userInitiated).async {
+//					let imageData = NSData(contentsOf: url)
+//					//All UI operations has to run on main thread.
+//					DispatchQueue.main.async {
+//						if imageData != nil {
+//							image = UIImage(data: imageData! as Data)
+//							restaurantValues[index].placeImage = image
+//							//self.do_table_refresh()
+//							
+//						} else {
+//							image = nil
+//						}
+//					}
+//				}
+//				
+//			}
+//		}
+//		}
+//		DispatchQueue.main.async(execute: {self.do_table_refresh()})
+//
+//		
+//		
+//	
+//	}
 	
 
 
@@ -285,7 +285,7 @@ class PlacesFirstTVC: UITableViewController {
 		placesSecondaryVC.placeDescriptionValue = place1.placeDescription
 		placesSecondaryVC.distance = place1.placeDistance
 		placesSecondaryVC.rating = place1.placeRating
-		placesSecondaryVC.placeTypeValue = "Restaurant"
+		placesSecondaryVC.placeTypeValue = place1.placeType
 		placesSecondaryVC.placePhoneNumber = place1.phoneNumber
 		placesSecondaryVC.mapURL = place1.mapURL
 		placesSecondaryVC.placeImageImg = place1.placeImage

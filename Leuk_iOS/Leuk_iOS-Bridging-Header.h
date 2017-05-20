@@ -5,3 +5,6 @@
 #import <Google/SignIn.h>
 #import "SWRevealViewController.h"
 #import "iCarousel.h"
+
+#import <Razorpay/Razorpay.h>
+

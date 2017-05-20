@@ -25,12 +25,17 @@ class PlacesSecondaryVC: UIViewController {
 	var photoLink: String!
 	var mainUrl: URL!
 	var secondaryUrl: URL!
+	
+	
+	var transitionedId: String!
+	
+	
+	var transitionValue: Int!
 
 	
 	
 	
-//	@IBOutlet weak var callTabBarTapped: UITabBarItem!
-//	@IBOutlet weak var mainTabBar: UITabBar!
+
 	
 	@IBOutlet weak var placeImage: UIImageView!
 	@IBOutlet weak var placeName: UILabel!
@@ -41,19 +46,47 @@ class PlacesSecondaryVC: UIViewController {
 	@IBOutlet weak var placeType: UILabel!
 	@IBOutlet weak var placeImageDescription: UIImageView!
 
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//	self.title = titleNotification
-	 insertValues()
 	
-	
+	if offerToPlaceTransition == 0{
+		insertValues()
+	}else if offerToPlaceTransition == 1 {
+		
+		
+		//do here
+		
+		
+		if placeTransitionArray.placeId == nil {
+			
+			haltForaWhile()
+			
+		}else{
+			insertValues()
+		}
+		
+		
+		offerToPlaceTransition = 0
+	}
 	
     }
+	
+	func haltForaWhile(){
+		
+		if placeTransitionArray.placeId == nil{
+		
+		_ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.haltForaWhile), userInfo: nil, repeats: false);
+		}
+	}
+	
+	
+	
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 	func insertValues(){
@@ -88,7 +121,9 @@ class PlacesSecondaryVC: UIViewController {
 	
 	
 	@IBAction func callButtonPressed(_ sender: Any) {
-		callNumber(phoneNumber: placePhoneNumber)
+		let newString = placePhoneNumber.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+
+		callNumber(phoneNumber: newString)
 	}
 	
 	private func callNumber(phoneNumber:String) {

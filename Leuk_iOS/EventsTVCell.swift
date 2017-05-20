@@ -44,7 +44,7 @@ class EventsTVCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 	logo.layoutIfNeeded()
-	logo.layer.cornerRadius = self.frame.height / 8.0
+	//logo.layer.cornerRadius = self.frame.height/8.0
 	logo.layer.masksToBounds = true
 
 	

@@ -9,5 +9,20 @@
 import UIKit
 
 class CouponsVCell: UICollectionViewCell {
-    
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		let view = UIView(frame: frame)
+		view.layer.borderWidth = 1
+		view.layer.borderColor = UIColor.black.cgColor
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

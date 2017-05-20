@@ -11,10 +11,10 @@ import PagingMenuController
 import SwiftyJSON
 
 private struct PagingMenuOptions: PagingMenuControllerCustomizable {
-	let viewController1 = CouponsVC.instantiateFromStoryboard()
+	let viewController2 = TicketsVC.instantiateFromStoryboard()
 	
-	private let viewController2 = OrderVC.instantiateFromStoryboard()
-	let viewController3 = TicketsVC.instantiateFromStoryboard()
+	private let viewController1 = OrderVC.instantiateFromStoryboard()
+	let viewController3 = CouponsVC.instantiateFromStoryboard()
 	fileprivate var componentType: ComponentType {
 		return .all(menuOptions: MenuOptions(), pagingControllers: pagingControllers)
 	}
@@ -97,7 +97,8 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
 	 self.title = "MY PROFILE"
 	
-	
+	print("Your PROFILE here")
+
 	//getUserDetails()
 	
 	
@@ -199,24 +200,12 @@ class ProfileVC: UIViewController {
 	
 	
 	private func fetchImage() {
-		let imageURL = URL(string: profileImages)
-		var image: UIImage?
-		if let url = imageURL {
-			//All network operations has to run on different thread(not on main thread).
-			DispatchQueue.global(qos: .userInitiated).async {
-				let imageData = NSData(contentsOf: url)
-				//All UI operations has to run on main thread.
-				DispatchQueue.main.async {
-					if imageData != nil {
-						image = UIImage(data: imageData! as Data)
-						self.profileImg.image = image
-						
-					} else {
-						image = nil
-					}
-				}
-			}
-		}
+		
+		
+		let url = URL(string: profileImages)
+		profileImg.kf.setImage(with: url)
+		
+
 	}
 
 	
@@ -264,31 +253,7 @@ class ProfileVC: UIViewController {
 	
 	
 	
-// MARK: - IMAGEURL copied
 
-//	private func fetchImage() {
-//		let imageURL = URL(string: profileImg)
-//		var image: UIImage?
-//		if let url = imageURL {
-//			//All network operations has to run on different thread(not on main thread).
-//			DispatchQueue.global(qos: .userInitiated).async {
-//				let imageData = NSData(contentsOf: url)
-//				//All UI operations has to run on main thread.
-//				DispatchQueue.main.async {
-//					if imageData != nil {
-//						image = UIImage(data: imageData as! Data)
-//						self.profileImage.image = image
-//						
-//					} else {
-//						image = nil
-//					}
-//				}
-//			}
-//		}
-//	}
-	
-	
-	
 	
 
     /*

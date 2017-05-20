@@ -27,6 +27,18 @@ class MenuTableVC: UITableViewController {
 		
 	}
 	
+	
+	
+//	func revealControllerToggle(){
+//		
+//		if revealViewController() != nil {
+//			self.target = revealViewController()
+//			self.action = #selector(SWRevealViewController.canResignFirstResponder)
+//			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+//		}
+//		
+//	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		self.tableView.reloadData()
 		self.animateTable()

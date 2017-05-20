@@ -136,6 +136,10 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	cell.substract.addTarget(self, action: #selector(self.deleteItem(_:)), for: .touchUpInside)
 
 	
+	let link = URL(string: commonForShopAtlast1[indexPath.row].itemImageLink)!
+	cell.itemImage.kf.setImage(with: link)
+
+	
 	
 	
 	

@@ -10,6 +10,8 @@ import UIKit
 
 class EventsTVC: UITableViewController {
 	var indexValueSecond: Int!
+	
+	var SenderValueOfEvent = homeEvents()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +119,9 @@ class EventsTVC: UITableViewController {
 		TVcell.hostedBy.text = valueForPlaces[indexPath.row].eventHostedBy
 		TVcell.date.text = valueForPlaces[indexPath.row].eventDate
 		TVcell.time.text = valueForPlaces[indexPath.row].eventTime
-		TVcell.imageLink.image = valueForPlaces[indexPath.row].eventImageOriginal
+//		TVcell.imageLink.image = valueForPlaces[indexPath.row].eventImageOriginal
+//		print(TVcell.imageLink.image)
+		print("\(valueForPlaces[indexPath.row].eventImageLink)")
 		let link = URL(string: valueForPlaces[indexPath.row].eventImageLink)!
 		TVcell.imageLink.kf.setImage(with: link)
 		let link2 = URL(string: valueForPlaces[indexPath.row].eventLogo)!
@@ -131,6 +135,79 @@ class EventsTVC: UITableViewController {
 		
 	}
 	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		if(indexValueSecond == 0){
+			
+			
+			
+			addValueToSegue(foodValues[indexPath.row])
+			
+			
+		}
+		else if(indexValueSecond == 1){
+			
+			addValueToSegue(socialValues[indexPath.row])
+			
+			
+		}
+		else if(indexValueSecond == 2){
+			
+			addValueToSegue(startupValues[indexPath.row])
+			
+			
+		}
+		else if(indexValueSecond == 3){
+			
+			addValueToSegue(sportsValues[indexPath.row])
+			
+		}
+		else if(indexValueSecond == 4){
+			
+			addValueToSegue(meetupValues[indexPath.row])
+			
+		}
+		else if(indexValueSecond == 5){
+			
+			addValueToSegue(partyValues[indexPath.row])
+			
+		}
+
+		
+		self.performSegue(withIdentifier: "EventsIndividualVC", sender: self)
+	}
+	
+	func addValueToSegue(_ eventValue: homeEvents){
+		
+		SenderValueOfEvent.eventCategory = eventValue.eventCategory
+		SenderValueOfEvent.eventDate = eventValue.eventDate
+		SenderValueOfEvent.eventDifference = eventValue.eventDifference
+		SenderValueOfEvent.eventHostedBy = eventValue.eventHostedBy
+		SenderValueOfEvent.eventId = eventValue.eventId
+		SenderValueOfEvent.eventImageLink = eventValue.eventImageLink
+		SenderValueOfEvent.eventImageOriginal = eventValue.eventImageOriginal
+		SenderValueOfEvent.eventLogo = eventValue.eventLogo
+		SenderValueOfEvent.eventLogoOriginal = eventValue.eventLogoOriginal
+		SenderValueOfEvent.eventName = eventValue.eventName
+		SenderValueOfEvent.eventTicketBasecode = eventValue.eventTicketBasecode
+		SenderValueOfEvent.eventTime = eventValue.eventTime
+		
+		SenderValueOfEvent.eventAddress = eventValue.eventAddress
+		SenderValueOfEvent.eventDesc = eventValue.eventDesc
+		SenderValueOfEvent.eventFee = eventValue.eventFee
+		SenderValueOfEvent.eventHostedBy = eventValue.eventHostedBy
+		SenderValueOfEvent.eventPhoneNumber = eventValue.eventPhoneNumber
+		SenderValueOfEvent.eventSingleLimit = eventValue.eventSingleLimit
+		SenderValueOfEvent.eventTicketLimit = eventValue.eventTicketLimit
+		SenderValueOfEvent.eventTicketSales = eventValue.eventTicketSales
+		SenderValueOfEvent.eventWebsite = eventValue.eventWebsite
+		
+		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		
+	}
 	
 
     /*
@@ -168,14 +245,76 @@ class EventsTVC: UITableViewController {
     }
     */
 
-    /*
+	
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+	
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+
+	
+	
+	if segue.identifier == "EventsIndividualVC" {
+		let eventsIndividualVC = segue.destination as!
+		EventsIndividualVC
+		
+		
+		
+		
+		
+		eventsIndividualVC.receiverEventValues.eventCategory = SenderValueOfEvent.eventCategory
+		eventsIndividualVC.receiverEventValues.eventDate = SenderValueOfEvent.eventDate
+		eventsIndividualVC.receiverEventValues.eventDifference = SenderValueOfEvent.eventDifference
+		eventsIndividualVC.receiverEventValues.eventHostedBy = SenderValueOfEvent.eventHostedBy
+		eventsIndividualVC.receiverEventValues.eventId = SenderValueOfEvent.eventId
+		eventsIndividualVC.receiverEventValues.eventImageLink = SenderValueOfEvent.eventImageLink
+		eventsIndividualVC.receiverEventValues.eventImageOriginal = SenderValueOfEvent.eventImageOriginal
+		eventsIndividualVC.receiverEventValues.eventLogo = SenderValueOfEvent.eventLogo
+		eventsIndividualVC.receiverEventValues.eventLogoOriginal = SenderValueOfEvent.eventLogoOriginal
+		eventsIndividualVC.receiverEventValues.eventName = SenderValueOfEvent.eventName
+		eventsIndividualVC.receiverEventValues.eventTicketBasecode = SenderValueOfEvent.eventTicketBasecode
+		eventsIndividualVC.receiverEventValues.eventTime = SenderValueOfEvent.eventTime
+		
+		
+		eventsIndividualVC.receiverEventValues.eventAddress = SenderValueOfEvent.eventAddress
+		eventsIndividualVC.receiverEventValues.eventDesc = SenderValueOfEvent.eventDesc
+		eventsIndividualVC.receiverEventValues.eventFee = SenderValueOfEvent.eventFee
+		eventsIndividualVC.receiverEventValues.eventHostedBy = SenderValueOfEvent.eventHostedBy
+		eventsIndividualVC.receiverEventValues.eventPhoneNumber = SenderValueOfEvent.eventPhoneNumber
+		eventsIndividualVC.receiverEventValues.eventSingleLimit = SenderValueOfEvent.eventSingleLimit
+		eventsIndividualVC.receiverEventValues.eventTicketLimit = SenderValueOfEvent.eventTicketLimit
+		eventsIndividualVC.receiverEventValues.eventTicketSales = SenderValueOfEvent.eventTicketSales
+		eventsIndividualVC.receiverEventValues.eventWebsite = SenderValueOfEvent.eventWebsite
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
     }
-    */
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
 
 }

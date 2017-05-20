@@ -95,7 +95,7 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 		
 		
 		
-		// MARK:- Api call for next page
+		// MARK:- Api call for getMenubyCategory
 		
 		var getMenu = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getMenubyCategory")!)
 		getMenu.httpMethod = "POST"
@@ -128,7 +128,6 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 				
 				if numberOfItems > 0
 				{
-					//commonForShopAtLast.removeAll()
 					for index in 0...numberOfItems-1 {
 						let menuList = shopMenuItem()
 						menuList.itemId = json["response"]["data"][index]["id"].string!
@@ -149,6 +148,11 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 						menuList.minimumSpending = json["response"]["data"][index]["minimum_spending"].string!
 						menuList.convFee = json["response"]["data"][index]["conv_fee"].string!
 						menuList.deliveryCharge = json["response"]["data"][index]["delivery_charge"].string!
+						
+						
+						menuList.placeId = json["response"]["data"][index]["place_id"].string!
+						
+						
 
 						
 						

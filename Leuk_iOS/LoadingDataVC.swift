@@ -16,11 +16,12 @@ class LoadingDataVC: UIViewController {
 	
 	var countOfPlaces: String!
 	var tokenIdFromGoogle: String!
-	
+	var count: Int!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-	
+	countOfPagesForFirstPage = 0
+
 	
 	firstpageNewsApi()
 	profileApi()
@@ -29,7 +30,6 @@ class LoadingDataVC: UIViewController {
 	getEventsValue()
 
 	getPlacesValues()
-	
 	
 	
 	
@@ -42,7 +42,7 @@ class LoadingDataVC: UIViewController {
 		
 		//MARK:- FIRST PAGE NEWS
 		
-		var newsRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPopularNews")!)
+		var newsRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPlaceNews")!)
 		newsRequest.httpMethod = "POST"
 		let postStringForNews="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
 		print("\(postStringForNews)")
@@ -61,6 +61,13 @@ class LoadingDataVC: UIViewController {
 				
 				var json = JSON(data: data!)
 				let numberOfEvents =  json["response"]["data"].count
+				
+				//DispatchQueue.main.async {
+					countOfPagesForFirstPage = numberOfEvents
+				//}
+				
+				
+				
 				print(numberOfEvents)
 				if numberOfEvents > 0
 				{
@@ -70,8 +77,11 @@ class LoadingDataVC: UIViewController {
 						
 						getNewsArray.newsId = json["response"]["data"][index]["id"].string!
 						getNewsArray.imageLink = json["response"]["data"][index]["image_link"].string!
-						getNewsArray.newsTitle = json["response"]["data"][index]["source"].string!
+						getNewsArray.newsTitle = json["response"]["data"][index]["news_title"].string!
 						getNewsArray.hits = json["response"]["data"][index]["hits"].string!
+						getNewsArray.newsSource = json["response"]["data"][index]["source"].string!
+						getNewsArray.pageLink = json["response"]["data"][index]["link"].string!
+						
 						
 						
 						
@@ -378,13 +388,37 @@ class LoadingDataVC: UIViewController {
 
 						eventValuesArray.eventTicketBasecode = json["response"]["data"][index]["ticket_basecode"].string!
 
-						eventValuesArray.eventTime = json["response"]["data"][index]["time"].string!
 
+						eventValuesArray.eventDesc = json["response"]["data"][index]["description"].string!
+						eventValuesArray.eventFee = json["response"]["data"][index]["fee"].string!
+						eventValuesArray.eventPhoneNumber = json["response"]["data"][index]["phone"].string!
+						eventValuesArray.eventAddress = json["response"]["data"][index]["address"].string!
+						eventValuesArray.eventLat = json["response"]["data"][index]["latitude"].string!
+						eventValuesArray.eventLong = json["response"]["data"][index]["longitude"].string!
+						eventValuesArray.eventSingleLimit = json["response"]["data"][index]["individual_ticket_limit"].string!
+						eventValuesArray.eventTicketSales = json["response"]["data"][index]["ticket_sales"].string!
+						eventValuesArray.eventTicketLimit = json["response"]["data"][index]["ticket_limit"].string!
+						eventValuesArray.eventWebsite = json["response"]["data"][index]["website"].string!
 					
+						
+						
+						
+						
+						
+						
 						if (eventValuesArray.eventCategory == "Social") {
 							socialValues.append(eventValuesArray)
+						}else if eventValuesArray.eventCategory == "Food" {
+							foodValues.append(eventValuesArray)
+						}else if eventValuesArray.eventCategory == "Party" {
+							partyValues.append(eventValuesArray)
+//						}else if eventValuesArray.eventCategory == "Comedy" {
+//							partyValues.append(eventValuesArray)
+						}else if eventValuesArray.eventCategory == "Startup" {
+							startupValues.append(eventValuesArray)
+						}else if eventValuesArray.eventCategory == "Sports" {
+							sportsValues.append(eventValuesArray)
 						}
-						
 						
 						
 						
@@ -457,7 +491,7 @@ class LoadingDataVC: UIViewController {
 		
 		
 		
-		var mytickets = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v19.php?method=getOffers")!)
+		var mytickets = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getOffers")!)
 		mytickets.httpMethod = "POST"
 		let postString2="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
 		
@@ -474,6 +508,7 @@ class LoadingDataVC: UIViewController {
 				
 		
 				var json = JSON(data: data!)
+				print("Yhapy \(json)")
 				let numberOfPlaces =  json["response"]["data"].count
 				//print(numberOfPlaces)
 				if numberOfPlaces > 0
@@ -484,20 +519,18 @@ class LoadingDataVC: UIViewController {
 					offerValue.offerBy = json["response"]["data"][index]["offer_by"].string!
 					offerValue.offerCategory = json["response"]["data"][index]["category"].string!
 					offerValue.offerDeal = json["response"]["data"][index]["coupon_basecode"].string!
-					
-					if let strImage = offerValue.offerImage {
-						
-						
-						if let data = NSData(contentsOf: NSURL(string:strImage )! as URL) {
-							offerValue.offerImageOriginal = UIImage(data: data as Data)
-						}
-					}
+					offerValue.offerById = json["response"]["data"][index]["offer_by_id"].string!
+					offerValue.offerDesc = json["response"]["data"][index]["offer_desc"].string!
+					offerValue.offerExpiry = json["response"]["data"][index]["offer_expiry"].string!  
+					offerValue.offerTiming = json["response"]["data"][index]["offer_time"].string!
+					offerValue.offerTitle = json["response"]["data"][index]["offer_title"].string!
+
 					
 					
 					
 					if (offerValue.offerCategory == "bars"){
 						homeOffersBars.append(offerValue)
-					}else if (offerValue.offerCategory == "apparels"){
+					}else if (offerValue.offerCategory == "Apparels"){
 						homeOfferesApparels.append(offerValue)
 					}else if (offerValue.offerCategory == "fnb") {
 						homeOffersF_B.append(offerValue)
@@ -505,9 +538,11 @@ class LoadingDataVC: UIViewController {
 						homeOffersHappy.append(offerValue)
 					}else if (offerValue.offerCategory == "Sports") {
 						homeOffersSports.append(offerValue)
+					}else if (offerValue.offerCategory == "Pubs") {
+						homeOffersBars.append(offerValue)
 					}
 					
-					//else if (a.type == "") Two left to add later
+					//else if (a.type == "") one left to add later
 					
 
 					
