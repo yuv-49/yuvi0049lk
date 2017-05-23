@@ -40,7 +40,6 @@
 		28EB90A71EA33BA5004BBB61 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EB90A51EA33BA5004BBB61 /* iCarousel.m */; };
 		28F20F3C1EB4C1E700ED8194 /* InsiderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F3B1EB4C1E700ED8194 /* InsiderConstants.swift */; };
 		28F20F3E1EB4D0A100ED8194 /* ShopMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F3D1EB4D0A100ED8194 /* ShopMenu.swift */; };
-		28F20F421EB5A79A00ED8194 /* LoadingForItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F411EB5A79A00ED8194 /* LoadingForItems.swift */; };
 		28F20F441EB5F20900ED8194 /* ShopMenuTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */; };
 		28F20F471EB602F700ED8194 /* ItemsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F461EB602F700ED8194 /* ItemsTVCell.swift */; };
 		28F20F491EB6032A00ED8194 /* ItemsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F20F481EB6032A00ED8194 /* ItemsTVC.swift */; };
@@ -62,6 +61,7 @@
 		28FC337B1E9FCE2A00F4A813 /* TicketsVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337A1E9FCE2A00F4A813 /* TicketsVCell.swift */; };
 		28FC337D1E9FCE3C00F4A813 /* OrderVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337C1E9FCE3C00F4A813 /* OrderVCell.swift */; };
 		28FC337F1E9FCE5100F4A813 /* CouponsVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337E1E9FCE5100F4A813 /* CouponsVCell.swift */; };
+		28FE7D171ED2E949005CCBAD /* HeavyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FE7D161ED2E948005CCBAD /* HeavyConstants.swift */; };
 		63568D8ED0141A383566FDCB /* Pods_Leuk_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82957FACEEC3C232CBFAF92 /* Pods_Leuk_iOSTests.framework */; };
 		ECF75B855BE7C90C92A17F5D /* Pods_Leuk_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63D3DBC6FA9A13D06C6C3CA /* Pods_Leuk_iOSUITests.framework */; };
 /* End PBXBuildFile section */
@@ -123,7 +123,6 @@
 		28EB90A61EA33BA5004BBB61 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		28F20F3B1EB4C1E700ED8194 /* InsiderConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsiderConstants.swift; sourceTree = "<group>"; };
 		28F20F3D1EB4D0A100ED8194 /* ShopMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopMenu.swift; sourceTree = "<group>"; };
-		28F20F411EB5A79A00ED8194 /* LoadingForItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingForItems.swift; sourceTree = "<group>"; };
 		28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopMenuTVCell.swift; sourceTree = "<group>"; };
 		28F20F461EB602F700ED8194 /* ItemsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTVCell.swift; sourceTree = "<group>"; };
 		28F20F481EB6032A00ED8194 /* ItemsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTVC.swift; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		28FC337A1E9FCE2A00F4A813 /* TicketsVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketsVCell.swift; sourceTree = "<group>"; };
 		28FC337C1E9FCE3C00F4A813 /* OrderVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderVCell.swift; sourceTree = "<group>"; };
 		28FC337E1E9FCE5100F4A813 /* CouponsVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponsVCell.swift; sourceTree = "<group>"; };
+		28FE7D161ED2E948005CCBAD /* HeavyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeavyConstants.swift; sourceTree = "<group>"; };
 		2B99307884C85FF1561A381D /* Pods-Leuk_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		35644FC66C827AF22EB2E51C /* Pods-Leuk_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5963E9E60EC73E325FDD52E7 /* Pods_Leuk_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +202,7 @@
 				28199A561EBE0F52003CD7C0 /* profileConstants.swift */,
 				28F20F3B1EB4C1E700ED8194 /* InsiderConstants.swift */,
 				28248B2F1EA051C400BEC756 /* Constants.swift */,
+				28FE7D161ED2E948005CCBAD /* HeavyConstants.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -333,7 +334,6 @@
 			children = (
 				280FB7421EA30C3D0024F445 /* FoodCVC.swift */,
 				280FB7441EA30C5E0024F445 /* FoodCVCell.swift */,
-				28F20F411EB5A79A00ED8194 /* LoadingForItems.swift */,
 				28F20F3D1EB4D0A100ED8194 /* ShopMenu.swift */,
 				28F20F431EB5F20900ED8194 /* ShopMenuTVCell.swift */,
 				28F20F481EB6032A00ED8194 /* ItemsTVC.swift */,
@@ -743,10 +743,10 @@
 				2837CE461E8BBECA000AF281 /* AppDelegate.swift in Sources */,
 				2809E2F81E9D4BF800F2ED34 /* PlacesSecondaryVC.swift in Sources */,
 				28F54FC51EA0111C00AAAB3E /* EventsTVCell.swift in Sources */,
+				28FE7D171ED2E949005CCBAD /* HeavyConstants.swift in Sources */,
 				28F54FC71EA01A6100AAAB3E /* OffersCVC.swift in Sources */,
 				2821977F1EB6ADFB002C4915 /* CartTVCell.swift in Sources */,
 				2837CE801E8BD53F000AF281 /* HomeSecondCVCell.swift in Sources */,
-				28F20F421EB5A79A00ED8194 /* LoadingForItems.swift in Sources */,
 				2809E2F41E9D30D300F2ED34 /* PlacesFirstTVC.swift in Sources */,
 				28F54FC31EA0110100AAAB3E /* EventsTVC.swift in Sources */,
 				28498BC41EC8574500FECD68 /* TicketAdvanceVC.swift in Sources */,

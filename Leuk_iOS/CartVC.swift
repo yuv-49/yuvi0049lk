@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, RazorpayPaymentCompletionProtocol {
+class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
 	
 	
@@ -22,18 +23,14 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, Raz
 	
 	var addBtnClicked: Bool!
 	var showHere : Int!
-
-	private var razorpay : Razorpay!
+	var subTotalValue : Int!
+	
 	
 	
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-	
-	print(YOUR_PUBLIC_KEY)
-	
-	 razorpay = Razorpay.initWithKey("YOUR_PUBLIC_KEY", andDelegate: self)
 	
 	
 	
@@ -45,7 +42,7 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, Raz
 	getGrandTotal()
 	
 	
-	
+
 	
 	
 	}
@@ -57,50 +54,6 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, Raz
 		
 		
 	}
-	func checkOut(_ sender:UITapGestureRecognizer){
-		
-		
-		
-		
-		getGrandTotal()
-		let min = cartValues[0].minimumSpending!
-
-		if showHere > Int(min)! {
-			let amount = showHere * 100
-			print(amount)
-			let options: [AnyHashable: Any] = ["amount": "\(amount)",     // mandatory, in paise
-				// all optional other than amount.
-				// "image": "https://url-to-image.png",
-				"name": "webloom solutions",
-				"description": "food",
-				"prefill": ["email": "shashankjha1994@gmail.com",
-				            "contact": "7795122355"],
-				"theme": ["color": "#F37254"]]
-			razorpay.open(options)
-			
-		} else {
-			print("select minimum atleast")
-			
-		}
-		
-		
-		
-	
-		
-		
-		
-	}
-	
-	//MARK:- Razorpay delegates
-	
-	func onPaymentSuccess(_ payment_id: String) {
-		UIAlertView.init(title: "Payment Successful", message: payment_id, delegate: self, cancelButtonTitle: "OK").show()
-	}
-	
-	func onPaymentError(_ code: Int32, description str: String) {
-		UIAlertView.init(title: "Error", message: str, delegate: self, cancelButtonTitle: "OK").show()
-	}
-	
 	
 	
 	func getGrandTotal(){
@@ -114,8 +67,8 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, Raz
 		let min = cartValues[0].minimumSpending!
 		deliveryCharge.text = cartValues[0].deliveryCharge!
 		convenienceFee.text = cartValues[0].convFee!
-		let subTotalValue = showHere + Int(cartValues[0].deliveryCharge)! + Int(cartValues[0].convFee)!
-		subtotal.text = "\(subTotalValue)"
+		subTotalValue = showHere + Int(cartValues[0].deliveryCharge)! + Int(cartValues[0].convFee)!
+		subtotal.text = "\(subTotalValue!)"
 		
 		if showHere > Int(min)! {
 			minimalOrder.isHidden = true
@@ -228,21 +181,7 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, Raz
 
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 	
@@ -256,7 +195,6 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource, Raz
 		
 		let shopMenuVC = segue.destination as! ConfirmOrderVC
 		shopMenuVC.entryPoint = 1
-		
 		
 		
 		

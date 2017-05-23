@@ -15,9 +15,11 @@ class OrderAdvance: UIViewController , UITableViewDelegate, UITableViewDataSourc
 	@IBOutlet weak var placeName: UILabel!
 	@IBOutlet weak var deliveryTime: UILabel!
 	@IBOutlet weak var placeRating: UILabel!
+	@IBOutlet weak var placeOrderAgain: UIButton!
+	
+	
 	
 	var orderReceived = Places()
-	var myOrderreceiver = MyOrders()
 	var orderNames =  [String]()
 	var orderQtys = [String]()
        var orderPrices = [String]()
@@ -27,12 +29,19 @@ class OrderAdvance: UIViewController , UITableViewDelegate, UITableViewDataSourc
         super.viewDidLoad()
 
 	
-	//let link = URL(string:orderReceived.placeFirstImageUrl )!
+//     let link = URL(string:orderReceived.placeFirstImageUrl )!
 	
 //	if self.placeImage.image == nil {
 //		self.placeImage.kf.setImage(with: )
 //		
 //	}
+	
+	
+	let gestureForCheckout = UITapGestureRecognizer(target: self, action:  #selector (self.checkOutAgain (_:)))
+	self.placeOrderAgain.addGestureRecognizer(gestureForCheckout)
+
+	
+	
 	
 	self.placeImage.kf.setImage(with: myOrderreceiver.imageLink)
 	print(orderReceived.placeFirstImageUrl)
@@ -46,6 +55,16 @@ class OrderAdvance: UIViewController , UITableViewDelegate, UITableViewDataSourc
 	
 	
 	}
+	
+	
+	func checkOutAgain(_ sender:UITapGestureRecognizer){
+		
+		self.performSegue(withIdentifier: "longDistanceCall", sender: nil)
+		
+		
+	}
+	
+	
 	
 	
 	
@@ -91,14 +110,41 @@ class OrderAdvance: UIViewController , UITableViewDelegate, UITableViewDataSourc
     }
     
 
-    /*
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+	
+	if (segue.identifier == "longDistanceCall") {
+		
+		let shopMenuVC = segue.destination as! ConfirmOrderVC
+		shopMenuVC.entryPoint = 2
+		
+		
+		
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
     }
-    */
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+

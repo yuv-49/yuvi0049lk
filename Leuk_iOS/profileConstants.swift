@@ -56,6 +56,7 @@ class MyOrders {
 	
 }
 
+var myOrderreceiver = MyOrders()
 
 
 class MyTicket {
@@ -78,6 +79,7 @@ class MyTicket {
 	var eventLat: String!
 	var eventLong: String!
 	var eventPhone: String!
+	var ticketId: String!
 	
 	
 	var eventLocation: String!

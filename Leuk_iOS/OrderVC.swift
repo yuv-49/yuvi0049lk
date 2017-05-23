@@ -57,6 +57,7 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		if myOrdersYet.count == 0{
 			_ = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.updateView), userInfo: nil, repeats: false);
 		}
+
 		return myOrdersYet.count
 	}
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,7 +82,6 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 			_ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.updateView), userInfo: nil, repeats: false);
 
 		}
-		myCollectionView.reloadData()
 		
 	}
 	
@@ -355,12 +355,20 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 	override func viewDidAppear(_ animated: Bool) {
 		apiCall()
 		// remove ordersdetail value
+		reloadFunc()
 		
 
 	}
 	
 	
-	
+	func reloadFunc(){
+		
+		if myOrdersYet.count == 0{
+			_ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.reloadFunc), userInfo: nil, repeats: false);
+			
+		}
+		myCollectionView.reloadData()
+	}
 	
 	
 	
@@ -392,21 +400,21 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		
 		
 		
-		finalOrder.myOrderreceiver.address = myOrderSender.address
-		finalOrder.myOrderreceiver.convFee = myOrderSender.convFee
-		finalOrder.myOrderreceiver.deliveryCharge = myOrderSender.deliveryCharge
-		finalOrder.myOrderreceiver.itemCost = myOrderSender.itemCost
-		finalOrder.myOrderreceiver.itemIds = myOrderSender.itemIds
-		finalOrder.myOrderreceiver.itemNames = myOrderSender.itemNames
-		finalOrder.myOrderreceiver.itemQuantity = myOrderSender.itemQuantity
-		finalOrder.myOrderreceiver.phone = myOrderSender.phone
-		finalOrder.myOrderreceiver.placeId = myOrderSender.placeId
-		finalOrder.myOrderreceiver.status = myOrderSender.status
-		finalOrder.myOrderreceiver.totalCost = myOrderSender.totalCost
-		finalOrder.myOrderreceiver.type = myOrderSender.type
-		finalOrder.myOrderreceiver.userId = myOrderSender.userId
-		finalOrder.myOrderreceiver.userName = myOrderSender.userName
-		finalOrder.myOrderreceiver.imageLink = myOrderSender.imageLink
+		myOrderreceiver.address = myOrderSender.address
+		myOrderreceiver.convFee = myOrderSender.convFee
+		myOrderreceiver.deliveryCharge = myOrderSender.deliveryCharge
+		myOrderreceiver.itemCost = myOrderSender.itemCost
+		myOrderreceiver.itemIds = myOrderSender.itemIds
+		myOrderreceiver.itemNames = myOrderSender.itemNames
+		myOrderreceiver.itemQuantity = myOrderSender.itemQuantity
+		myOrderreceiver.phone = myOrderSender.phone
+		myOrderreceiver.placeId = myOrderSender.placeId
+		myOrderreceiver.status = myOrderSender.status
+		myOrderreceiver.totalCost = myOrderSender.totalCost
+		myOrderreceiver.type = myOrderSender.type
+		myOrderreceiver.userId = myOrderSender.userId
+		myOrderreceiver.userName = myOrderSender.userName
+		myOrderreceiver.imageLink = myOrderSender.imageLink
 
 		
 		

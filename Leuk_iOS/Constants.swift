@@ -10,8 +10,8 @@ import Foundation
 
 
 
-var YOUR_PUBLIC_KEY =  /* "rzp_test_Jq60z50TZrtFeL"*/  "rzp_live_chMEONGnMsyuTW"
-
+var YOUR_PUBLIC_KEY =  "rzp_live_chMEONGnMsyuTW"  /* "rzp_test_Jq60z50TZrtFeL"*/ // "rzp_live_chMEONGnMsyuTW"
+var YOUR_PRIVATE_KEY = ""
 
 
 

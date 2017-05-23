@@ -12,8 +12,9 @@ import SwiftyJSON
 class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	
+	@IBOutlet weak var myTableView: UITableView!
        var indexValueShop: Int!
-	var totalValueHere: [Int]!
+	//var totalValueHere: [Int]!
 	var menuFoodId: String!
 	var indexValueSender : Int!
 	
@@ -21,6 +22,7 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+	
 	let btn1 = UIButton(type: .custom)
 	btn1.setImage(UIImage(named: "parties"), for: .normal)
 	btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -34,6 +36,7 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	
 	func callCartScene(){
+		// Method for calling cart through navbar
 		
 		
 		
@@ -51,8 +54,29 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 		return 1
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		
+		
+//		if categoryOfItem.count == 0 {
+//			callTimer()
+//		}
 		return categoryOfItem.count
 	}
+	
+	
+	
+	
+	func callTimer(){
+		
+		if categoryOfItem.count == 0 {
+			DispatchQueue.main.async {
+				
+				_ = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(self.callTimer), userInfo: nil, repeats: true);
+			}
+		}
+		//tableView.reloadData()
+		
+	}
+		
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ShopMenuTVCell", for: indexPath) as! ShopMenuTVCell
@@ -176,8 +200,19 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
        override func viewDidAppear(_ animated: Bool) {
 		commonForShopAtlast1.removeAll()
+		reloadFunc()
 	}
 	
+	
+	func reloadFunc(){
+		
+		if categoryOfItem.count == 0{
+			_ = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.reloadFunc), userInfo: nil, repeats: false);
+			
+		}
+	
+		myTableView.reloadData()
+	}
 	
 	func getItemForCategory(_ listArrayForItem: [shopMenuItem]) {
 		

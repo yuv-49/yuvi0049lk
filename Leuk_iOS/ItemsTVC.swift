@@ -79,12 +79,12 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 	
 
-	if commonForShopAtlast1.count == 0{
-		DispatchQueue.main.async {
-			_ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.reload), userInfo: nil, repeats: false)
-		}
-		
-	}
+//	if commonForShopAtlast1.count == 0{
+//		DispatchQueue.main.async {
+//			_ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.reload), userInfo: nil, repeats: false)
+//		}
+//		
+//	}
 	return commonForShopAtlast1.count
 	}
 	
@@ -242,8 +242,24 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	override func viewDidAppear(_ animated: Bool) {
 		
 		getTotalCartValue()
-		myTable.reloadData()
+		
+		reloadFunc()
 	
+	}
+	
+	
+	
+	
+	func reloadFunc(){
+		
+		if commonForShopAtlast1.count == 0{
+			DispatchQueue.main.async {
+				_ = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.reloadFunc), userInfo: nil, repeats: false)
+			}
+			
+		}
+		myTable.reloadData()
+
 	}
 	
     /*

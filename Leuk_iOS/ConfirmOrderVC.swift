@@ -8,9 +8,10 @@
 
 import UIKit
 import BEMCheckBox
+import SwiftyJSON
 
 
-class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegate{
+class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegate, RazorpayPaymentCompletionProtocol{
 	
 	
 	
@@ -60,6 +61,25 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 	
 	
 	
+	
+	
+	
+	
+	var razorpayOrderId: String!
+	
+	private var razorpay : Razorpay!
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +87,11 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 	
 //	var myCheckBox = BEMCheckBox(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(25), height: CGFloat(25)))
 //	view.addSubview(myCheckBox)
+	
+	
+	
+	razorpay = Razorpay.initWithKey(YOUR_PUBLIC_KEY, andDelegate: self)
+	
 	
 	
 	cod.delegate = self
@@ -106,6 +131,14 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 
 		getPlaceOrder()
 
+	}else if entryPoint == 2 {
+		
+		subTotalValue = Int(myOrderreceiver.totalCost)! + Int(myOrderreceiver.convFee)! + Int(myOrderreceiver.deliveryCharge)!
+		totalAmount.text = "\(subTotalValue!)"
+
+		getPlaceOrderForLong()
+		
+		
 	}
 	
 	
@@ -116,9 +149,122 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 	
 
     }
+	
+	
+	
+	
+
+	
+	
 	func checkOut(_ sender:UITapGestureRecognizer){
-		apiCall()
+		
+		
+		
+		
+		
+		if cardOrCod == 1 {
+			apiCallForPlacingOrderFinal()
+			
+		}else if cardOrCod == 2 {
+			
+			let amount = subTotalValue * 100
+			
+			var place = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=generateOrderId")!)
+			place.httpMethod = "POST"
+			let  postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&amount=\(amount)&order_type=\(cardOrCod!)"
+			print("YSHSHSHSHSHSYSYSYSYS \(postValue)")
+			
+			
+			place.httpBody = postValue.data(using: .utf8)
+			
+			let task2 = URLSession.shared.dataTask(with: place) { data, response, error in
+				if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+					print("statusCode should be 200, but is \(httpStatus.statusCode)")
+					//print("response = \(response)")
+				}
+					
+				else {
+					
+					var json = JSON(data: data!)
+					print(json)
+					
+					self.razorpayOrderId = json["response"]["data"]["razorpay_order_id"].string!
+					
+					
+					
+					
+					
+					
+				}
+			}
+			
+			task2.resume()
+
+			callRazorpay()
+
+		}
+		
+
+		
+		
+		
+		
+		
+		
 	}
+	
+	
+	func callRazorpay(){
+		
+		if self.razorpayOrderId != nil {
+			
+			let amount = subTotalValue * 100
+			print(amount)
+			let options: [AnyHashable: Any] = ["amount": "\(amount)",     // mandatory, in paise
+				// all optional other than amount.
+				// "image": "https://url-to-image.png",
+				"name": "webloom solutions",
+				"currency": "INR",
+				"order_id": "\(razorpayOrderId!)",
+				"description": "food",
+	// MARK:- fill these 			"prefill": ["email": "shashankjha1994@gmail.com",
+	//			            "contact": "7795122355"],
+				"theme": ["color": "#F37254"]]
+			razorpay.open(options)
+		}
+	}
+	
+	
+	
+	
+	
+	//MARK:- Razorpay delegates
+	
+	func onPaymentSuccess(_ payment_id: String) {
+		UIAlertView.init(title: "Payment Successful", message: payment_id, delegate: self, cancelButtonTitle: "OK").show()
+	}
+	
+	func onPaymentError(_ code: Int32, description str: String) {
+		UIAlertView.init(title: "Error", message: str, delegate: self, cancelButtonTitle: "OK").show()
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	func setUserDefaults(){
 		
@@ -175,16 +321,21 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 	}
 	
 	func showingAndRemoving(){
-		var val = 0
-		if  val == 1 {
+
+		print("\( placeServiceStatusForPayment)")
+		if  placeServiceStatusForPayment == 1 {
 			self.card.isHidden = true
 			self.cardLabel.isHidden = true
+			self.cod.on = true
+			cardOrCod = 1
 			
 			
-		} else if val == 2 {
+		} else if placeServiceStatusForPayment == 2 {
 			self.cod.isHidden = true
 			self.codLabel.isHidden = true
-		} else if val == 3{
+			self.card.on = true
+			cardOrCod = 2
+		} else if placeServiceStatusForPayment == 3{
 			
 			
 		}
@@ -250,16 +401,47 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 		
 	}
 	
+	func getPlaceOrderForLong(){
+		
+		placeId = myOrderreceiver.placeId
+		totalCost = myOrderreceiver.totalCost
+		convFee = myOrderreceiver.convFee
+		delivery = myOrderreceiver.deliveryCharge
+		
+		cnfItemId = myOrderreceiver.itemIds
+		cnfItemName = myOrderreceiver.itemNames
+		cnfItemQuantity = myOrderreceiver.itemQuantity
+		itemCost = myOrderreceiver.itemCost
+		
+		print("YSHS PLACEID \(placeId!)")
+		print("YSHS AMOUNT \(totalCost!)")
+		print("YSHS convfee \(convFee!)")
+		print("YSHS delivery \(delivery!)")
+		
+		
+		print("YSHS ITEMIDS \(cnfItemId!)")
+		print("YSHS ITEMNAMES \(cnfItemName!)")
+		print("YSHS ITEMQTY \(cnfItemQuantity!)")
+		print("YSHS itemcost \(itemCost!)")
+		
+		
+		
+		
+	}
 	
 	
 	
-	func apiCall(){
+	
+	func apiCallForPlacingOrderFinal(){
 		
 		// MARK:- Api call for plcaing order
 		
+		
+		//var totalFinalCost = totalCost + convFee + delivery
+		
 		var place = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=placeOrder")!)
 		place.httpMethod = "POST"
-	  let  postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(placeId!)&item_ids=\(cnfItemId!)&item_names=\(cnfItemName!)&item_quantity=\(cnfItemQuantity!)&total_cost=\(totalCost!)&address=\(userDeliveryAddress.text!)&user_phone=\(userPhoneNo.text!)&conv_fee=\(convFee!)&delivery=\(delivery!)&type=\(1)&item_cost=\(itemCost!)"
+	  let  postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(placeId!)&item_ids=\(cnfItemId!)&item_names=\(cnfItemName!)&item_quantity=\(cnfItemQuantity!)&total_cost=\(subTotalValue!)&address=\(userDeliveryAddress.text!)&user_phone=\(userPhoneNo.text!)&conv_fee=\(convFee!)&delivery=\(delivery!)&type=\(cardOrCod!)&item_cost=\(itemCost!)"
 		print("YSHSHSHSHSHSYSYSYSYS \(postValue)")
 		
 		
@@ -286,6 +468,12 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 		
 		
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -319,12 +507,11 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 	
 
 	
+	
+	
+	
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+  
 
     /*
     // MARK: - Navigation

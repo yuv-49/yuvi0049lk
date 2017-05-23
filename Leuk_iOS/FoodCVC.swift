@@ -21,6 +21,10 @@ class FoodCVC: UICollectionViewController {
         super.viewDidLoad()
 
 	valueForSecondApiCall = 1000
+	placeServiceStatusForPayment = 0
+	
+	cartValues.removeAll()
+
 //	groceriesForShop.removeAll()
 //	foodForShop.removeAll()
 //	medicineForShop.removeAll()
@@ -173,7 +177,9 @@ class FoodCVC: UICollectionViewController {
 			if valueForSecondApiCall != indexPath.row {
 				apiCallForMenu(menuFoodId,indexx: indexPath)
 			}
-			self.performSegue(withIdentifier: "shopmenufirst", sender: self)
+			placeServiceStatusForPayment = Int(restaurantOrder[indexPath.row].service!)
+			print("helloHappy \(placeServiceStatusForPayment!)")
+			self.performSegue(withIdentifier: "shopmenu", sender: self)
 
 			
 			
@@ -183,7 +189,9 @@ class FoodCVC: UICollectionViewController {
 			if valueForSecondApiCall != indexPath.row {
 				apiCallForMenu(menuFoodId,indexx: indexPath)
 			}
-			self.performSegue(withIdentifier: "shopmenufirst", sender: self)
+			placeServiceStatusForPayment = Int(GroceriesOrder[indexPath.row].service!)
+			print("helloHappy \(placeServiceStatusForPayment!)")
+			self.performSegue(withIdentifier: "shopmenu", sender: self)
 
 			
 		}
@@ -192,7 +200,9 @@ class FoodCVC: UICollectionViewController {
 			if valueForSecondApiCall != indexPath.row {
 				apiCallForMenu(menuFoodId,indexx: indexPath)
 			}
-			self.performSegue(withIdentifier: "shopmenufirst", sender: self)
+			placeServiceStatusForPayment = Int(MedicineOrder[indexPath.row].service!)
+			print("helloHappy \(placeServiceStatusForPayment!)")
+			self.performSegue(withIdentifier: "shopmenu", sender: self)
 
 			
 		}
@@ -201,7 +211,9 @@ class FoodCVC: UICollectionViewController {
 			if valueForSecondApiCall != indexPath.row {
 				apiCallForMenu(menuFoodId,indexx: indexPath)
 			}
-			self.performSegue(withIdentifier: "shopmenufirst", sender: self)
+			placeServiceStatusForPayment = Int(staitionaryOrder[indexPath.row].service!)
+			print("helloHappy \(placeServiceStatusForPayment!)")
+			self.performSegue(withIdentifier: "shopmenu", sender: self)
 
 			
 		}
@@ -240,7 +252,6 @@ class FoodCVC: UICollectionViewController {
 			}
 				
 			else {
-				categoryOfItem.removeAll()
 				var json = JSON(data: data!)
 				let numberOfItems = json["response"]["data"].count
 				if numberOfItems > 0 {
@@ -383,81 +394,40 @@ class FoodCVC: UICollectionViewController {
 		
 	}
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 	
+	override func viewDidAppear(_ animated: Bool) {
+		categoryOfItem.removeAll()
+		cartValues.removeAll()
+
+
+	}
 	
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//		if (segue.identifier == "shopmenu") {
-//			
-//			let shopMenuVC = segue.destination as! ShopMenu
-//			
-//			if self.indexValueSecond == 0 {
-//				shopMenuVC.indexValueShop = 0
-//				
-//			} else if self.indexValueSecond == 1 {
-//				shopMenuVC.indexValueShop = 1
-//				
-//			} else if self.indexValueSecond == 2 {
-//				shopMenuVC.indexValueShop = 2
-//				
-//			} else {
-//				shopMenuVC.indexValueShop = 3
-//				
-//			}
-//			
-//			
-//			
-//			
-//		} else
-			if segue.identifier == "shopmenufirst" {
-			let shopMenuVC = segue.destination as! LoadingForItems
+
+		
+		
+		
+			if segue.identifier == "shopmenu" {
+			let shopMenuVC = segue.destination as! ShopMenu 
+				
 			
 			if self.indexValueSecond == 0 {
-				shopMenuVC.valueForLoad = 0
+				shopMenuVC.indexValueShop = 0
 				shopMenuVC.menuFoodId = menuFoodId
 				
 			} else if self.indexValueSecond == 1 {
-				shopMenuVC.valueForLoad = 1
+				shopMenuVC.indexValueShop = 1
 				shopMenuVC.menuFoodId = menuFoodId
 
 				
 			} else if self.indexValueSecond == 2 {
-				shopMenuVC.valueForLoad = 2
+				shopMenuVC.indexValueShop = 2
 				shopMenuVC.menuFoodId = menuFoodId
 
 				
 			} else {
-				shopMenuVC.valueForLoad = 3
+				shopMenuVC.indexValueShop = 3
 				shopMenuVC.menuFoodId = menuFoodId
 
 				

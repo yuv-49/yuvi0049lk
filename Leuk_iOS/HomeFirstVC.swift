@@ -28,7 +28,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	@IBOutlet weak var open: UIBarButtonItem!
 	
 	@IBOutlet weak var carouselView: iCarousel!
-	@IBOutlet weak var hotNowImage: UIImageView!
+//	@IBOutlet weak var hotNowImage: UIImageView!
 	
 	
 	
@@ -37,10 +37,15 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	var firstView = ["Order Now","Offers","Events","Places","Ask Leuk","Discover","Contests","Subscriptions","Profile"]
 	
+	var navBar: UINavigationBar = UINavigationBar()
+	
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.title = "LEUK"
+		
+		self.setNavBarToTheView()
 
 		open.target = self.revealViewController()
 		open.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -49,9 +54,11 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		//count = 0
 		
 		carouselView.type = .linear
+		carouselView.isPagingEnabled  = true
+		carouselView.bounces = true
+		carouselView.bounceDistance = 0.5
+		//carouselView.autoscroll = 4.0
 		
-		
-		// collectionView
 		
 		let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 		
@@ -60,9 +67,19 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		
 		firstCollectionView!.collectionViewLayout = layout
-
 		
 		
+		Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
+		
+		
+	}
+	
+	
+	
+	func setNavBarToTheView() {
+		self.navBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+		self.navBar.backgroundColor = (UIColor.leukRed())
+		self.view.addSubview(navBar)
 	}
 	
 	
@@ -171,23 +188,28 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	func numberOfItems(in carousel: iCarousel) -> Int {
 
-		if firstPageNews.count != countOfPagesForFirstPage {
-			Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: false)
-		}
+//		if firstPageNews.count != countOfPagesForFirstPage {
+//			Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: false)
+//		}
+
+		
+
+		
 		
 		return firstPageNews.count
 	}
 	
+	
 	func reloadCarousel(){
 		
-	
-		
-		
-		if firstPageNews.count != countOfPagesForFirstPage {
-			Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: false)
-		}
-		
 		carouselView.reloadData()
+
+		
+		
+//		if firstPageNews.count != countOfPagesForFirstPage {
+//			Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: false)
+//		}
+		
 	}
 	
 	
@@ -196,21 +218,47 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		carouselView.scroll(toOffset: 0, duration: 0.01)
+		//reloadCarousel()
+
+		
+		//carouselView.scroll(toOffset: 0, duration: 0.01)
+
+		
+		//autoScroll()
 		
 		
-		
-		
-		Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.runMethod), userInfo: nil, repeats: true)
+		Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: true)
 		Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: false)
 	}
-	func runMethod() {
-
+	
+	
+	func autoScroll(){
+		
 		carouselView.scrollToItem(at: carouselView.currentItemIndex + 1, animated: true)
-		if carouselView.currentItemIndex == firstPageNews.count - 1{
-			Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.runMethod1), userInfo: nil, repeats: false)
+
+		
+		if carouselView.currentItemIndex ==  firstPageNews.count - 1{
+			//runMethod1()
+			Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.runMethod1), userInfo: nil, repeats: false)
+		}else{
+			//Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
+			
 		}
+		//if carouselView
+
 	}
+	
+	
+	
+	
+	
+//	func runMethod() {
+//
+//		carouselView.scrollToItem(at: carouselView.currentItemIndex + 1, animated: true)
+//		if carouselView.currentItemIndex == firstPageNews.count - 1{
+//			Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.runMethod1), userInfo: nil, repeats: false)
+//		}
+//	}
 	
 	
 	
@@ -226,7 +274,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		if firstPageNews.count == 0 {
 		
 		
-		Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: true)
+		let timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: true)
 		}
 	}
 	
@@ -234,19 +282,19 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
 		
 		
-		let tempView = UIView(frame: CGRect(x: 5, y: 0, width: self.view.frame.width - 10, height: self.view.frame.height * 0.50))
+		let tempView = UIView(frame: CGRect(x: 5, y: 0, width: self.view.frame.width - 10, height: self.view.frame.height * 0.45))
 		tempView.backgroundColor = UIColor.clear
 		
 
 		let imageView = UIImageView()
 		let link = URL(string: firstPageNews[index].imageLink)!
 		imageView.kf.setImage(with: link)
-		imageView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width - 10, height: self.view.frame.height * 0.39)
+		imageView.frame = CGRect(x: 0, y: 50 , width: self.view.frame.width - 10, height: self.view.frame.height * 0.33)
 		tempView.addSubview(imageView)
 		
 		
 		let label0 = UILabel()
-		label0.frame = CGRect(x: 10, y: self.view.frame.height * 0.38, width: self.view.frame.width/3, height: self.view.frame.height * 0.06)
+		label0.frame = CGRect(x: 10, y: self.view.frame.height * 0.38, width: self.view.frame.width/3, height: self.view.frame.height * 0.04)
 		label0.textAlignment = NSTextAlignment.left
 		label0.textColor = UIColor.lightGray
 		label0.adjustsFontSizeToFitWidth = true
@@ -257,7 +305,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		tempView.addSubview(label0)
 		
 		let label1 = UILabel()
-		label1.frame = CGRect(x: 10, y: self.view.frame.height * 0.40, width: self.view.frame.width * 0.90, height: self.view.frame.height * 0.10)
+		label1.frame = CGRect(x: 10, y: self.view.frame.height * 0.40, width: self.view.frame.width * 0.90, height: self.view.frame.height * 0.05)
 		label1.textAlignment = NSTextAlignment.left
 		label1.adjustsFontSizeToFitWidth = true
 		label1.text = firstPageNews[index].newsTitle!
@@ -267,7 +315,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		
 		let label2 = UILabel()
-		label2.frame = CGRect(x: 10, y: self.view.frame.height * 0.46, width: self.view.frame.width * 0.60, height: self.view.frame.height * 0.06)
+		label2.frame = CGRect(x: 10, y: self.view.frame.height * 0.46, width: self.view.frame.width * 0.60, height: self.view.frame.height * 0.03)
 		label2.textAlignment = NSTextAlignment.left
 		label2.adjustsFontSizeToFitWidth = true
 		label2.font = UIFont(name: "Avenir Next", size: label2.font.pointSize)
@@ -397,11 +445,11 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	// MARK: UICollectionViewDelegate
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-
-		return CGSize(width: collectionView.frame.width * 0.30, height: collectionView.frame.height * 0.30)
-	}
-	
+//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//
+//		return CGSize(width: collectionView.frame.width * 0.30, height: collectionView.frame.height * 0.28)
+//	}
+//	
 	
 	
 	

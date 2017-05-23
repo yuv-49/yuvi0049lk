@@ -157,7 +157,7 @@ class LoadingDataVC: UIViewController {
 		
 	//	for i in 1..<4 {
 			
-			var places = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v19.php?method=getPlaces&pagecount=1")!)
+			var places = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getPlaces&pagecount=1")!)
 			places.httpMethod = "POST"
 			let postString3="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
 			

@@ -93,8 +93,8 @@ class MenuTableVC: UITableViewController {
 		
 		// Configure the cell...
 		
-		cell.menuImage.image = UIImage(named: "Event")
-		//cell.menuImage.image = UIImage(named: menuImages[(indexPath as NSIndexPath).row])
+		//cell.menuImage.image = UIImage(named: menuI)
+		cell.menuImage.image = UIImage(named: menuImages[(indexPath as NSIndexPath).row])
 		cell.menuLabel.text = menuOptions[(indexPath as NSIndexPath).row]
 		
 		cell.menuLabel.textColor = UIColor.white

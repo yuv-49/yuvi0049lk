@@ -76,6 +76,11 @@ class TicketsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 				{
 					for index in 0...numberOfEvents - 1 {
 						
+						
+						
+						
+						if json["response"]["data"][index]["id"].string != nil{
+
 						let myTicketData = MyTicket()
 						myTicketData.allows = json["response"]["data"][index]["allows"].string!
 						myTicketData.eventAddress = json["response"]["data"][index]["address"].string!
@@ -92,14 +97,15 @@ class TicketsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 						myTicketData.eventTime = json["response"]["data"][index]["time"].string!
 						myTicketData.eventViews = json["response"]["data"][index]["views"].string!
 						myTicketData.imageLink = json["response"]["data"][index]["image_link"].string!
-						myTicketData.statusCode = json["response"]["data"][index]["status_code"].string!
+						myTicketData.statusCode = json["response"]["data"][index]["status"].string!
 						myTicketData.ticketBasecode = json["response"]["data"][index]["ticket_basecode"].string!
-						myTicketData.ticketCode = json["response"]["data"][index]["ticket_code"].string!
+						//myTicketData.ticketCode = json["response"]["data"][index]["ticket_code"].string!
 						myTicketData.ticketLimit = json["response"]["data"][index]["ticket_limit"].string!
 						myTicketData.ticketSales = json["response"]["data"][index]["ticket_sales"].string!
 						myTicketData.fee = json["response"]["data"][index]["fee"].string!
 						myTicketData.eventLocation = json["response"]["data"][index]["location"].string!
-						
+						myTicketData.ticketId = json["response"]["data"][index]["ticket_id"].string!
+							
 						var finalString: String!
 						var timeForUI = myTicketData.eventTime.characters.split{$0 == ":"}.map(String.init)
 						
@@ -153,10 +159,9 @@ class TicketsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 						
 						
 						
-						
-						self.myTicketYet.append(myTicketData)
+							self.myTicketYet.append(myTicketData)
 
-
+						}
 				
 				
 				
@@ -257,7 +262,7 @@ class TicketsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 		ticketSender.ticketSales = myTicketYet[indexPath.row].ticketSales
 		ticketSender.eventLocation = myTicketYet[indexPath.row].eventLocation
 		ticketSender.eventTime = myTicketYet[indexPath.row].eventTime
-		
+		ticketSender.ticketId = myTicketYet[indexPath.row].ticketId
 		
 		self.performSegue(withIdentifier: "TicketAdvanceVC", sender: self)
 		
@@ -333,7 +338,7 @@ class TicketsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 		ticketValues.tickerReceiver.ticketLimit = ticketSender.ticketLimit
 		ticketValues.tickerReceiver.eventLocation = ticketSender.eventLocation
 		ticketValues.tickerReceiver.eventTime = ticketSender.eventTime
-		
+		ticketValues.tickerReceiver.ticketId = ticketSender.ticketId
 		
 		
 		
