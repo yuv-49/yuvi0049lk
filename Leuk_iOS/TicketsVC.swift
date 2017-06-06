@@ -52,9 +52,9 @@ class TicketsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 		
 		// MARK:- PROFILE MYTICKETS
 		
-		var myTickets = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=myTickets")!)
+		var myTickets = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=myTickets")!)
 		myTickets.httpMethod = "POST"
-		let postStringForTickets="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postStringForTickets="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		print("\(postStringForTickets)")
 		
 		

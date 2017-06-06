@@ -169,9 +169,9 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 			
 			let amount = subTotalValue * 100
 			
-			var place = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=generateOrderId")!)
+			var place = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=generateOrderId")!)
 			place.httpMethod = "POST"
-			let  postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&amount=\(amount)&order_type=\(cardOrCod!)"
+			let  postValue="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&amount=\(amount)&order_type=\(cardOrCod!)"
 			print("YSHSHSHSHSHSYSYSYSYS \(postValue)")
 			
 			
@@ -439,9 +439,9 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 		
 		//var totalFinalCost = totalCost + convFee + delivery
 		
-		var place = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=placeOrder")!)
+		var place = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=placeOrder")!)
 		place.httpMethod = "POST"
-	  let  postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(placeId!)&item_ids=\(cnfItemId!)&item_names=\(cnfItemName!)&item_quantity=\(cnfItemQuantity!)&total_cost=\(subTotalValue!)&address=\(userDeliveryAddress.text!)&user_phone=\(userPhoneNo.text!)&conv_fee=\(convFee!)&delivery=\(delivery!)&type=\(cardOrCod!)&item_cost=\(itemCost!)"
+	  let  postValue="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&place_id=\(placeId!)&item_ids=\(cnfItemId!)&item_names=\(cnfItemName!)&item_quantity=\(cnfItemQuantity!)&total_cost=\(subTotalValue!)&address=\(userDeliveryAddress.text!)&user_phone=\(userPhoneNo.text!)&conv_fee=\(convFee!)&delivery=\(delivery!)&type=\(cardOrCod!)&item_cost=\(itemCost!)"
 		print("YSHSHSHSHSHSYSYSYSYS \(postValue)")
 		
 		

@@ -18,8 +18,21 @@ class OffersCVC: UICollectionViewController {
 	var idValuetoPass: String!
 	var offerClassToPass = HomeOffers()
 
+	@IBOutlet var myCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+
+	
+	
+	
+	
+	let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+	
+	layout.itemSize = CGSize(width: self.view.frame.width * 0.485, height: self.view.frame.height * 0.33)
+	//	layout.minimumInteritemSpacing = 0
+	layout.minimumLineSpacing = 10
+	
+	myCollectionView.collectionViewLayout = layout
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -78,6 +91,15 @@ class OffersCVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)  as! OffersCVCell
+	
+	
+	
+	cell.layer.shadowColor = UIColor.gray.cgColor
+	cell.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+	cell.layer.shadowRadius = 2.0
+	cell.layer.shadowOpacity = 0.6
+	cell.layer.masksToBounds = false
+	cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
     
 	if(indexValueSecond == 0){
 		updateValues(homeOffersHappy, cellForRow: indexPath, TableCell: cell)

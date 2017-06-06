@@ -28,6 +28,8 @@ class ItemsTVCell: UITableViewCell {
 	
 	
 	
+	
+      
 
 	
 	
@@ -76,6 +78,10 @@ class ItemsTVCell: UITableViewCell {
         // Initialization code
 	//itemQuantityInNumber = 0
 	//itemQuantity.text = "0"
+	
+	itemImage.backgroundColor = UIColor.leukRed()
+	itemImage.layer.cornerRadius = 8.0
+	itemImage.clipsToBounds = true
 	
     }
 

@@ -11,20 +11,36 @@ import CoreLocation
 import SwiftyJSON
 import Kingfisher
 
+import CoreLocation
 
-class LoadingDataVC: UIViewController {
+
+class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	
-	var countOfPlaces: String!
-	var tokenIdFromGoogle: String!
-	var count: Int!
+//	var countOfPlaces: String!
+//	var tokenIdFromGoogle: String!
+//	var count: Int!
 	
     override func viewDidLoad() {
+	
+	
+	
+//	locationF()
+//	let locationManager = CLLocationManager()
+//	locationManager.delegate = self;
+//	locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//	locationManager.requestAlwaysAuthorization()
+//	locationManager.startUpdatingLocation()
+
+	
+	
+	
+	
         super.viewDidLoad()
 	countOfPagesForFirstPage = 0
 
 	
 	firstpageNewsApi()
-	profileApi()
+	//profileApi()
 	
 	getApi()
 	getEventsValue()
@@ -36,15 +52,28 @@ class LoadingDataVC: UIViewController {
     }
 	
 	
+	func locationF(){
+		
+		
+	}
+	
+	
+	
+	
+//	func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//		var locValue:CLLocationCoordinate2D = manager.location!.coordinate
+//		print("locations = \(locValue.latitude) \(locValue.longitude)")
+//	}
+	
 	func firstpageNewsApi(){
 		
 		
 		
 		//MARK:- FIRST PAGE NEWS
 		
-		var newsRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPlaceNews")!)
+		var newsRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlaceNews")!)
 		newsRequest.httpMethod = "POST"
-		let postStringForNews="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postStringForNews="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		print("\(postStringForNews)")
 		
 		
@@ -115,9 +144,9 @@ class LoadingDataVC: UIViewController {
 		
 		//MARK:- PROFILE
 		
-		var profileRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getUserInfo")!)
+		var profileRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getUserInfo")!)
 		profileRequest.httpMethod = "POST"
-		let postString1="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postString1="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		print("\(postString1)")
 		
 		
@@ -155,11 +184,10 @@ class LoadingDataVC: UIViewController {
 		
 		// MARK:- places api
 		
-	//	for i in 1..<4 {
-			
-			var places = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getPlaces&pagecount=1")!)
+		
+			var places = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlaces&pagecount=1")!)
 			places.httpMethod = "POST"
-			let postString3="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+			let postString3="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 			
 			
 			places.httpBody = postString3.data(using: .utf8)
@@ -235,7 +263,7 @@ class LoadingDataVC: UIViewController {
 							
 							
 							
-							
+				//
 							
 							
 							
@@ -352,9 +380,9 @@ class LoadingDataVC: UIViewController {
 	
 	func getEventsValue(){
 		
-		var eventRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getEvents")!)
+		var eventRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getEvents")!)
 		eventRequest.httpMethod = "POST"
-		let postStringForEvents="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postStringForEvents="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		print("\(postStringForEvents)")
 		
 		
@@ -454,32 +482,32 @@ class LoadingDataVC: UIViewController {
 	
 	func getApi(){
 		
-		var request1 = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=generateSession")!)
-		request1.httpMethod = "POST"
-		let postString =  "key=leuk12&secret=gammayz&google_auth_token_id=\(tokenIdFromGoogle!)"
-		print("hello world \(postString)")
-		request1.httpBody = postString.data(using: .utf8)
-		
-		let task1 = URLSession.shared.dataTask(with: request1) { data, response, error in
-			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				// print("response = \(response)")
-			}
-				
-			else {
-				//print("RFc")
-				//let responseString = String(data: data!, encoding: .utf8)
-				//print("responseString = \(responseString!)")
-				
-			 var json = JSON(data: data!)
-			 sessionId = json["response"]["data"]["session"]["sessionid"].string!
-			 tokenId = json["response"]["data"]["session"]["token"].string!
-				// print("sess tok \(sessionId)             \(tokenId)")
-				
-				
-			}
-		}
-		task1.resume()
+//		var request1 = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=generateSession")!)
+//		request1.httpMethod = "POST"
+//		let postString =  "key=leuk12&secret=gammayz&google_auth_token_id=\(tokenIdFromGoogle!)"
+//		print("hello world \(postString)")
+//		request1.httpBody = postString.data(using: .utf8)
+//		
+//		let task1 = URLSession.shared.dataTask(with: request1) { data, response, error in
+//			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+//				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//				// print("response = \(response)")
+//			}
+//				
+//			else {
+//				//print("RFc")
+//				//let responseString = String(data: data!, encoding: .utf8)
+//				//print("responseString = \(responseString!)")
+//				
+//			 var json = JSON(data: data!)
+//			 sessionId = json["response"]["data"]["session"]["sessionid"].string!
+//			 tokenId = json["response"]["data"]["session"]["token"].string!
+//				// print("sess tok \(sessionId)             \(tokenId)")
+//				
+//				
+//			}
+//		}
+//		task1.resume()
 		
 		
 
@@ -491,9 +519,9 @@ class LoadingDataVC: UIViewController {
 		
 		
 		
-		var mytickets = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getOffers")!)
+		var mytickets = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getOffers")!)
 		mytickets.httpMethod = "POST"
-		let postString2="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postString2="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		
 		
 		mytickets.httpBody = postString2.data(using: .utf8)
@@ -599,51 +627,51 @@ class LoadingDataVC: UIViewController {
 	}
 	
 	
-	func getUserDetails(){
-		
-		if(sessionId != nil){
-		
-		
-		var profileRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v19.php?method=getUserInfo")!)
-		profileRequest.httpMethod = "POST"
-		let postString1="key=leuk12&secret=gammayz&sessionid=\(sessionId!)&token=\(tokenId!)"
-		print("\(postString1)")
-		
-		
-		profileRequest.httpBody = postString1.data(using: .utf8)
-		
-		let task6 = URLSession.shared.dataTask(with: profileRequest) { data, response, error in
-			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				//print("response = \(response)")
-			}
-				
-			else {
-				//print("RFcss")
-				//let responseString = String(data: data!, encoding: .utf8)
-				//print("responseString = \(responseString!)")
-				
-				
-				
-				
-				
-//				var json = JSON(data: data!)
-//				Name = json["response"]["data"]["name"].string!
-//				area = json["response"]["data"]["location"].string!
-//				referalCode = json["response"]["data"]["referral_code"].string!
-//				level = json["response"]["data"]["level"].string!
-//				profileImg = json["response"]["data"]["profile_img"].string!
-//				totalCredits = json["response"]["data"]["total_credits"].string!
-//				// remainingCredits = json["response"]["data"]["remaining_credits"].string!
-//				print(Name)
-			}
-		}
-		
-		task6.resume()
-		}
-		
-
-	}
+//	func getUserDetails(){
+//		
+//		if(sessionId != nil){
+//		
+//		
+//		var profileRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getUserInfo")!)
+//		profileRequest.httpMethod = "POST"
+//		let postString1="key=leuk12&secret=gammayz&sessionid=\(sessionId!)&token=\(tokenId!)"
+//		print("\(postString1)")
+//		
+//		
+//		profileRequest.httpBody = postString1.data(using: .utf8)
+//		
+//		let task6 = URLSession.shared.dataTask(with: profileRequest) { data, response, error in
+//			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+//				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//				//print("response = \(response)")
+//			}
+//				
+//			else {
+//				//print("RFcss")
+//				//let responseString = String(data: data!, encoding: .utf8)
+//				//print("responseString = \(responseString!)")
+//				
+//				
+//				
+//				
+//				
+////				var json = JSON(data: data!)
+////				Name = json["response"]["data"]["name"].string!
+////				area = json["response"]["data"]["location"].string!
+////				referalCode = json["response"]["data"]["referral_code"].string!
+////				level = json["response"]["data"]["level"].string!
+////				profileImg = json["response"]["data"]["profile_img"].string!
+////				totalCredits = json["response"]["data"]["total_credits"].string!
+////				// remainingCredits = json["response"]["data"]["remaining_credits"].string!
+////				print(Name)
+//			}
+//		}
+//		
+//		task6.resume()
+//		}
+//		
+//
+//	}
 	
 	
 	
@@ -651,8 +679,15 @@ class LoadingDataVC: UIViewController {
 
 	override func viewDidAppear(_ animated: Bool) {
 		
-		
+		getSessionAndToken()
+
 		update()
+		
+		
+		
+		
+		
+		
 //		//All network operations has to run on different thread(not on main thread).
 //		DispatchQueue.global(qos: .userInitiated).async {
 //			
@@ -667,6 +702,23 @@ class LoadingDataVC: UIViewController {
 		
 		
 		
+		
+		
+		
+		
+	}
+	
+	
+	
+	func getSessionAndToken(){
+		
+		if let SessionIdForSaving = userDefaults.value(forKey: "SessionIdForSaving") {
+			SESSION_ID = (SessionIdForSaving as? String)!
+		}
+		
+		if let tokenIdForSaving = userDefaults.value(forKey: "tokenIdForSaving") {
+			TOKEN_ID_FROM_LEUK = (tokenIdForSaving as? String)!
+		}
 		
 		
 		
@@ -696,9 +748,9 @@ class LoadingDataVC: UIViewController {
 		
 		//MARK:- FIRST PAGE NEWS
 		
-		var newsRequest = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPopularNews")!)
+		var newsRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPopularNews")!)
 		newsRequest.httpMethod = "POST"
-		let postStringForNews="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postStringForNews="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID)&token=\(TOKEN_ID_FROM_LEUK)"
 		print("\(postStringForNews)")
 		
 		

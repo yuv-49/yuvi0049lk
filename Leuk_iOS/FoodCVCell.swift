@@ -17,12 +17,22 @@ class FoodCVCell: UICollectionViewCell {
 	@IBOutlet weak var foodPlaceRating: UILabel!
 	@IBOutlet weak var foodPlaceStatus: UILabel!
 	
+	@IBOutlet weak var locationImg: UIImageView!
+	
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		foodPlaceImage.backgroundColor = UIColor.leukRed()
+		foodPlaceImage.image = UIImage(named: "dinnerPlace")
+		foodPlaceImage.layer.cornerRadius = 8.0
+		foodPlaceImage.clipsToBounds = true
+		// Initialization code
+		//foodPlaceImage.frame = CGRect(x: 0, y: 0, width: self.frame.width - 6, height: self.frame.height * 0.1)
+	}
 	
 	
 	
 	
 	
-	
-	
-    
 }

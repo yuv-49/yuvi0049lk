@@ -26,7 +26,8 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-	
+		myTable.tableFooterView = UIView()
+
 		let gestureForView = UITapGestureRecognizer(target: self, action:  #selector (self.showCart (_:)))
 		self.cartShow.addGestureRecognizer(gestureForView)
 		
@@ -54,7 +55,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 				
 			}
 			
-			cartSum.text = "\(totalCartValue!)"
+			cartSum.text = "₹ \(totalCartValue!)"
 		}
 	}
 
@@ -122,13 +123,17 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 		cell.itemQuantity.text = "\(commonForShopAtlast1[indexPath.row].rows!)"
 
 	}
+	if commonForShopAtlast1[indexPath.row].itemspicy == "1" {
+		
+		cell.itemSpicy.image = UIImage(named: "spicy")
+	}
 	
 	
 	if addBtnClicked {
 		cell.itemQuantity.text = "\(commonForShopAtlast1[indexPath.row].rows!)"
 	}
 	
-	
+	//commonForShopAtlast1[indexPath.row].itemspicy
 	
 	cell.add.tag = indexPath.row
 	cell.add.addTarget(self, action: #selector(self.addItem(_:)), for: .touchUpInside)
@@ -144,11 +149,15 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
 	
 	  if commonForShopAtlast1[indexPath.row].itemOfferCost != commonForShopAtlast1[indexPath.row].itemRegularCost {
-		  cell.realCost.text = commonForShopAtlast1[indexPath.row].itemRegularCost
-		  cell.offerCost.text = commonForShopAtlast1[indexPath.row].itemOfferCost
+		
+		let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "₹ \(commonForShopAtlast1[indexPath.row].itemRegularCost!)")
+		attributeString.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0, attributeString.length))
+		
+		  cell.realCost.attributedText = attributeString  //"₹ \(commonForShopAtlast1[indexPath.row].itemRegularCost!)"
+		  cell.offerCost.text = "₹ \(commonForShopAtlast1[indexPath.row].itemOfferCost!)"
 	  }else {
+		  cell.offerCost.text = "₹ \(commonForShopAtlast1[indexPath.row].itemOfferCost!)"
 		  cell.realCost.text = ""
-		  cell.offerCost.text = commonForShopAtlast1[indexPath.row].itemOfferCost
 	  }
 	
 	 
@@ -186,7 +195,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			totalCartValue = totalCartValue + (val.rows * Int(val.itemOfferCost)!)
 		}
 
-		cartSum.text = "\(totalCartValue!)"
+		cartSum.text = "₹ \(totalCartValue!)"
 		let indexPath = IndexPath(item: button.tag, section: 0)
 		myTable.reloadRows(at: [indexPath], with: .none)
 		
@@ -225,7 +234,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			totalCartValue = totalCartValue + (val.rows * Int(val.itemOfferCost)!)
 		}
 		
-		cartSum.text = "\(totalCartValue!)"
+		cartSum.text = "₹ \(totalCartValue!)"
 		
 		let indexPath = IndexPath(item: button.tag, section: 0)
 		myTable.reloadRows(at: [indexPath], with: .none)

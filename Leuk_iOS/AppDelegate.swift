@@ -20,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
 		// Mark:- Google configuration.
 		
+		
+		
+		
+		
+		let textAttributes = [NSForegroundColorAttributeName:UIColor.leukRed()]
+		UINavigationBar.appearance().titleTextAttributes = textAttributes
+		
 		var configureError: NSError?
 		GGLContext.sharedInstance().configureWithError(&configureError)
 		if (configureError != nil){

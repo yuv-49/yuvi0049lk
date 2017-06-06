@@ -39,6 +39,14 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	
 	 setNavTitle()
 	
+	let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+	
+	layout.minimumInteritemSpacing = 0
+	layout.minimumLineSpacing = 0
+	
+
+	homeSecCollectionView!.collectionViewLayout = layout
+	
         // Do any additional setup after loading the view.
     }
 
@@ -105,8 +113,8 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SecondCell", for: indexPath) as! HomeSecondCVCell
 		
 		cell.layer.shadowColor = UIColor.gray.cgColor
-		cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-		cell.layer.shadowRadius = 2.0
+		cell.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+		cell.layer.shadowRadius = 1.0
 		cell.layer.shadowOpacity = 0.6
 		cell.layer.masksToBounds = false
 		cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
@@ -137,7 +145,13 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: collectionView.frame.width * 0.485, height: collectionView.frame.height * 0.30)
+		if indexValue == 0 {
+			return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height * 0.415)
+
+			
+		}else{
+			return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height * 0.28)
+		}
 	}
 	
 	

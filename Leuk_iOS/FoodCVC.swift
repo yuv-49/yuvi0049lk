@@ -17,6 +17,7 @@ class FoodCVC: UICollectionViewController {
 	var menuFoodId: String!
 	var valueForSecondApiCall: Int!
 
+	@IBOutlet var myCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +25,15 @@ class FoodCVC: UICollectionViewController {
 	placeServiceStatusForPayment = 0
 	
 	cartValues.removeAll()
+	
+	let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+	
+	layout.itemSize = CGSize(width: self.view.frame.width * 0.485, height: self.view.frame.height * 0.33)
+//	layout.minimumInteritemSpacing = 0
+	layout.minimumLineSpacing = 10
+	
+	myCollectionView.collectionViewLayout = layout
+	//self.collectionViewLayout = layout
 
 //	groceriesForShop.removeAll()
 //	foodForShop.removeAll()
@@ -61,6 +71,10 @@ class FoodCVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
+	
+	
+	
+	
 	if(indexValueSecond == 0){
 		if restaurantOrder.count == 0 {
 			DispatchQueue.main.async {
@@ -120,7 +134,21 @@ class FoodCVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodcvcell", for: indexPath) as! FoodCVCell
-    
+	
+	
+	
+	//cell.layer.borderColor = UIColor.gray.cgColor
+	//cell.layer.borderWidth = 1.0
+	
+	
+	
+	cell.layer.shadowColor = UIColor.gray.cgColor
+	cell.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+	cell.layer.shadowRadius = 2.0
+	cell.layer.shadowOpacity = 0.6
+	cell.layer.masksToBounds = false
+	cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+	
 	  if(indexValueSecond == 0){
 		  updateValues(restaurantOrder, cellForRow: indexPath, TableCell: cell)
 	  }
@@ -142,7 +170,7 @@ class FoodCVC: UICollectionViewController {
 	func updateValues(_ valueForPlaces:[Places],cellForRow indexPath: IndexPath, TableCell TVcell:FoodCVCell ){
 		
 		
-		
+		TVcell.foodPlaceImage.image = UIImage(named: "dinner-512")
 		
 		if(valueForPlaces[indexPath.row].placeFirstImageUrl != nil){
 			
@@ -150,11 +178,13 @@ class FoodCVC: UICollectionViewController {
 			TVcell.foodPlaceImage.kf.setImage(with: valueForPlaces[indexPath.row].placeFirstImageUrl)
 		} else {
 			print("Add the default image on places")
+			TVcell.foodPlaceImage.image = UIImage(named: "dinnerPlace")
 		}
 		
 		
 		
-		
+		TVcell.locationImg.image  = UIImage(named: "Location-1")
+
 		TVcell.foodPlaceName.text = valueForPlaces[indexPath.row].placeName
 		TVcell.foodPlaceDistance.text = valueForPlaces[indexPath.row].placeDistance
 		//TVcell.foodPlaceImage.image = valueForPlaces[indexPath.row].placeImage
@@ -228,7 +258,13 @@ class FoodCVC: UICollectionViewController {
 	}
 	
 	
-	
+//	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+//	{
+//		
+//		
+//		return CGSize(width: self.view.frame.width / 2, height: self.view.frame.height * 0.3)
+//	}
+
 	
 	
 	func apiCallForMenu(_ placeId: String,indexx path: IndexPath){
@@ -237,9 +273,9 @@ class FoodCVC: UICollectionViewController {
 		
 		
 		
-		var getMenuCategory = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getMenuCategory")!)
+		var getMenuCategory = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getMenuCategory")!)
 		getMenuCategory.httpMethod = "POST"
-		let postValue11="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(placeId)"
+		let postValue11="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&place_id=\(placeId)"
 		print("YSHSHSHSHSHS \(postValue11)")
 		
 		
@@ -302,94 +338,94 @@ class FoodCVC: UICollectionViewController {
 		
 		// MARK:- Api call for next page
 		
-		var getMenu = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getMenu")!)
-		getMenu.httpMethod = "POST"
-		let postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(placeId)"
-		print("YSHSHSHSHSHS \(postValue)")
-		
-		
-		getMenu.httpBody = postValue.data(using: .utf8)
-		
-		let task2 = URLSession.shared.dataTask(with: getMenu) { data, response, error in
-			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				//print("response = \(response)")
-			}
-				
-			else {
-				
-				
-				var json = JSON(data: data!)
-				print(json)
-				let numberOfItems = json["response"]["data"].count
-				print(numberOfItems)
-				if numberOfItems > 0
-				{
-					
-					for index in 0...numberOfItems-1 {
-						let menuList = shopMenuItem()
-						menuList.itemId = json["response"]["data"][index]["id"].string!
-						menuList.itemNonVeg = json["response"]["data"][index]["non_veg"].string!
-						menuList.itemOfferCost = json["response"]["data"][index]["offer_cost"].string!
-						menuList.itemCategory = json["response"]["data"][index]["category"].string!
-						menuList.itemDescription = json["response"]["data"][index]["description"].string!
-						menuList.itemName = json["response"]["data"][index]["item_name"].string!
-						menuList.itemLimit = json["response"]["data"][index]["item_limit"].string!
-						menuList.itemVeg = json["response"]["data"][index]["veg"].string!
-						menuList.itemtags = json["response"]["data"][index]["tags"].string!
-						menuList.itemspicy = json["response"]["data"][index]["spicy"].string!
-						menuList.itemLove = json["response"]["data"][index]["love"].string!
-						menuList.itemImageLink = json["response"]["data"][index]["image"].string!
-						menuList.itemPlaceId = json["response"]["data"][index]["place_id"].string!
-						menuList.itemRegularCost = json["response"]["data"][index]["regular_cost"].string!
-			
-					
-						
-						commonForShop.append(menuList)
-						
+//		var getMenu = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getMenu")!)
+//		getMenu.httpMethod = "POST"
+//		let postValue="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID)&token=\(TOKEN_ID_FROM_LEUK)&place_id=\(placeId)"
+//		print("YSHSHSHSHSHS \(postValue)")
+//		
+//		
+//		getMenu.httpBody = postValue.data(using: .utf8)
+//		
+//		let task2 = URLSession.shared.dataTask(with: getMenu) { data, response, error in
+//			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+//				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//				//print("response = \(response)")
+//			}
+//				
+//			else {
+//				
+//				
+//				var json = JSON(data: data!)
+//				print("yuvraj lakj \(json)")
+//				let numberOfItems = json["response"]["data"].count
+//				print(numberOfItems)
+//				if numberOfItems > 0
+//				{
 //					
-//						if(menuList.itemCategory != nil){
+//					for index in 0...numberOfItems-1 {
+//						let menuList = shopMenuItem()
+//						menuList.itemId = json["response"]["data"][index]["id"].string!
+//						menuList.itemNonVeg = json["response"]["data"][index]["non_veg"].string!
+//						menuList.itemOfferCost = json["response"]["data"][index]["offer_cost"].string!
+//						menuList.itemCategory = json["response"]["data"][index]["category"].string!
+//						menuList.itemDescription = json["response"]["data"][index]["description"].string!
+//						menuList.itemName = json["response"]["data"][index]["item_name"].string!
+//						menuList.itemLimit = json["response"]["data"][index]["item_limit"].string!
+//						menuList.itemVeg = json["response"]["data"][index]["veg"].string!
+//						menuList.itemtags = json["response"]["data"][index]["tags"].string!
+//						menuList.itemspicy = json["response"]["data"][index]["spicy"].string!
+//						menuList.itemLove = json["response"]["data"][index]["love"].string!
+//						menuList.itemImageLink = json["response"]["data"][index]["image"].string!
+//						menuList.itemPlaceId = json["response"]["data"][index]["place_id"].string!
+//						menuList.itemRegularCost = json["response"]["data"][index]["regular_cost"].string!
+//			
 //					
 //						
-//						if(self.indexValueSecond == 0){
-//							
-//							foodForShop.append(menuList)
-//							//print(menuList.itemCategory)
-//							
-////							for value in foodForShop {
-////								if value.itemCategory != menuList.itemCategory {
-////									self.categoryOfItem.append(menuList.itemCategory)
-////									//print(menuList.itemCategory)
-////									
-////								}
-////							}
-//							
-//						}
-//						else if(self.indexValueSecond == 1){
-//							groceriesForShop.append(menuList)
-//						}
-//						else if(self.indexValueSecond == 2){
-//							medicineForShop.append(menuList)
-//							
-//							
-//							
-//						}
-//						else if(self.indexValueSecond == 3){
-//							stationaryForShop.append(menuList)
-//							
-//						}
-//						}
+//						commonForShop.append(menuList)
+//						
+////					
+////						if(menuList.itemCategory != nil){
+////					
+////						
+////						if(self.indexValueSecond == 0){
+////							
+////							foodForShop.append(menuList)
+////							//print(menuList.itemCategory)
+////							
+//////							for value in foodForShop {
+//////								if value.itemCategory != menuList.itemCategory {
+//////									self.categoryOfItem.append(menuList.itemCategory)
+//////									//print(menuList.itemCategory)
+//////									
+//////								}
+//////							}
+////							
+////						}
+////						else if(self.indexValueSecond == 1){
+////							groceriesForShop.append(menuList)
+////						}
+////						else if(self.indexValueSecond == 2){
+////							medicineForShop.append(menuList)
+////							
+////							
+////							
+////						}
+////						else if(self.indexValueSecond == 3){
+////							stationaryForShop.append(menuList)
+////							
+////						}
+////						}
+////				
+//					
+//					}
+//				}
 //				
-					
-					}
-				}
-				
-			
-			
-			}
-		}
-		
-		task2.resume()
+//			
+//			
+//			}
+//		}
+//		
+//		task2.resume()
 		self.valueForSecondApiCall = path.row
 		
 	}

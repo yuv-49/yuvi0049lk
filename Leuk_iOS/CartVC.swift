@@ -21,6 +21,7 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var convenienceFee: UILabel!
 	@IBOutlet weak var subtotal: UILabel!
 	
+	
 	var addBtnClicked: Bool!
 	var showHere : Int!
 	var subTotalValue : Int!
@@ -32,7 +33,8 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 	
-	
+	myTable.tableFooterView = UIView()
+
 	
 	let gestureForCheckout = UITapGestureRecognizer(target: self, action:  #selector (self.checkOut1 (_:)))
 	self.checkout.addGestureRecognizer(gestureForCheckout)
@@ -115,11 +117,11 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
 		
 		
-		cell.numberOfItems.text = "\(cartValues[indexPath.row].rows!)"
+		cell.numberOfItems.text = "X \(cartValues[indexPath.row].rows!)"
 
 		if addBtnClicked {
 			
-			cell.numberOfItems.text = "\(cartValues[indexPath.row].rows!)"
+			cell.numberOfItems.text = "X \(cartValues[indexPath.row].rows!)"
 			getGrandTotal()
 			addBtnClicked = false
 		}

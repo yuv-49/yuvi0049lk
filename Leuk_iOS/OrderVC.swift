@@ -94,9 +94,9 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		
 		// MARK:- PROFILE MYORDERS
 		
-		var myOrder = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=myOrders")!)
+		var myOrder = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=myOrders")!)
 		myOrder.httpMethod = "POST"
-		let postStringForOrder="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d"
+		let postStringForOrder="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		print("\(postStringForOrder)")
 		
 		
@@ -193,9 +193,9 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		//MARK:- PLACEBYID
 		
 		
-		var placeReq = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPlacebyId")!)
+		var placeReq = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlacebyId")!)
 		placeReq.httpMethod = "POST"
-		let postString="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(placeId!)"
+		let postString="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&place_id=\(placeId!)"
 		print("\(postString)")
 		
 		

@@ -23,6 +23,8 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
 
 	
+	myTableView.tableFooterView = UIView()
+	
 	let btn1 = UIButton(type: .custom)
 	btn1.setImage(UIImage(named: "parties"), for: .normal)
 	btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -121,9 +123,9 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 		
 		// MARK:- Api call for getMenubyCategory
 		
-		var getMenu = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v22.php?method=getMenubyCategory")!)
+		var getMenu = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getMenubyCategory")!)
 		getMenu.httpMethod = "POST"
-		let postValue="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(menuFoodId!)&category=\(value)"
+		let postValue="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&place_id=\(menuFoodId!)&category=\(value)"
 		print("YSHSHSHSHSHS \(postValue)")
 		
 		

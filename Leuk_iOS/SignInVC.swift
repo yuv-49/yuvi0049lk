@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
+import SwiftyJSON
 
 class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
+	
+	
+	
+	
+	
+	
 
 	@IBAction func googleViewTapped(_ sender: Any) {
 		
@@ -16,7 +24,15 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	}
 	
 	
-	var tokenId: String!
+	var tokenId1: String!
+	
+	var name: String!
+	var email: String!
+	var userName: String!
+	var profileImage: String!
+	var password: String!
+	
+	
 	
 	
 
@@ -27,6 +43,7 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	  GIDSignIn.sharedInstance().uiDelegate = self
 	 // GIDSignIn.sharedInstance().signInSilently()
 	  GIDSignIn.sharedInstance().delegate = self
+	   password = "password"
 	
 	
 	if GIDSignIn.sharedInstance().hasAuthInKeychain() == true{
@@ -62,11 +79,7 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 		
 	}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
+ 
 	
 	
 	// MARK: - Google delegates
@@ -78,29 +91,138 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 			print("the user signed in as \(user)")
 			print(user.profile.email)
 			print(user.profile.name)
-			print(user.userID)
+			print("yuvi0049 \(user.userID)")
+			print("HELLOUS \(user.profile.imageURL(withDimension: 400))")
 			print(user.profile.imageURL(withDimension: 400))
-			//print()
+			
+			profileImage = user.profile.imageURL(withDimension: 400).absoluteString
+			print("HELLOUS" + profileImage)
+			
+			
+			name = user.profile.name
+			email = user.profile.email
+			userName = user.profile.givenName
+			
+			
 			
 			let authentication = user.authentication
-			tokenId =  authentication?.idToken
+			tokenId1 =  authentication?.idToken
 			print("YSHS: token \(tokenId)")
 			
 			
 			if GIDSignIn.sharedInstance().hasAuthInKeychain() {
 				
-				performSegue(withIdentifier: "showloader", sender:nil)
 			}
 			
 			
 			
-			//performSegue(withIdentifier: "showloader", sender:nil)
+			//completeSignIn(user.userID)
+			
+			
+			
+			
+			
+			
+
+			apiCallForLogin()
 
 			
 			
 		}
 	}
 
+	//MARK:- keychain
+	
+	func completeSignIn(_ id: String){
+		_ = KeychainWrapper.defaultKeychainWrapper.set(id, forKey: KEY_UID_FOR_KEYCHAIN_FROM_GOOGLE)
+		print("YS: data saved to keychain")
+		apiCallForLogin()
+		
+	}
+	
+	
+	
+	
+	
+	
+	func apiCallForLogin(){
+		
+		
+		//MARK:- LOGIN
+		
+		var login = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=login")!)
+		login.httpMethod = "POST"
+		let postStringForNews="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&email=\(email!)&username=\(email!)&password=\(email!)"
+		print("\(postStringForNews)")
+		
+		
+		login.httpBody = postStringForNews.data(using: .utf8)
+		
+		let task2 = URLSession.shared.dataTask(with: login) { data, response, error in
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+			}
+				
+			else {
+				
+				
+				var json = JSON(data: data!)
+				print("HAPPYSINGHKA \(json)")
+				
+				let message = json["response"]["message"].string!
+					
+				if message == "Incorrect login details"{
+					
+					
+					DispatchQueue.main.async {
+						self.performSegue(withIdentifier: "userdetailsvc", sender:nil)
+
+					}
+					
+				}else{
+					//print("proceed with the data to segue")
+					let tokenV = json["response"]["data"]["session"]["token"].string!
+					let sessionIdV = json["response"]["data"]["session"]["sessionid"].string!
+					print("\(token) \(sessionIdV)")
+					
+					// MARK:- user defaults for sessionid and token
+					userDefaults.set(sessionIdV, forKey: "SessionIdForSaving")
+					userDefaults.set(tokenV, forKey: "tokenIdForSaving")
+					SESSION_ID = sessionIdV
+					TOKEN_ID_FROM_LEUK = tokenV
+					
+
+					DispatchQueue.main.async {
+						
+						SESSION_ID = sessionIdV
+						TOKEN_ID_FROM_LEUK = tokenV
+						
+						self.performSegue(withIdentifier: "sidese", sender: nil)
+
+					}
+					
+					
+					
+					
+					
+					
+				}
+				
+				
+
+			}
+			
+			
+			
+		}
+		
+		
+		
+		task2.resume()
+		
+		
+		
+	}
 	
 	
 	
@@ -114,10 +236,15 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 	
-	if (segue.identifier == "showloader") {
+	if (segue.identifier == "userdetailsvc") {
 		
-		let loadingDataVC = segue.destination as! LoadingDataVC
-		loadingDataVC.tokenIdFromGoogle = tokenId
+		let dataSegue = segue.destination as! UserDetailsVC
+		dataSegue.name = name
+		dataSegue.email = email
+		dataSegue.userName = userName
+		dataSegue.profileImageValue = profileImage
+		dataSegue.token = tokenId1
+		
 		
 	}
 
@@ -132,6 +259,6 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	
 	
     }
-    
+	
 
 }

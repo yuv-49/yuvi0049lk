@@ -127,9 +127,9 @@ class OffersIndividualVC: UIViewController {
 		//MARK:- PLACEBYID
 		
 		
-		var placeReq = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPlacebyId")!)
+		var placeReq = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlacebyId")!)
 		placeReq.httpMethod = "POST"
-		let postString="key=leuk12&secret=gammayz&sessionid=2bdc9173b3568b4b6cdc0cd07964c4d3&token=0fd3486ab4adc005ae3b915a978e231151ae927f0f7084a0f96946287726196d&place_id=\(homeOfferReceived.offerById!)"
+		let postString="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&place_id=\(homeOfferReceived.offerById!)"
 		print("\(postString)")
 		
 		
@@ -194,7 +194,7 @@ class OffersIndividualVC: UIViewController {
 					
 //MARK:- set the place image
 					
-					self.offerPlaceImage.kf.setImage(with: placeTransitionArray.placeFirstImageUrl)
+					self.offerPlaceLogo.kf.setImage(with: placeTransitionArray.placeFirstImageUrl)
 					
 					
 				}
@@ -207,7 +207,7 @@ class OffersIndividualVC: UIViewController {
 					
 				}
 				
-				      self.offerPlaceLogo.kf.setImage(with: placeTransitionArray.placeSecondImageUrl)
+				      self.offerPlaceImage.kf.setImage(with: placeTransitionArray.placeSecondImageUrl)
 				
 				
 				

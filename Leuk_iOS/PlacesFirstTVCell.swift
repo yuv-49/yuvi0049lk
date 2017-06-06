@@ -27,6 +27,11 @@ class PlacesFirstTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+	
+	placeImage.backgroundColor = UIColor.leukRed()
+	placeImage.image = UIImage(named: "dinnerPlace")
+	placeImage.layer.cornerRadius = 8.0
+	placeImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

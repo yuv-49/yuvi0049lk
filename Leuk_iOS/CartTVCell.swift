@@ -39,6 +39,10 @@ class CartTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+	
+	itemImage.backgroundColor = UIColor.leukRed()
+	itemImage.layer.cornerRadius = 8.0
+	itemImage.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
