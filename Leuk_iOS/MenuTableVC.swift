@@ -121,19 +121,25 @@ class MenuTableVC: UITableViewController {
 			
 		case 1:
 			print("messages")
-			//self.revealViewController().revealToggle(animated: true)
+			self.revealViewController().revealToggle(animated: true)
+			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 2:
 			print("notifications")
-			//self.revealViewController().revealToggle(animated: true)
+			self.revealViewController().revealToggle(animated: true)
+			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 3:
 			print("bookmarks")
-			//self.revealViewController().revealToggle(animated: true)
+			self.revealViewController().revealToggle(animated: true)
+			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 4:
 			print("discover")
-			self.performSegue(withIdentifier: "discovernotify", sender: self)
+			self.revealViewController().revealToggle(animated: true)
+			//MARK:- todo
+			//self.performSegue(withIdentifier: "discovernotify", sender: self)
+			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 			
 			
@@ -152,10 +158,14 @@ class MenuTableVC: UITableViewController {
 			
 		case 5:
 			print("credits")
-			//self.revealViewController().revealToggle(animated: true)
+			self.revealViewController().revealToggle(animated: true)
+			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 6:
 			print("report")
+			
+			self.revealViewController().revealToggle(animated: true)
+			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 
 		case 7:
 			print("logout")

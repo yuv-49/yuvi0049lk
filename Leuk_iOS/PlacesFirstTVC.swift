@@ -201,6 +201,11 @@ class PlacesFirstTVC: UITableViewController {
 			print("Add the default image on places")
 		}
 		TVcell.placeDistance!.text = valueForPlaces[indexPath.row].placeDistance
+		
+		
+		if valueForPlaces[indexPath.row].featured == "0"{
+			TVcell.placePremium.isHidden = true
+		}
 
 		
 	}

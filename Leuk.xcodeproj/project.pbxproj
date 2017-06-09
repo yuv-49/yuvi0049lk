@@ -393,9 +393,9 @@
 		28FC33661E9F869900F4A813 /* BeforeLaunchVCs */ = {
 			isa = PBXGroup;
 			children = (
-				281E606F1E9ECF120051423C /* LoadingDataVC.swift */,
 				28FC33671E9F86C900F4A813 /* SignInVC.swift */,
 				2822FC8A1ED490F00050CB01 /* UserDetailsVC.swift */,
+				281E606F1E9ECF120051423C /* LoadingDataVC.swift */,
 			);
 			name = BeforeLaunchVCs;
 			sourceTree = "<group>";
@@ -544,7 +544,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2837CE3D1E8BBECA000AF281 /* Build configuration list for PBXProject "Leuk_iOS" */;
+			buildConfigurationList = 2837CE3D1E8BBECA000AF281 /* Build configuration list for PBXProject "Leuk" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -939,15 +939,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 22E3QU5W9V;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Leuk_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.webloomsolutions.Leuk-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Leuk_iOS/Leuk_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -957,14 +962,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 22E3QU5W9V;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Leuk_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.webloomsolutions.Leuk-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Leuk_iOS/Leuk_iOS-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1033,7 +1043,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2837CE3D1E8BBECA000AF281 /* Build configuration list for PBXProject "Leuk_iOS" */ = {
+		2837CE3D1E8BBECA000AF281 /* Build configuration list for PBXProject "Leuk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2837CE6B1E8BBECA000AF281 /* Debug */,

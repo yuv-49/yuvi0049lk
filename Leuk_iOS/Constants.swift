@@ -49,6 +49,8 @@ class HomeOffers{
 	var offerDesc: String!
 	var offerExpiry: String!
 	var offerTiming: String!
+	var recommended: String!
+	var views: String!
 	
 }
 
@@ -61,6 +63,7 @@ var homeOffersHappy = [HomeOffers]()
 var homeOffersSports = [HomeOffers]()
 var homeOffersSpa = [HomeOffers]()
 
+var pageTwoValues = [HomeOffers]()
 
 
 var offerToPlaceTransition = 0
@@ -86,6 +89,10 @@ class Places {
 	var mapURL: String!
 	var placeArea: String!
 	var photoLink: String!
+	var featured: String!
+	var recommended : String!
+	
+	var views: String!
 	
 	var image1: UIImage!
 	var image1Link: String!
@@ -123,6 +130,10 @@ var staitionaryOrder = [Places]()
 
 // Profile
 
+
+var pageOneValues = [Places]()
+var pageFourValues = [Places]()
+
 var orderDetailsForUser = Places()
 
 
@@ -144,13 +155,14 @@ class homeEvents{
 	
 	var eventWebsite: String!
 	
+	var recommended : String!
 	
 	var eventPhoneNumber: String!
 	var eventFee: String!
 	var eventDesc : String!
 	var eventAddress: String!
 	
-	
+	var views: String!
 	var eventTicketSales: String!
 	var eventTicketLimit: String!
 	
@@ -172,6 +184,8 @@ var startupValues = [homeEvents]()
 var sportsValues = [homeEvents]()
 var meetupValues = [homeEvents]()
 var partyValues = [homeEvents]()
+
+var pageThreeValues = [homeEvents]()
 
 
 

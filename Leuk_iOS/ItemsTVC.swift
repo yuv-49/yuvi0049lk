@@ -61,9 +61,12 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
 	func showCart(_ sender:UITapGestureRecognizer){
 		
-		if totalCartValue != 0 {
+		if cartValues.count != 0 {
 
 			self.performSegue(withIdentifier: "CartVC", sender: self)
+		}else{
+			
+			UIAlertView.init(title: "Cart Empty", message: "Add Something to Cart", delegate: self, cancelButtonTitle: "OK").show()
 		}
 
 		
@@ -91,6 +94,11 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	
 	func reload(){
 		
+		
+		DispatchQueue.main.async {
+			
+		
+		
 		if commonForShopAtlast1.count != 0 {
 			if cartValues.count != 0 {
 		
@@ -104,7 +112,9 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			}
 		}
 		
-		myTable.reloadData()
+		self.myTable.reloadData()
+			
+		}
 	}
 	
 	
@@ -125,7 +135,8 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 	}
 	if commonForShopAtlast1[indexPath.row].itemspicy == "1" {
 		
-		cell.itemSpicy.image = UIImage(named: "spicy")
+		// MARK:- to do
+		//cell.itemSpicy.image = UIImage(named: "spicy")
 	}
 	
 	
@@ -178,18 +189,21 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 		print("out")
 		addBtnClicked = true
 		
-		
-		
-		var sum = 0
-		for val in cartValues {
-			if val.itemId == commonForShopAtlast1[clicked].itemId {
-				val.rows = commonForShopAtlast1[clicked].rows
-				sum = 1
+		//DispatchQueue.main.async {
+			var sum = 0
+			for val in cartValues {
+				if val.itemId == commonForShopAtlast1[clicked].itemId {
+					val.rows = commonForShopAtlast1[clicked].rows
+					sum = 1
+				}
 			}
-		}
-		if sum == 0{
-			cartValues.append(commonForShopAtlast1[clicked])
-		}
+			if sum == 0{
+				cartValues.append(commonForShopAtlast1[clicked])
+			}
+		//}
+		
+		
+		
 		totalCartValue = 0
 		for val in cartValues {
 			totalCartValue = totalCartValue + (val.rows * Int(val.itemOfferCost)!)
@@ -219,16 +233,17 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 		print("out")
 		addBtnClicked = true
 		
-		
-		
-		for val in cartValues {
-			if val.itemId == commonForShopAtlast1[clicked].itemId {
-				val.rows = commonForShopAtlast1[clicked].rows
-				
-			} else {
-				print("nana not here")
+					for val in cartValues {
+				if val.itemId == commonForShopAtlast1[clicked].itemId {
+					val.rows = commonForShopAtlast1[clicked].rows
+					
+				} else {
+					print("na na not here")
+				}
 			}
-		}
+		
+		
+		
 		totalCartValue = 0
 		for val in cartValues {
 			totalCartValue = totalCartValue + (val.rows * Int(val.itemOfferCost)!)
@@ -267,6 +282,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			}
 			
 		}
+		reload()
 		myTable.reloadData()
 
 	}

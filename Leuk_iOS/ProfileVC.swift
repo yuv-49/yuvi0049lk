@@ -88,6 +88,7 @@ class ProfileVC: UIViewController {
 	@IBOutlet weak var customerRefCode: UILabel!
 	@IBOutlet weak var customerLevel: UILabel!
 	@IBOutlet weak var custCreditsLeft: UILabel!
+	@IBOutlet weak var nextLabel: UILabel!
 	
 	
 	var options: PagingMenuControllerCustomizable!
@@ -102,7 +103,7 @@ class ProfileVC: UIViewController {
 	//getUserDetails()
 	
 	
-	profileApi()
+	//profileApi()
 	
 	
 	if (Name == nil){
@@ -121,6 +122,13 @@ class ProfileVC: UIViewController {
 		btnToHomeOutlet.isHidden = false
 	}
 	
+	
+	profileImg.backgroundColor = UIColor.leukRed()
+	profileImg.layer.cornerRadius = 8.0
+	profileImg.clipsToBounds = true
+
+	
+	
 	pagingCall()
 	
 	
@@ -137,6 +145,8 @@ class ProfileVC: UIViewController {
 		customerArea.text = area
 		customerRefCode.text = referalCode
 		customerLevel.text = level
+		let next = Int(level!)
+		nextLabel.text = "\(next! + 1)"
 		custCreditsLeft.text = "\(remainingCredits!) credits left"
 
 	}

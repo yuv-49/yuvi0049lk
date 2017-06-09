@@ -60,6 +60,11 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 
 	override func viewDidAppear(_ animated: Bool) {
 		
+		
+		
+		
+		//self.performSegue(withIdentifier: "userdetailsvc", sender:nil)
+		
 		if GIDSignIn.sharedInstance().hasAuthInKeychain() {
 			
 			//performSegue(withIdentifier: "showloader", sender:nil)
@@ -223,6 +228,7 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 		
 		
 	}
+	
 	
 	
 	

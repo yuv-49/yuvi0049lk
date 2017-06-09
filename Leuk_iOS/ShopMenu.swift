@@ -25,13 +25,16 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	myTableView.tableFooterView = UIView()
 	
-	let btn1 = UIButton(type: .custom)
-	btn1.setImage(UIImage(named: "parties"), for: .normal)
-	btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-	btn1.addTarget(self, action: #selector(self.callCartScene), for: .touchUpInside)
-	let item1 = UIBarButtonItem(customView: btn1)
 	
-	self.navigationItem.setRightBarButtonItems([item1], animated: true)
+	
+	//MARK:- todo
+//	let btn1 = UIButton(type: .custom)
+//	btn1.setImage(UIImage(named: "parties"), for: .normal)
+//	btn1.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+//	btn1.addTarget(self, action: #selector(self.callCartScene), for: .touchUpInside)
+//	let item1 = UIBarButtonItem(customView: btn1)
+//	
+//	self.navigationItem.setRightBarButtonItems([item1], animated: true)
 	
 	
     }
@@ -109,7 +112,11 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 		}
 		print("YSYSYSYSY\(commonForShopAtlast1)")
 		
-		self.performSegue(withIdentifier: "shopconnect", sender: self)
+		DispatchQueue.main.async {
+			self.performSegue(withIdentifier: "shopconnect", sender: self)
+
+		}
+		
 
 		
 		
@@ -193,8 +200,11 @@ class ShopMenu: UIViewController, UITableViewDelegate, UITableViewDataSource {
 		}
 		
 		task2.resume()
+		DispatchQueue.main.async {
+			self.performSegue(withIdentifier: "shopconnect", sender: self)
+
+		}
 		
-		self.performSegue(withIdentifier: "shopconnect", sender: self)
 
 		
 		

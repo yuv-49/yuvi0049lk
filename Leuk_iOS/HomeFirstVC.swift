@@ -37,7 +37,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	var linkToCall : String!
 	
-	
+	var timerDel : Timer!
 	
 	
 	@IBOutlet weak var locationPopup: UIView!
@@ -65,6 +65,10 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		locationPopup.isHidden = true
 		
+		
+		
+		currentLocation.text = area
+		
 		self.setNavBarToTheView()
 		locationPicker.delegate = self
 		locationPicker.dataSource = self
@@ -79,6 +83,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		carouselView.isPagingEnabled  = true
 		carouselView.bounces = true
 		carouselView.bounceDistance = 0.5
+		
 		
 		
 //		let gestureForLocation = UITapGestureRecognizer(target: self, action:  #selector (self.changeLoc (_:)))
@@ -118,7 +123,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	func changeLoc(_ sender:UITapGestureRecognizer){
 		
 		self.locationPopup.isHidden = true
-		print("here we are")
+	//	print("here we are")
 		
 		changeLocApiCall()
 		
@@ -130,12 +135,18 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	func changeLocApiCall(){
 		
+		if locationVal == nil {
+			
+			locationVal = pickerDataSource[0]
+
+		}
 		
 		
+		var value: Int!
 		var locationUpdate = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=updateUserLocation")!)
 		locationUpdate.httpMethod = "POST"
 		let postString1="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&location=\(locationVal!)"
-		print("\(postString1)")
+		print("happy sinn \(postString1)")
 		
 		
 		locationUpdate.httpBody = postString1.data(using: .utf8)
@@ -152,11 +163,13 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 				//print("responseString = \(responseString!)")
 				
 				
-				
 				DispatchQueue.main.async {
-						self.performSegue(withIdentifier: "restartAgain", sender: nil)
-
+					
+					value = 1
+					
+					
 				}
+				
 				
 				print("successful")
 				
@@ -170,7 +183,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		task2.resume()
 		
 
-		
+		self.performSegue(withIdentifier: "restartAgain", sender: nil)
 		
 		
 		
@@ -217,6 +230,8 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	}
  
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		
+
 		if pickerDataSource.count == 0 {
 			Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(pickerCall), userInfo: nil, repeats: false)
 		}
@@ -231,7 +246,6 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
 	{
-		locationVal = pickerDataSource[0]
 
 		if(row == 0)
 		{
@@ -284,6 +298,8 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	func reloadCarousel(){
 		
+		
+		
 		carouselView.reloadData()
 
 		
@@ -298,30 +314,12 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		//reloadCarousel()
-
-		
-		//carouselView.scroll(toOffset: 0, duration: 0.01)
-
-		
-		//autoScroll()
 		
 		
-		Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: true)
-		Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: false)
+		
+		timerDel = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: true)
+		//Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: false)
 	}
-	
-	
-	override func viewWillAppear(_ animated: Bool) {
-
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -331,45 +329,34 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 
 		
 		if carouselView.currentItemIndex ==  firstPageNews.count - 1{
-			//runMethod1()
+		
 			Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.runMethod1), userInfo: nil, repeats: false)
 		}else{
-			//Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
+			
 			
 		}
-		//if carouselView
+		
 
 	}
 	
 	
 	
-	
-	
-//	func runMethod() {
-//
-//		carouselView.scrollToItem(at: carouselView.currentItemIndex + 1, animated: true)
-//		if carouselView.currentItemIndex == firstPageNews.count - 1{
-//			Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.runMethod1), userInfo: nil, repeats: false)
-//		}
-//	}
-	
-	
-	
+
 	
 	func runMethod1(){
 		carouselView.scrollToItem(at: 0, animated: true)
 	}
 	
 	
-	func checkForData(){
-		
-		
-		if firstPageNews.count == 0 {
-		
-		
-		let timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: true)
-		}
-	}
+//	func checkForData(){
+//		
+//		
+//		if firstPageNews.count == 0 {
+//		
+//		
+//		let timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: false)
+//		}
+//	}
 	
 	
 	func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
@@ -388,7 +375,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		
 		let label0 = UILabel()
-		label0.frame = CGRect(x: 1, y: self.view.frame.height * 0.395, width: self.view.frame.width/3, height: self.view.frame.height * 0.05)
+		label0.frame = CGRect(x: 4, y: self.view.frame.height * 0.395, width: self.view.frame.width/3, height: self.view.frame.height * 0.05)
 		label0.textAlignment = NSTextAlignment.left
 		label0.textColor = UIColor.lightGray
 		label0.adjustsFontSizeToFitWidth = true
@@ -399,20 +386,23 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		tempView.addSubview(label0)
 		
 		let label1 = UILabel()
-		label1.frame = CGRect(x: 1, y: self.view.frame.height * 0.427, width: self.view.frame.width * 0.95, height: self.view.frame.height * 0.04)
+		label1.frame = CGRect(x: 4, y: self.view.frame.height * 0.427, width: self.view.frame.width * 0.95, height: self.view.frame.height * 0.04)
 		label1.textAlignment = NSTextAlignment.left
 		label1.adjustsFontSizeToFitWidth = true
 		label1.text = firstPageNews[index].newsTitle!
-		label1.font = UIFont(name: "Avenir Next", size: label1.font.pointSize)
+		label1.font = UIFont(name: "Avenir Next", size: 12)
 		tempView.addSubview(label1)
 		
 		
+		let dot = UIImageView(frame: CGRect(x: 4, y: self.view.frame.height * 0.463, width: 25, height: 25))
+		dot.image = UIImage(named: "bell")
+		tempView.addSubview(dot)
 		
 		let label2 = UILabel()
-		label2.frame = CGRect(x: 20, y: self.view.frame.height * 0.464, width: self.view.frame.width , height: self.view.frame.height * 0.03)
+		label2.frame = CGRect(x: 26, y: self.view.frame.height * 0.464, width: self.view.frame.width , height: self.view.frame.height * 0.03)
 		label2.textAlignment = NSTextAlignment.left
 		label2.adjustsFontSizeToFitWidth = true
-		label2.font = UIFont(name: "Avenir Next", size: label2.font.pointSize)
+		label2.font = UIFont(name: label2.font.fontName, size: 13)
 		label2.text = "\(firstPageNews[index].hits!) people have viewed this"
 		tempView.addSubview(label2)
 		
@@ -565,14 +555,23 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		}
 			
 		else if(indexPath.row == 5) {
-			self.performSegue(withIdentifier: "discoverfromhome", sender: self)
+			
+			UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
+			
+			
+			// MARK:- todo
+			//self.performSegue(withIdentifier: "discoverfromhome", sender: self)
 		}
 		
 		
 			
 		else {
 			indexValue = indexPath.row
-			self.performSegue(withIdentifier: "RestCell", sender: self)
+			
+			UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
+			
+			// MARK:- todo
+			//self.performSegue(withIdentifier: "RestCell", sender: self)
 
 		}
 		
@@ -668,19 +667,35 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "FirstFourCell") {
+			
+			timerDel.invalidate()
 			let homeSecondVC = segue.destination as! HomeSecondVC
 			homeSecondVC.indexValue = indexValue
 			
 			
 			
 		}
-		else if (segue.identifier == "RestCell") {
 			
-			let homeThirdVC = segue.destination as! HomeThirdVC
-			homeThirdVC.indexValue = indexValue
-			
-			
-		}
+		// MARK: todo
+//		else if (segue.identifier == "RestCell") {
+//			
+//			timerDel.invalidate()
+//			
+//			let homeThirdVC = segue.destination as! HomeThirdVC
+//			homeThirdVC.indexValue = indexValue
+//			
+//			
+//		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		else if (segue.identifier == "profilevc"){
 //			let profilevc = segue.destination as! ProfileVC
 //			

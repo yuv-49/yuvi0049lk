@@ -20,11 +20,13 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var deliveryCharge: UILabel!
 	@IBOutlet weak var convenienceFee: UILabel!
 	@IBOutlet weak var subtotal: UILabel!
+	@IBOutlet weak var minimalOrderLabel: UILabel!
+	@IBOutlet weak var subtotalValue: UILabel!
 	
 	
 	var addBtnClicked: Bool!
 	var showHere : Int!
-	var subTotalValue : Int!
+	var subTotalValue1 : Int!
 	
 	
 	
@@ -51,7 +53,14 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
 	func checkOut1(_ sender:UITapGestureRecognizer){
 		
-		self.performSegue(withIdentifier: "ConfirmOrderVC", sender: self)
+		if subTotalValue1 < Int(cartValues[0].minimumSpending)! {
+			UIAlertView.init(title: "Oh Snap!", message: "Minimum order Price is \(cartValues[0].minimumSpending!)", delegate: self, cancelButtonTitle: "OK").show()
+			
+		}else{
+			self.performSegue(withIdentifier: "ConfirmOrderVC", sender: self)
+
+		}
+		
 
 		
 		
@@ -69,16 +78,19 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 		let min = cartValues[0].minimumSpending!
 		deliveryCharge.text = cartValues[0].deliveryCharge!
 		convenienceFee.text = cartValues[0].convFee!
-		subTotalValue = showHere + Int(cartValues[0].deliveryCharge)! + Int(cartValues[0].convFee)!
-		subtotal.text = "\(subTotalValue!)"
+		subtotalValue.text = "\(showHere!)"
+		subTotalValue1 = showHere + Int(cartValues[0].deliveryCharge)! + Int(cartValues[0].convFee)!
+		subtotal.text = "\(subTotalValue1!)"
 		
 		if showHere > Int(min)! {
 			minimalOrder.isHidden = true
+			minimalOrderLabel.isHidden = true
 			//subtotal.text = "\(showHere!)"
 			print(showHere)
 			
 		} else {
 			minimalOrder.isHidden = false
+			minimalOrderLabel.isHidden = false
 			minimalOrder.text = min
 			
 		}

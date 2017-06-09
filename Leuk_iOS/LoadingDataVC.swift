@@ -40,7 +40,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 
 	
 	firstpageNewsApi()
-	//profileApi()
+	profileApi()
 	
 	getApi()
 	getEventsValue()
@@ -203,10 +203,12 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 
 					var json = JSON(data: data!)
 					let numberOfPlaces =  json["response"]["data"].count
+					//print(" haps \(json["response"]["data"])")
 					print(numberOfPlaces)
 					if numberOfPlaces > 0
 					{
 						for index in 0...numberOfPlaces-1 {
+							
 							let placesValue = Places()
 							placesValue.placeId = json["response"]["data"][index]["id"].string!
 							placesValue.placeName = json["response"]["data"][index]["name"].string!
@@ -222,15 +224,15 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							placesValue.mapURL = json["response"]["data"][index]["maps_url"].string!
 							placesValue.lastUpdate = json["response"]["data"][index]["last_update"].string!
 							
-							
-							
+							placesValue.featured = json["response"]["data"][index]["featured"].string!
+							placesValue.recommended = json["response"]["data"][index]["recommended"].string!
 							
 							
 							
 							placesValue.service = json["response"]["data"][index]["service"].string!
 							placesValue.orderType = json["response"]["data"][index]["order_type"].string!
 							
-							
+							placesValue.views = json["response"]["data"][index]["views"].string!
 							
 							
 							
@@ -299,6 +301,15 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 					
 							
 							if (placesValue.service == "1"){
+								
+								if placesValue.recommended == "1" {
+									
+									pageOneValues.append(placesValue)
+								}
+								
+								
+								
+								
 								if(placesValue.orderType == "Grocery"){
 									GroceriesOrder.append(placesValue)
 								}
@@ -319,32 +330,73 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							
 							
 				       if (placesValue.placeType == "restaurant") {
+						
+						if placesValue.recommended == "1" {
+							
+							pageFourValues.append(placesValue)
+						}
+
+						
 						if(self.checkValue(idValue: placesValue.placeId, arrayName: restaurantValues)){
 							restaurantValues.append(placesValue)
 
 						}
 					}
 					else if (placesValue.placeType == "store") {
+						
+						if placesValue.recommended == "1" {
+							
+							pageFourValues.append(placesValue)
+						}
+						
 						if(self.checkValue(idValue: placesValue.placeId, arrayName: storesValues)){
 							storesValues.append(placesValue)
 						}
 					}
 					else if (placesValue.placeType == "pubs") {
+						
+						if placesValue.recommended == "1" {
+							
+							pageFourValues.append(placesValue)
+						}
+						
+						
 						if(self.checkValue(idValue: placesValue.placeId, arrayName: pubsValues)){
 							pubsValues.append(placesValue)
 						}
 					}
 					else if (placesValue.placeType == "entertainment") {
+						
+						if placesValue.recommended == "1" {
+							
+							pageFourValues.append(placesValue)
+						}
+						
+						
 						if(self.checkValue(idValue: placesValue.placeId, arrayName: EntertainmentValues)){
 							EntertainmentValues.append(placesValue)
 						}
 					}
 					else if (placesValue.placeType == "cafe") {
+						
+						if placesValue.recommended == "1" {
+							
+							pageFourValues.append(placesValue)
+						}
+						
+						
 							if(self.checkValue(idValue: placesValue.placeId, arrayName: cafeValues)){
 								cafeValues.append(placesValue)
 						}
 					}
 					else if (placesValue.placeType == "medical") {
+						
+						if placesValue.recommended == "1" {
+							
+							pageFourValues.append(placesValue)
+						}
+						
+						
 								if(self.checkValue(idValue: placesValue.placeId, arrayName: MedicalValues)){
 									MedicalValues.append(placesValue)
 						}
@@ -428,7 +480,14 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 						eventValuesArray.eventTicketLimit = json["response"]["data"][index]["ticket_limit"].string!
 						eventValuesArray.eventWebsite = json["response"]["data"][index]["website"].string!
 					
+						eventValuesArray.recommended = json["response"]["data"][index]["recommended"].string!
 						
+						eventValuesArray.views = json["response"]["data"][index]["views"].string!
+						
+						if eventValuesArray.recommended == "1" {
+							
+							pageThreeValues.append(eventValuesArray)
+						}
 						
 						
 						
@@ -552,9 +611,14 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 					offerValue.offerExpiry = json["response"]["data"][index]["offer_expiry"].string!  
 					offerValue.offerTiming = json["response"]["data"][index]["offer_time"].string!
 					offerValue.offerTitle = json["response"]["data"][index]["offer_title"].string!
-
+					offerValue.recommended = json["response"]["data"][index]["recommended"].string!
 					
 					
+					if offerValue.recommended == "1"{
+					
+						pageTwoValues.append(offerValue)
+					}
+// add views
 					
 					if (offerValue.offerCategory == "bars"){
 						homeOffersBars.append(offerValue)

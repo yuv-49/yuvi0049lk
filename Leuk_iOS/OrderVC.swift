@@ -45,6 +45,7 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+	myOrdersYet.removeAll()
 
 	}
 	
