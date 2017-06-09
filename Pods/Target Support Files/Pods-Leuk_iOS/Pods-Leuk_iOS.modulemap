@@ -1,0 +1,6 @@
+framework module Pods_Leuk_iOS {
+  umbrella header "Pods-Leuk_iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
