@@ -162,10 +162,24 @@ class EventsIndividualVC: UIViewController {
 		var diffInHour = Int(finalHourToSubstract!)! + 24 - Int(hour)
 		if diffInHour >= 24 {
 			
-			diffInHour -= 24
+			diffInHour -= 25
+            
 		}
+        
+        if diffInHour == -1{
+            diffInHour = 0
+        }
 		print(diffInHour)
-		hoursLeft.text = "\(diffInHour)"
+        
+        if diffInHour < 10{
+            
+            hoursLeft.text = "0\(diffInHour)"
+        }else{
+            
+            hoursLeft.text = "\(diffInHour)"
+        }
+        
+		
 		
 		
 		let finalMninuteToSubstract = hourToSubstract?[1]
@@ -173,10 +187,25 @@ class EventsIndividualVC: UIViewController {
 		var diffInMinute = Int(finalMninuteToSubstract!)! + 60 - Int(minute)
 		if diffInMinute >= 60 {
 			
-			diffInMinute -= 60
+			diffInMinute -= 61
 		}
+        
+        if diffInMinute == -1 {
+            diffInMinute = 0
+        }
 		print(diffInMinute)
-		minuteLeft.text = ": \(diffInMinute)"
+        
+        if diffInMinute < 10{
+            
+            minuteLeft.text = ": 0\(diffInMinute)"
+        }else{
+            
+            minuteLeft.text = ": \(diffInMinute)"
+        }
+        
+        
+        
+		
 		
 		let finalSecondToSubstract = hourToSubstract?[2]
 		
@@ -186,7 +215,14 @@ class EventsIndividualVC: UIViewController {
 			diffInSecond -= 60
 		}
 		print(diffInSecond)
-		secondsLeft.text = ": \(diffInSecond)"
+        
+        if diffInSecond < 10{
+            secondsLeft.text = ": 0\(diffInSecond)"
+        }else{
+            secondsLeft.text = ": \(diffInSecond)"
+            
+        }
+//		secondsLeft.text = ": \(diffInSecond)"
 		
 		
 		var  datesVal = dateToSubstract?.characters.split{$0 == "-"}.map(String.init)
@@ -198,10 +234,19 @@ class EventsIndividualVC: UIViewController {
 			diffInDay -= 30
 		}
 		
-		diffInDay -= 1
+	//	diffInDay -= 1
+        if diffInDay == -1{
+            diffInDay = 0
+        }
 		
 		print(diffInDay)
-		daysLeft.text = "\(diffInDay)"
+        
+        if diffInDay < 10{
+            daysLeft.text = "0\(diffInDay)"
+        }else{
+            daysLeft.text = "\(diffInDay)"
+
+        }
 
 		
 

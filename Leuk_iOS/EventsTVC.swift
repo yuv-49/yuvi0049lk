@@ -11,6 +11,7 @@ import UIKit
 class EventsTVC: UITableViewController {
 	var indexValueSecond: Int!
 	
+    @IBOutlet var eventTable: UITableView!
 	var SenderValueOfEvent = homeEvents()
 
     override func viewDidLoad() {
@@ -18,6 +19,26 @@ class EventsTVC: UITableViewController {
 
 	
 	setTitleForNotification()
+        
+        
+        
+        
+        eventTable.tableFooterView = UIView()
+        
+        
+//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        
+//        layout.itemSize = CGSize(width: self.view.frame.width * 0.485, height: self.view.frame.height * 0.33)
+//        //	layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 10
+//        
+//        myCollectionView.collectionViewLayout = layout
+
+        
+        
+
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
