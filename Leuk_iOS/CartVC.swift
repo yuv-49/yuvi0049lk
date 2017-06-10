@@ -22,6 +22,7 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	@IBOutlet weak var subtotal: UILabel!
 	@IBOutlet weak var minimalOrderLabel: UILabel!
 	@IBOutlet weak var subtotalValue: UILabel!
+   // @IBOutlet weak var minimumOrderValue: UILabel!
 	
 	
 	var addBtnClicked: Bool!
