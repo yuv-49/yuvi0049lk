@@ -455,8 +455,12 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 				
 			else {
 				
-				print("order plcaed")
-				UIAlertView.init(title: "Order SuccessFul", message: "your orderhas been successfully placed", delegate: self, cancelButtonTitle: "DONE").show()
+				print("order placed")
+                DispatchQueue.main.async {
+                    				UIAlertView.init(title: "Order SuccessFul", message: "your order has been successfully placed", delegate: self, cancelButtonTitle: "DONE").show()
+                }
+                
+			//	UIAlertView.init(title: "Order SuccessFul", message: "your order has been successfully placed", delegate: self, cancelButtonTitle: "DONE").show()
 				
 				
 			}

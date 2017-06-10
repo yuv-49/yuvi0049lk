@@ -45,7 +45,6 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-	myOrdersYet.removeAll()
 
 	}
 	
@@ -70,6 +69,25 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		cell.orderTime.text = myOrdersYet[indexPath.row].time
 		cell.placeImage.kf.setImage(with: myOrdersYet[indexPath.row].imageLink)
 		cell.placeName.text = myOrdersYet[indexPath.row].placeName
+        
+        if myOrdersYet[indexPath.row].status == "0"{
+            
+            cell.orderStatus.text = "ORDER DELIVERED"
+            
+        }else if myOrdersYet[indexPath.row].status == "1"{
+            
+            cell.orderStatus.text = "ORDER PLACED"
+            
+        }else if myOrdersYet[indexPath.row].status == "2"{
+            
+            cell.orderStatus.text = "ORDER ACCEPTED"
+            
+        }else if myOrdersYet[indexPath.row].status == "3"{
+            
+            cell.orderStatus.text = "ORDER DECLINED"
+            
+        }
+        
 
 		
 		return cell
@@ -186,6 +204,8 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		
 		
 	}
+    
+    
 	
 	
 	func getPlaceInfoById(_ placeId: String!){
@@ -356,6 +376,9 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 	override func viewDidAppear(_ animated: Bool) {
 		apiCall()
 		// remove ordersdetail value
+        
+        myOrdersYet.removeAll()
+
 		reloadFunc()
 		
 
