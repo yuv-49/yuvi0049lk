@@ -66,6 +66,7 @@
 		28FC337F1E9FCE5100F4A813 /* CouponsVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC337E1E9FCE5100F4A813 /* CouponsVCell.swift */; };
 		28FE7D171ED2E949005CCBAD /* HeavyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FE7D161ED2E948005CCBAD /* HeavyConstants.swift */; };
 		63568D8ED0141A383566FDCB /* Pods_Leuk_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82957FACEEC3C232CBFAF92 /* Pods_Leuk_iOSTests.framework */; };
+		A6F27CA11EED155B0099CD2A /* OrderNow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CA01EED155B0099CD2A /* OrderNow.storyboard */; };
 		ECF75B855BE7C90C92A17F5D /* Pods_Leuk_iOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63D3DBC6FA9A13D06C6C3CA /* Pods_Leuk_iOSUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +157,7 @@
 		2B99307884C85FF1561A381D /* Pods-Leuk_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		35644FC66C827AF22EB2E51C /* Pods-Leuk_iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOSUITests/Pods-Leuk_iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5963E9E60EC73E325FDD52E7 /* Pods_Leuk_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6F27CA01EED155B0099CD2A /* OrderNow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderNow.storyboard; sourceTree = "<group>"; };
 		B82957FACEEC3C232CBFAF92 /* Pods_Leuk_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63D3DBC6FA9A13D06C6C3CA /* Pods_Leuk_iOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leuk_iOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D730674BD5E9ED76EBC9ED81 /* Pods-Leuk_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leuk_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leuk_iOS/Pods-Leuk_iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		2837CE441E8BBECA000AF281 /* Leuk_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A6F27C9F1EED15270099CD2A /* Storyboards */,
 				28199A581EBE0F6B003CD7C0 /* Constants */,
 				2837CE451E8BBECA000AF281 /* AppDelegate.swift */,
 				2837CE491E8BBECA000AF281 /* Main.storyboard */,
@@ -426,6 +429,14 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		A6F27C9F1EED15270099CD2A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A6F27CA01EED155B0099CD2A /* OrderNow.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		BCCF875DC71482F4FE6C9772 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2837CE531E8BBECA000AF281 /* LaunchScreen.storyboard in Resources */,
+				A6F27CA11EED155B0099CD2A /* OrderNow.storyboard in Resources */,
 				28FC33611E9F824800F4A813 /* GoogleService-Info.plist in Resources */,
 				2837CE501E8BBECA000AF281 /* Assets.xcassets in Resources */,
 				2837CE4B1E8BBECA000AF281 /* Main.storyboard in Resources */,
