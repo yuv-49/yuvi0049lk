@@ -121,17 +121,22 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 
 
 	
-	showingAndRemoving()
+	
 	
 	
 	
 	
 	if entryPoint == 1 {
+		showingAndRemoving()
+		
 		totalCostFunc()
 
 		getPlaceOrder()
 
 	}else if entryPoint == 2 {
+		
+		placeServiceStatusForPayment = Int(myOrderreceiver.status)
+		showingAndRemoving()
 		
 		subTotalValue = Int(myOrderreceiver.totalCost)! + Int(myOrderreceiver.convFee)! + Int(myOrderreceiver.deliveryCharge)!
 		totalAmount.text = "\(subTotalValue!)"
@@ -166,7 +171,7 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 			apiCallForPlacingOrderFinal()
 			
 		}else if cardOrCod == 2 {
-			
+		
 			let amount = subTotalValue * 100
 			
 			var place = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=generateOrderId")!)
@@ -312,7 +317,7 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 				userDefaults.set(userDeliveryAddress.text, forKey: "addressValueForSaving")
 			}
 			
-			print("hihiop3")
+			//print("hihiop3")
 
 			
 			

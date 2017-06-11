@@ -45,6 +45,9 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+	
+	//myOrdersYet.removeAll()
+
 
 	}
 	
@@ -111,6 +114,8 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 	
 	func apiCall(){
 		
+
+		
 		// MARK:- PROFILE MYORDERS
 		
 		var myOrder = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=myOrders")!)
@@ -128,6 +133,8 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 			}
 				
 			else {
+				self.myOrdersYet.removeAll()
+
 				var json = JSON(data: data!)
 				print(json)
 				let numberOfEvents =  json["response"]["data"].count
@@ -178,10 +185,23 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 						
 						print(self.time)
 						
+//						var value = 0
 						
+						//DispatchQueue.main.async {
+//							for orders in self.myOrdersYet {
+//								if orders.orderId != orderOnce.orderId{
+//									value = 1
+//								}
+//							}
+//							
+//							if value == 1{
+								self.myOrdersYet.append(orderOnce)
+//							}
+
+						//}
 						
 
-						self.myOrdersYet.append(orderOnce)
+						
 
 
 					}
@@ -377,7 +397,7 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 		apiCall()
 		// remove ordersdetail value
         
-        myOrdersYet.removeAll()
+//myOrdersYet.removeAll()
 
 		reloadFunc()
 		

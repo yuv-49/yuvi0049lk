@@ -227,6 +227,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							placesValue.featured = json["response"]["data"][index]["featured"].string!
 							placesValue.recommended = json["response"]["data"][index]["recommended"].string!
 							
+							placesValue.openingTime = json["response"]["data"][index]["opening_hour"].string!
+						       placesValue.closingTime = json["response"]["data"][index]["closing_hour"].string!
 							
 							
 							placesValue.service = json["response"]["data"][index]["service"].string!

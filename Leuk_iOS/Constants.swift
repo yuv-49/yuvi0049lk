@@ -92,6 +92,9 @@ class Places {
 	var featured: String!
 	var recommended : String!
 	
+	var openingTime: String!
+	var closingTime: String!
+	
 	var views: String!
 	
 	var image1: UIImage!
