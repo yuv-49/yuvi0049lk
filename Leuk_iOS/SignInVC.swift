@@ -9,6 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 import SwiftyJSON
+import CoreLocation
 
 class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	
@@ -44,6 +45,10 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	 // GIDSignIn.sharedInstance().signInSilently()
 	  GIDSignIn.sharedInstance().delegate = self
 	   password = "password"
+	
+	
+	
+	
 	
 	
 	if GIDSignIn.sharedInstance().hasAuthInKeychain() == true{
@@ -84,6 +89,7 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 		
 	}
 
+	
  
 	
 	

@@ -30,7 +30,6 @@ class shopMenuItem {
 	
 	
 	
-	
 	var rows : Int!
 	
 

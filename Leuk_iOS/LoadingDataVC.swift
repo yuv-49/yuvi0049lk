@@ -20,22 +20,35 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 //	var tokenIdFromGoogle: String!
 //	var count: Int!
 	
+	
+	let locationManager = CLLocationManager()
+
+	
+	
     override func viewDidLoad() {
 	
+	super.viewDidLoad()
+
 	
+	//MARK:- User Location
+
 	
-//	locationF()
-//	let locationManager = CLLocationManager()
-//	locationManager.delegate = self;
-//	locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//	locationManager.requestAlwaysAuthorization()
-//	locationManager.startUpdatingLocation()
+	isAuthorizedtoGetUserLocation()
+	
+	locationManager.delegate = self;
+	locationManager.desiredAccuracy = kCLLocationAccuracyBest
+	locationManager.requestAlwaysAuthorization()
+	locationManager.startUpdatingLocation()
+
+	
+//	if CLLocationManager.locationServicesEnabled() {
+//		
+//		locationManager.requestLocation();
+//	}
 
 	
 	
 	
-	
-        super.viewDidLoad()
 	countOfPagesForFirstPage = 0
 
 	
@@ -52,17 +65,45 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
     }
 	
 	
-	func locationF(){
+	func isAuthorizedtoGetUserLocation() {
 		
-		
+		if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
+			locationManager.requestWhenInUseAuthorization()
+		}
+	}
+
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		if status == .authorizedWhenInUse {
+			print("User allowed us to access location")
+			//do whatever init activities here.
+			
+			let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+			userLatitude = locValue.latitude
+			userLongitude = locValue.longitude
+			print("locations = \(locValue.latitude) \(locValue.longitude)")
+		}
 	}
 	
 	
+
 	
 	
-//	func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//		var locValue:CLLocationCoordinate2D = manager.location!.coordinate
+	
+//	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//		let locValue:CLLocationCoordinate2D = manager.location!.coordinate
 //		print("locations = \(locValue.latitude) \(locValue.longitude)")
+//	}
+	
+//	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//		if status == .authorizedAlways {
+//			if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+//				if CLLocationManager.isRangingAvailable() {
+//					
+//					let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+//					print("locations = \(locValue.latitude) \(locValue.longitude)")
+//				}
+//			}
+//		}
 //	}
 	
 	func firstpageNewsApi(){
@@ -227,9 +268,17 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							placesValue.featured = json["response"]["data"][index]["featured"].string!
 							placesValue.recommended = json["response"]["data"][index]["recommended"].string!
 							
-							placesValue.openingTime = json["response"]["data"][index]["opening_hour"].string!
-						       placesValue.closingTime = json["response"]["data"][index]["closing_hour"].string!
+							var openingTime = json["response"]["data"][index]["opening_hour"].string!
+							var closingTime = json["response"]["data"][index]["closing_hour"].string!
 							
+						      var openingTimeFInal = openingTime.characters.split{$0 == ":"}.map(String.init)
+							var closingTimeFinal = closingTime.characters.split{$0 == ":"}.map(String.init)
+							
+							placesValue.openingTimeHour = openingTimeFInal[0]
+							placesValue.openingTimeMinute = openingTimeFInal[1]
+							
+							placesValue.closingTimeHour = closingTimeFinal[0]
+							placesValue.closingTimeMinute = closingTimeFinal[0]
 							
 							placesValue.service = json["response"]["data"][index]["service"].string!
 							placesValue.orderType = json["response"]["data"][index]["order_type"].string!
@@ -271,8 +320,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							
 							
 							
-							userLatitude = 28.4595
-							userLongitude = 77.0266
+//							userLatitude = 28.4595
+//							userLongitude = 77.0266
 							
 							
 							

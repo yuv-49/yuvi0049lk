@@ -16,6 +16,9 @@ class FoodCVC: UICollectionViewController {
 	var indexValueSecond: Int!
 	var menuFoodId: String!
 	var valueForSecondApiCall: Int!
+	
+	
+	var statusLocal: String!
 
 	@IBOutlet var myCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -63,6 +66,8 @@ class FoodCVC: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+	
+	
         return 1
     }
 
@@ -170,6 +175,12 @@ class FoodCVC: UICollectionViewController {
 	func updateValues(_ valueForPlaces:[Places],cellForRow indexPath: IndexPath, TableCell TVcell:FoodCVCell ){
 		
 		
+		 // var returnVal = computeStatus(valueForPlaces[indexPath.row].openingTimeHour,closingtimeHour: valueForPlaces[indexPath.row].closingTimeHour,closingTimeMinute: valueForPlaces[indexPath.row].closingTimeMinute,openingTimeMinute: valueForPlaces[indexPath.row].openingTimeMinute)
+		
+		
+		
+
+		
 		TVcell.foodPlaceImage.image = UIImage(named: "dinner-512")
 		
 		if(valueForPlaces[indexPath.row].placeFirstImageUrl != nil){
@@ -181,7 +192,13 @@ class FoodCVC: UICollectionViewController {
 			TVcell.foodPlaceImage.image = UIImage(named: "dinnerPlace")
 		}
 		
+	//	TVcell.foodPlaceStatus.text = computeStatus(valueForPlaces[indexPath.row].openingTimeHour,closingtimeHour: valueForPlaces[indexPath.row].closingTimeHour,closingTimeMinute: valueForPlaces[indexPath.row].closingTimeMinute,openingTimeMinute: valueForPlaces[indexPath.row].openingTimeMinute)
 		
+
+
+		
+		
+		TVcell.foodPlaceStatus.text = valueForPlaces[indexPath.row].statusEach
 		
 		TVcell.locationImg.image  = UIImage(named: "Location-1")
 
@@ -195,10 +212,10 @@ class FoodCVC: UICollectionViewController {
 	}
 	
 	
+	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		
 	//	let indexPathValues = collectionView.indexPathsForSelectedItems
-		
 		
 		
 		if(indexValueSecond == 0){
@@ -256,6 +273,10 @@ class FoodCVC: UICollectionViewController {
 		
 
 	}
+	
+	
+	
+	
 	
 	
 //	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -434,10 +455,102 @@ class FoodCVC: UICollectionViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		categoryOfItem.removeAll()
 		cartValues.removeAll()
+		
+		
+		getStatusOfPlaces()
+		
+		
 
 
 	}
 	
+	
+	func getStatusOfPlaces(){
+		if(indexValueSecond == 0){
+			updateValueForPlace(restaurantOrder)
+		}
+		else if(indexValueSecond == 1){
+			updateValueForPlace(GroceriesOrder)
+		}
+		else if(indexValueSecond == 2){
+			updateValueForPlace(MedicineOrder)
+		}
+		else if(indexValueSecond == 3){
+			updateValueForPlace(staitionaryOrder)
+		}
+		self.collectionView?.reloadData()
+	}
+	
+	
+	
+	func updateValueForPlace(_ objcts : [Places]){
+		
+		for objct in objcts {
+			objct.statusEach = computeStatus(objct.openingTimeHour, closingtimeHour: objct.closingTimeHour, closingTimeMinute: objct.closingTimeMinute, openingTimeMinute: objct.openingTimeMinute)
+		}
+		
+		
+	}
+	
+	func computeStatus(_ openingTimeHour: String,closingtimeHour closingTimeHour: String,closingTimeMinute: String,openingTimeMinute: String) -> String{
+		
+		
+		
+		
+		print(openingTimeHour)
+		print(closingTimeHour)
+		print(openingTimeMinute)
+		print(closingTimeMinute)
+		
+		
+		
+		let date = Date()
+		
+		let calender = Calendar.current
+		var hour = calender.component(.hour, from: date)
+		print("haps")
+		print(hour)
+		statusLocal = "OPEN NOW"
+		
+		
+		if Int(openingTimeHour)! < Int(closingTimeHour)!{
+			
+			if hour > Int(openingTimeHour)! && hour < Int(closingTimeHour)! {
+				
+				statusLocal = "OPEN NOW"
+			}else{
+				statusLocal = "ClOSED"
+			}
+			if hour == Int(closingTimeHour)! - 1{
+				
+				statusLocal = "CLOSING NOW"
+			}
+			
+		}else{
+//			let close = Int(closingTimeHour)! + 24
+//			if hour < Int(closingTimeHour)!{
+				//hour = hour + 24
+				if hour > Int(openingTimeHour)! || hour < Int(closingTimeHour)!{
+					statusLocal = "OPEN NOW"
+				}else{
+					statusLocal = "CLOSED"
+				}
+				if hour == Int(closingTimeHour)! - 1{
+					statusLocal = "CLOSING NOW"
+				}
+			//}
+			
+			
+			
+		}
+		
+		
+		
+		return statusLocal
+		
+	}
+	
+
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 

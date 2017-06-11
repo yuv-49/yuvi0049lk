@@ -92,8 +92,14 @@ class Places {
 	var featured: String!
 	var recommended : String!
 	
-	var openingTime: String!
-	var closingTime: String!
+	var openingTimeHour: String!
+	var closingTimeHour: String!
+	
+	var openingTimeMinute: String!
+	var closingTimeMinute: String!
+	
+	var statusEach: String!
+	
 	
 	var views: String!
 	
