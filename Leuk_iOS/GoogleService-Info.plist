@@ -2,27 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>819999945992-40u0ebg1kq9jdqf7a53shtt210holqmk.apps.googleusercontent.com</string>
+	<string>605183043064-9btd48kjs6jhl39vvbketm25v58k8h03.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.819999945992-40u0ebg1kq9jdqf7a53shtt210holqmk</string>
+	<string>com.googleusercontent.apps.605183043064-9btd48kjs6jhl39vvbketm25v58k8h03</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAXbKa4-tqVmBUndMJPeDS9oydhXbeRL6s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>605183043064</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.webloomsolutions.Leuk-iOS</string>
+	<string>com.webloomsolutions.leuk</string>
 	<key>PROJECT_ID</key>
-	<string>firebase-leukios</string>
+	<string>leuk-1140</string>
+	<key>STORAGE_BUCKET</key>
+	<string>leuk-1140.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:819999945992:ios:17fe670e432b58b6</string>
+	<string>1:605183043064:ios:850a674baae62d4e</string>
+	<key>DATABASE_URL</key>
+	<string>https://leuk-1140.firebaseio.com</string>
 </dict>
 </plist>

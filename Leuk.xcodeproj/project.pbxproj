@@ -24,6 +24,7 @@
 		2822FC901ED526370050CB01 /* ContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2822FC8F1ED526370050CB01 /* ContentVC.swift */; };
 		28248B301EA051C400BEC756 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28248B2F1EA051C400BEC756 /* Constants.swift */; };
 		282A9B651EA4F11D00FE84BF /* ASHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A9B641EA4F11D00FE84BF /* ASHorizontalScrollView.swift */; };
+		28352E841EF14F8B008877ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28352E831EF14F8B008877ED /* GoogleService-Info.plist */; };
 		28376F9D1EC07A7F005B5792 /* OrderAdvance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28376F9C1EC07A7F005B5792 /* OrderAdvance.swift */; };
 		28376FA11EC0958B005B5792 /* OrderAdvanceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28376FA01EC0958B005B5792 /* OrderAdvanceTVCell.swift */; };
 		2837CE461E8BBECA000AF281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE451E8BBECA000AF281 /* AppDelegate.swift */; };
@@ -52,7 +53,6 @@
 		28F54FC51EA0111C00AAAB3E /* EventsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC41EA0111C00AAAB3E /* EventsTVCell.swift */; };
 		28F54FC71EA01A6100AAAB3E /* OffersCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC61EA01A6100AAAB3E /* OffersCVC.swift */; };
 		28F54FCA1EA01AA300AAAB3E /* OffersCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F54FC91EA01AA300AAAB3E /* OffersCVCell.swift */; };
-		28FC33611E9F824800F4A813 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FC33601E9F824800F4A813 /* GoogleService-Info.plist */; };
 		28FC33681E9F86C900F4A813 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC33671E9F86C900F4A813 /* SignInVC.swift */; };
 		28FC336B1E9FA6F400F4A813 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FC336A1E9FA6F400F4A813 /* SWRevealViewController.m */; };
 		28FC336E1E9FAB4F00F4A813 /* MenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC336D1E9FAB4F00F4A813 /* MenuTableVC.swift */; };
@@ -106,6 +106,7 @@
 		2822FC8F1ED526370050CB01 /* ContentVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentVC.swift; sourceTree = "<group>"; };
 		28248B2F1EA051C400BEC756 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		282A9B641EA4F11D00FE84BF /* ASHorizontalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASHorizontalScrollView.swift; sourceTree = "<group>"; };
+		28352E831EF14F8B008877ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28376F9C1EC07A7F005B5792 /* OrderAdvance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderAdvance.swift; sourceTree = "<group>"; };
 		28376FA01EC0958B005B5792 /* OrderAdvanceTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderAdvanceTVCell.swift; sourceTree = "<group>"; };
 		2837CE421E8BBECA000AF281 /* Leuk_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leuk_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,7 +142,6 @@
 		28F54FC41EA0111C00AAAB3E /* EventsTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTVCell.swift; sourceTree = "<group>"; };
 		28F54FC61EA01A6100AAAB3E /* OffersCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersCVC.swift; sourceTree = "<group>"; };
 		28F54FC91EA01AA300AAAB3E /* OffersCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersCVCell.swift; sourceTree = "<group>"; };
-		28FC33601E9F824800F4A813 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28FC33621E9F832A00F4A813 /* Leuk_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Leuk_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		28FC33671E9F86C900F4A813 /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		28FC33691E9FA6F400F4A813 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -270,6 +270,7 @@
 				2837CE4F1E8BBECA000AF281 /* Assets.xcassets */,
 				2837CE511E8BBECA000AF281 /* LaunchScreen.storyboard */,
 				2837CE4C1E8BBECA000AF281 /* Leuk_iOS.xcdatamodeld */,
+				28352E831EF14F8B008877ED /* GoogleService-Info.plist */,
 			);
 			path = Leuk_iOS;
 			sourceTree = "<group>";
@@ -329,7 +330,6 @@
 				28EB90A31EA33B62004BBB61 /* RevealViewCotroller */,
 				28FC33621E9F832A00F4A813 /* Leuk_iOS-Bridging-Header.h */,
 				2837CE541E8BBECA000AF281 /* Info.plist */,
-				28FC33601E9F824800F4A813 /* GoogleService-Info.plist */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -559,7 +559,7 @@
 				TargetAttributes = {
 					2837CE411E8BBECA000AF281 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = 22E3QU5W9V;
+						DevelopmentTeam = 4TM29U4JYU;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -605,10 +605,10 @@
 				2837CE531E8BBECA000AF281 /* LaunchScreen.storyboard in Resources */,
 				A6F27CA11EED155B0099CD2A /* OrderNow.storyboard in Resources */,
 				A6F27CA71EED1E630099CD2A /* Events.storyboard in Resources */,
-				28FC33611E9F824800F4A813 /* GoogleService-Info.plist in Resources */,
 				2837CE501E8BBECA000AF281 /* Assets.xcassets in Resources */,
 				A6F27CA41EED176D0099CD2A /* ConfirmOrder.storyboard in Resources */,
 				2837CE4B1E8BBECA000AF281 /* Main.storyboard in Resources */,
+				28352E841EF14F8B008877ED /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,11 +978,11 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 22E3QU5W9V;
+				DEVELOPMENT_TEAM = 4TM29U4JYU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Leuk_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.webloomsolutions.Leuk-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.webloomsolutions.leuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Leuk_iOS/Leuk_iOS-Bridging-Header.h";
@@ -1001,11 +1001,11 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 22E3QU5W9V;
+				DEVELOPMENT_TEAM = 4TM29U4JYU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Leuk_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.webloomsolutions.Leuk-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.webloomsolutions.leuk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Leuk_iOS/Leuk_iOS-Bridging-Header.h";

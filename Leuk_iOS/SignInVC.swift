@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 import SwiftyJSON
-import CoreLocation
+//import CoreLocation
 
 class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	

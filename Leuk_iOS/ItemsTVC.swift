@@ -283,7 +283,7 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			
 		}
 		reload()
-		myTable.reloadData()
+		//myTable.reloadData()
 
 	}
 	
