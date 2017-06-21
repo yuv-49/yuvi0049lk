@@ -92,6 +92,10 @@ class Places {
 	var featured: String!
 	var recommended : String!
 	
+	
+	var latFinal: String!
+	var longFinal: String!
+	
 	var openingTimeHour: String!
 	var closingTimeHour: String!
 	

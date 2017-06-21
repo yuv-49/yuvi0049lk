@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreLocation
 
 
 
@@ -23,6 +24,9 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	@IBOutlet weak var locationPicker: UIPickerView!
 	
+	
+	let locationManager = CLLocationManager()
+
 	
 	
 	var pickerDataSource = [String]()//= ["Manipal", "Bangalore", "Gurgaon", "Ranchi"]
@@ -57,7 +61,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	var navBar: UINavigationBar = UINavigationBar()
 	
-	
+	var timerOne: Timer!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -84,6 +88,8 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		carouselView.bounces = true
 		carouselView.bounceDistance = 0.5
 		
+		isAuthorizedtoGetUserLocation()
+
 		
 		
 //		let gestureForLocation = UITapGestureRecognizer(target: self, action:  #selector (self.changeLoc (_:)))
@@ -113,10 +119,86 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		firstCollectionView!.collectionViewLayout = layout
 		
 		
-		Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
+		timerOne = Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
 		
 		
 	}
+	
+	
+	
+	
+	
+	// MARK:- Location
+	
+	
+	func isAuthorizedtoGetUserLocation() {
+		
+		if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
+			locationManager.requestWhenInUseAuthorization()
+		}
+	}
+	
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		
+		let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+		
+		userLatitude = 28.4595
+		userLongitude = 77.0266
+		
+		switch status {
+		case .notDetermined:
+			
+			
+			break
+		// Do stuff
+		case .authorizedAlways:
+			
+			
+			break
+		// Do stuff
+		case .authorizedWhenInUse:
+			
+			let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+			userLatitude = locValue.latitude
+			userLongitude = locValue.longitude
+			print("locations = \(locValue.latitude) \(locValue.longitude)")
+			
+			break
+			
+		case .restricted:
+			
+			
+			
+			
+			break
+		// Do stuff
+		case .denied:
+			
+			print("Denied")
+			
+			
+			
+			
+			break
+			// Do stuff
+		}
+		
+		
+		
+		
+		//		if status == .authorizedWhenInUse {
+		//			print("User allowed us to access location")
+		//			//do whatever init activities here.
+		//
+		//			let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+		//			userLatitude = locValue.latitude
+		//			userLongitude = locValue.longitude
+		//			print("locations = \(locValue.latitude) \(locValue.longitude)")
+		//		}
+	}
+	
+	
 	
 	
 	
@@ -142,8 +224,8 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		}
 		
 		
-		var value: Int!
-		var locationUpdate = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=updateUserLocation")!)
+		//var value: Int!
+		var locationUpdate = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=editUserDetails")!)
 		locationUpdate.httpMethod = "POST"
 		let postString1="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&location=\(locationVal!)"
 		print("happy sinn \(postString1)")
@@ -163,12 +245,19 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 				//print("responseString = \(responseString!)")
 				
 				
-				DispatchQueue.main.async {
-					
-					value = 1
-					
-					
-				}
+
+//				var json = JSON(data: data!)
+//				print("HSA \(json)")
+				
+				
+				
+				
+//				DispatchQueue.main.async {
+//					
+//					value = 1
+//					
+//					
+//				}
 				
 				
 				print("successful")
@@ -319,6 +408,12 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		timerDel = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: true)
 		//Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: false)
+	}
+	
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		timerDel.invalidate()
+		timerOne.invalidate()
 	}
 	
 	
@@ -556,7 +651,17 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 			
 		else if(indexPath.row == 5) {
 			
-			UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
+			let alertController = UIAlertController(title: "Coming Soon", message: "Hold on For a While", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
 			
 			
 			// MARK:- todo
@@ -568,7 +673,17 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		else {
 			indexValue = indexPath.row
 			
-			UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
+			let alertController = UIAlertController(title: "Coming Soon", message: "Hold on For a While", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
 			
 			// MARK:- todo
 			//self.performSegue(withIdentifier: "RestCell", sender: self)
@@ -595,6 +710,25 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		locationPopup.isHidden = false
 		
+		//locationPopup.layer.cornerRadius = 10
+		locationPopup.layer.shadowColor = UIColor.darkGray.cgColor
+		locationPopup.layer.shadowOffset = CGSize(width: 0.5, height: 2.0)
+		locationPopup.layer.shadowRadius = 320.0
+		locationPopup.layer.shadowOpacity = 6.0
+		locationPopup.layer.masksToBounds = false
+		
+		
+		
+		firstCollectionView.setRecursiveUserInteraction(false)
+		carouselView.setRecursiveUserInteraction(false)
+		
+//		firstCollectionView.isAccessibilityElement = false
+		
+//		view.setRecursiveUserInteraction(false)
+//		locationPopup.setRecursiveUserInteraction(true)
+		
+		
+				
 	}
 	
 	func getLocationValues(){

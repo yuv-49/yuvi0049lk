@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import CoreLocation
 
 private let reuseIdentifier = "Cell"
 
@@ -203,14 +204,53 @@ class FoodCVC: UICollectionViewController {
 		TVcell.locationImg.image  = UIImage(named: "Location-1")
 
 		TVcell.foodPlaceName.text = valueForPlaces[indexPath.row].placeName
-		TVcell.foodPlaceDistance.text = valueForPlaces[indexPath.row].placeDistance
+		//TVcell.foodPlaceDistance.text = valueForPlaces[indexPath.row].placeDistance
 		//TVcell.foodPlaceImage.image = valueForPlaces[indexPath.row].placeImage
 		TVcell.foodPlaceRating.text = valueForPlaces[indexPath.row].placeRating
 		TVcell.foodPlaceRating.text?.append("★")
+		
+		TVcell.foodPlaceDistance.text = computeDistance(valueForPlaces[indexPath.row].latFinal, longitude: valueForPlaces[indexPath.row].longFinal)
+		
+		
 
 		
 	}
 	
+	
+	
+	func computeDistance(_ lati: String,longitude longi: String)-> String{
+		
+		var distance: String!
+		
+		if let d = Float(lati) {
+			if let e = Float(longi) {
+				let coordinate1 = CLLocation(latitude: CLLocationDegrees(d),longitude: CLLocationDegrees(e))
+				let coordinate2 = CLLocation(latitude: userLatitude,longitude: userLongitude)
+				let distanceInMetres = coordinate1.distance(from: coordinate2)
+				
+				var V = Float(distanceInMetres)
+				if(distanceInMetres <= 1000){
+					
+					distance = "\(V)"+" metres"
+				}else {
+					
+					
+					var vOne : Int!
+					vOne = Int(V / 100)
+					V = Float( vOne) / 10
+					distance = "\(V)"+" KM"
+				}
+				
+				
+				
+			}
+		}
+
+		
+		
+		
+		return distance
+	}
 	
 	
 	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -507,7 +547,7 @@ class FoodCVC: UICollectionViewController {
 		let date = Date()
 		
 		let calender = Calendar.current
-		var hour = calender.component(.hour, from: date)
+		let hour = calender.component(.hour, from: date)
 		print("haps")
 		print(hour)
 		statusLocal = "OPEN NOW"
@@ -515,7 +555,7 @@ class FoodCVC: UICollectionViewController {
 		
 		if Int(openingTimeHour)! < Int(closingTimeHour)!{
 			
-			if hour > Int(openingTimeHour)! && hour < Int(closingTimeHour)! {
+			if hour >= Int(openingTimeHour)! && hour < Int(closingTimeHour)! {
 				
 				statusLocal = "OPEN NOW"
 			}else{

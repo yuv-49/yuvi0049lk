@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.webloomsolutions.Leuk-iOS</string>
+				<string>com.webloomsolutions.leuk</string>
 			</array>
 		</dict>
 		<dict>
@@ -33,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.819999945992-40u0ebg1kq9jdqf7a53shtt210holqmk</string>
+				<string>com.googleusercontent.apps.605183043064-9btd48kjs6jhl39vvbketm25v58k8h03</string>
 			</array>
 		</dict>
 	</array>

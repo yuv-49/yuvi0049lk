@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import CoreLocation
 
 
 
@@ -18,7 +19,9 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	var indexValue: Int!
 	var indexValueSecond: Int!
 	
-	var timerDel: Timer!
+	var timerValHere: Timer!
+	
+	//var distance: String!
 
 	var firstView = ["SHOP","OFFERS","EVENTS","PLACES","Ask Leuk","Discover","Contests","Subscriptions","Profile"]
 	var orderNowImageForDefault = ["foodandbeverage","groceries","medicines","stationary"]
@@ -56,7 +59,7 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	carouselV.bounces = true
 	carouselV.bounceDistance = 0.5
 	
-	Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
+	timerValHere = Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.autoScroll), userInfo: nil, repeats: true)
 
     }
 
@@ -354,10 +357,27 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 		
 		if indexValue == 1 {
 			
-			let dot = UIImageView(frame: CGRect(x: 4, y: self.view.frame.height * 0.463, width: 25, height: 25))
-			dot.image = UIImage(named: "location-1")
-			tempView.addSubview(dot)
+//			let dot = UIImageView(frame: CGRect(x: 4, y: self.view.frame.height * 0.463, width: 25, height: 25))
+//			dot.image = UIImage(named: "Location-1")
+//			tempView.addSubview(dot)
+//			
 			
+			
+			let label2 = UILabel()
+			label2.frame = CGRect(x: 6, y: self.view.frame.height * 0.464, width: self.view.frame.width , height: self.view.frame.height * 0.03)
+			label2.textAlignment = NSTextAlignment.left
+			label2.adjustsFontSizeToFitWidth = true
+			label2.font = UIFont(name: label2.font.fontName, size: 13)
+			
+//			label2.text = computeDistance(pageTwoValues[index]., longitude: l)
+//			label2.text?.append(" away from your location")
+//			
+//			label2.text = "\(firstPageNews[index].hits!) away from your location"
+			
+			label2.text = "Expires: "
+			label2.text?.append(pageTwoValues[index].offerExpiry)
+			tempView.addSubview(label2)
+
 			
 			
 			
@@ -437,6 +457,41 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	
 	
 	
+//	func computeDistance(_ lati: String,longitude longi: String)-> String{
+//		
+//		var distance: String!
+//		
+//		if let d = Float(lati) {
+//			if let e = Float(longi) {
+//				let coordinate1 = CLLocation(latitude: CLLocationDegrees(d),longitude: CLLocationDegrees(e))
+//				let coordinate2 = CLLocation(latitude: userLatitude,longitude: userLongitude)
+//				let distanceInMetres = coordinate1.distance(from: coordinate2)
+//				
+//				var V = Float(distanceInMetres)
+//				if(distanceInMetres <= 1000){
+//					
+//					
+//					
+//					distance = "\(V)"+" metres"
+//				}else {
+//					var vOne : Int!
+//					vOne = Int(V / 100)
+//					V = Float( vOne ) / 10
+//					distance = "\(V)"+" KM"
+//				}
+//				
+//				
+//				
+//			}
+//		}
+//		
+//		
+//		
+//		
+//		return distance
+//	}
+	
+	
 	
 
 	
@@ -484,8 +539,13 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 		
 		
 		
-		timerDel = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: true)
+		//timerDel = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(self.reloadCarousel), userInfo: nil, repeats: true)
 	
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		
+	     timerValHere.invalidate()
 	}
 	
 	
@@ -549,7 +609,7 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
         if (segue.identifier == "PlacesFirstTVC") {
 		
 
-		timerDel.invalidate()
+		//timerDel.invalidate()
 		let placesFirstTVC = segue.destination as! PlacesFirstTVC
 		placesFirstTVC.indexValueSecond = indexValueSecond
 		//placesFirstTVC.indexValue = indexValue
@@ -557,14 +617,14 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	}
 	else if(segue.identifier == "maineventsegue"){
 		
-		timerDel.invalidate()
+		//timerDel.invalidate()
 		
 		let eventsTVC = segue.destination as! EventsTVC
 		eventsTVC.indexValueSecond = indexValueSecond
 	}
 	else if(segue.identifier == "mainoffersegue"){
 		
-		timerDel.invalidate()
+		//timerDel.invalidate()
 		
 			let offersCVC = segue.destination as! OffersCVC
 			offersCVC.indexValue = indexValue
@@ -572,7 +632,7 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 	}
 	else if(segue.identifier == "foodcvc"){
 		
-		timerDel.invalidate()
+		//timerDel.invalidate()
 		
 		let foodCVC = segue.destination as! FoodCVC
 		//FoodCVC.indexValues = indexValue

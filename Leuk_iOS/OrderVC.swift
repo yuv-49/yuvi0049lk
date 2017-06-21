@@ -262,7 +262,8 @@ class OrderVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 				
 				
 				
-				orderDetailsForUser.placeId = json["response"]["data"][index]["id"].string!
+			
+				orderDetailsForUser.placeId = placeId// = json["response"]["data"][index]["id"].string!
 				orderDetailsForUser.placeName = json["response"]["data"][index]["name"].string!
 				orderDetailsForUser.placeType = json["response"]["data"][index]["type"].string!
 				let lat = json["response"]["data"][index]["latitude"].string!

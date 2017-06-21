@@ -29,7 +29,8 @@ class EventsIndividualVC: UIViewController {
 	
 	var receiverEventValues = homeEvents()
 
-	
+	var timeVals: Int!
+
 	
 
     override func viewDidLoad() {
@@ -73,7 +74,6 @@ class EventsIndividualVC: UIViewController {
 		
 		var  timeBreak = timeSelected?.characters.split{$0 == ":"}.map(String.init)
 		var dateBreak = dateSelected?.characters.split{$0 == "-"}.map(String.init)
-		var timeVals: Int!
 		
 		
 		meridian = "AM"

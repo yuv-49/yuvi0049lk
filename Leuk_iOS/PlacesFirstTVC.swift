@@ -188,11 +188,34 @@ class PlacesFirstTVC: UITableViewController {
 	
 	func updateValues(_ valueForPlaces:[Places],cellForRow indexPath: IndexPath, TableCell TVcell:PlacesFirstTVCell ){
 		
+//		calculateImageLink()
+		
+		
+//		var photoLinkArray = valueForPlaces[indexPath.row].photoLink.characters.split{$0 == ","}.map(String.init)
+//		if (photoLinkArray.count) > 0 {
+//			
+//			valueForPlaces[indexPath.row].placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/\(area!)/\(valueForPlaces[indexPath.row].placeId ?? "")/\(photoLinkArray[0]).png")
+//			print("hapse \(valueForPlaces[indexPath.row].placeFirstImageUrl)")
+//			
+//			
+//		}
+//		
+//		if (photoLinkArray.count) > 1 {
+//			
+//			valueForPlaces[indexPath.row].placeSecondImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/\(area!)/\(valueForPlaces[indexPath.row].placeId ?? "")/\(photoLinkArray[1]).png")
+//			
+//			
+//			
+//			
+//		}
+		
+		
 		TVcell.placeName!.text = valueForPlaces[indexPath.row].placeName
 		TVcell.placceType!.text = valueForPlaces[indexPath.row].placeType
 		TVcell.placeRating!.text = valueForPlaces[indexPath.row].placeRating
 		TVcell.placeRating.text?.append("★")
 		
+		print("hurep \(valueForPlaces[indexPath.row].placeFirstImageUrl)")
 		if(valueForPlaces[indexPath.row].placeFirstImageUrl != nil){
 
 	
@@ -213,9 +236,30 @@ class PlacesFirstTVC: UITableViewController {
 
 	
 	
-	
-	
-	
+//	func calculateImageLink(){
+//		
+//		var photoLinkArray = placesValue.photoLink.characters.split{$0 == ","}.map(String.init)
+//		if (photoLinkArray.count) > 0 {
+//			
+//			placesValue.placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/\(area!)/\(placesValue.placeId ?? "")/\(photoLinkArray[0] ).png")!
+//			
+//			
+//			
+//			
+//		}
+//		if (photoLinkArray.count) > 1 {
+//			
+//			placesValue.placeSecondImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/\(area!)/\(placesValue.placeId ?? "")/\(photoLinkArray[1] ).png")!
+//			
+//			
+//			
+//			
+//		}
+//
+//		
+//	}
+//	
+//	
 	
 	
 	
@@ -268,6 +312,8 @@ class PlacesFirstTVC: UITableViewController {
 		place1.photoLink = valueForPlaces[(indexPath?.row)!].photoLink
 		place1.placeFirstImageUrl = valueForPlaces[(indexPath?.row)!].placeFirstImageUrl
 		place1.placeSecondImageUrl = valueForPlaces[(indexPath?.row)!].placeSecondImageUrl
+		place1.latFinal = valueForPlaces[(indexPath?.row)!].latFinal
+		place1.longFinal = valueForPlaces[(indexPath?.row)!].longFinal
 	}
 
 
@@ -299,6 +345,9 @@ class PlacesFirstTVC: UITableViewController {
 		placesSecondaryVC.photoLink = place1.photoLink
 		placesSecondaryVC.mainUrl = place1.placeFirstImageUrl
 		placesSecondaryVC.secondaryUrl = place1.placeSecondImageUrl
+		placesSecondaryVC.lat = place1.latFinal
+		placesSecondaryVC.long = place1.longFinal
+		
 		
 	}
 	

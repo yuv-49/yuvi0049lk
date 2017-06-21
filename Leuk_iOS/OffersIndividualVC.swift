@@ -93,10 +93,12 @@ class OffersIndividualVC: UIViewController {
 		
 		offerToPlaceTransition = 1
 		
-	
+		//getPlaceInfoById()
 		
-		self.performSegue(withIdentifier: "viewplace", sender: self)
-
+		DispatchQueue.main.async {
+			self.performSegue(withIdentifier: "viewplace", sender: self)
+			
+		}
 		
 		
 	}
@@ -149,7 +151,7 @@ class OffersIndividualVC: UIViewController {
 				
 				
 				let json = JSON(data: data!)
-				print(json)
+				print("hahaha ksa \(json)")
 				let index = 0
 		
 
@@ -158,15 +160,14 @@ class OffersIndividualVC: UIViewController {
 				placeTransitionArray.placeId = json["response"]["data"][index]["id"].string!
 				placeTransitionArray.placeName = json["response"]["data"][index]["name"].string!
 				placeTransitionArray.placeType = json["response"]["data"][index]["type"].string!
-				let lat = json["response"]["data"][index]["latitude"].string!
-				let long = json["response"]["data"][index]["longitude"].string!
+				placeTransitionArray.latFinal = json["response"]["data"][index]["latitude"].string!
+				placeTransitionArray.longFinal = json["response"]["data"][index]["longitude"].string!
 				placeTransitionArray.phoneNumber = json["response"]["data"][index]["phone"].string!
 				placeTransitionArray.placeRating = json["response"]["data"][index]["rating"].string!
 				placeTransitionArray.placeDescription = json["response"]["data"][index]["description"].string!
 				placeTransitionArray.placeAddress = json["response"]["data"][index]["address"].string!
 				placeTransitionArray.mapURL = json["response"]["data"][index]["maps_url"].string!
 				placeTransitionArray.placeType = json["response"]["data"][index]["type"].string!
-				
 				
 //				
 //				if self.purchaseOrContactValue == 0 {
@@ -190,8 +191,8 @@ class OffersIndividualVC: UIViewController {
 				var photoLinkArray = placeTransitionArray.photoLink.characters.split{$0 == ","}.map(String.init)
 				if (photoLinkArray.count) > 0 {
 					
-					placeTransitionArray.placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/gurgaon/\(placeTransitionArray.placeId ?? "")/\(photoLinkArray[0] ).png")!
-					
+					placeTransitionArray.placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/DelhiNCR/\(placeTransitionArray.placeId ?? "")/\(photoLinkArray[0] ).png")!
+					print("htrnvm \(placeTransitionArray.placeFirstImageUrl)")
 //MARK:- set the place image
 					
 					self.offerPlaceLogo.kf.setImage(with: placeTransitionArray.placeFirstImageUrl)
@@ -220,8 +221,8 @@ class OffersIndividualVC: UIViewController {
 				
 				
 				
-				if let d = Float(lat) {
-					if let e = Float(long) {
+				if let d = Float(placeTransitionArray.latFinal) {
+					if let e = Float(placeTransitionArray.longFinal) {
 						let coordinate1 = CLLocation(latitude: CLLocationDegrees(d),longitude: CLLocationDegrees(e))
 						let coordinate2 = CLLocation(latitude: userLatitude,longitude: userLongitude)
 						let distanceInMetres = coordinate1.distance(from: coordinate2)
@@ -241,11 +242,15 @@ class OffersIndividualVC: UIViewController {
 				}
 		
 				
-		  }
+				
+			
+			}
 			
 		}
 		
 		task2.resume()
+		
+		
 	}
 	
 	
@@ -341,6 +346,8 @@ class OffersIndividualVC: UIViewController {
 		showPlace.photoLink = placeTransitionArray.photoLink
 		showPlace.mainUrl = placeTransitionArray.placeFirstImageUrl
 		showPlace.secondaryUrl = placeTransitionArray.placeSecondImageUrl
+		showPlace.lat = placeTransitionArray.latFinal
+		showPlace.long = placeTransitionArray.longFinal
 		
 		
 		

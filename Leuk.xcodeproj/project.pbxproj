@@ -25,6 +25,7 @@
 		28248B301EA051C400BEC756 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28248B2F1EA051C400BEC756 /* Constants.swift */; };
 		282A9B651EA4F11D00FE84BF /* ASHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A9B641EA4F11D00FE84BF /* ASHorizontalScrollView.swift */; };
 		28352E841EF14F8B008877ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28352E831EF14F8B008877ED /* GoogleService-Info.plist */; };
+		28352E861EF424A9008877ED /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28352E851EF424A9008877ED /* Reachability.swift */; };
 		28376F9D1EC07A7F005B5792 /* OrderAdvance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28376F9C1EC07A7F005B5792 /* OrderAdvance.swift */; };
 		28376FA11EC0958B005B5792 /* OrderAdvanceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28376FA01EC0958B005B5792 /* OrderAdvanceTVCell.swift */; };
 		2837CE461E8BBECA000AF281 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837CE451E8BBECA000AF281 /* AppDelegate.swift */; };
@@ -107,6 +108,7 @@
 		28248B2F1EA051C400BEC756 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		282A9B641EA4F11D00FE84BF /* ASHorizontalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASHorizontalScrollView.swift; sourceTree = "<group>"; };
 		28352E831EF14F8B008877ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		28352E851EF424A9008877ED /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		28376F9C1EC07A7F005B5792 /* OrderAdvance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderAdvance.swift; sourceTree = "<group>"; };
 		28376FA01EC0958B005B5792 /* OrderAdvanceTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderAdvanceTVCell.swift; sourceTree = "<group>"; };
 		2837CE421E8BBECA000AF281 /* Leuk_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leuk_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,6 +332,7 @@
 				28EB90A31EA33B62004BBB61 /* RevealViewCotroller */,
 				28FC33621E9F832A00F4A813 /* Leuk_iOS-Bridging-Header.h */,
 				2837CE541E8BBECA000AF281 /* Info.plist */,
+				28352E851EF424A9008877ED /* Reachability.swift */,
 			);
 			name = Supporting;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				28F20F3C1EB4C1E700ED8194 /* InsiderConstants.swift in Sources */,
 				28FC33701E9FAB6F00F4A813 /* MenuTableVCell.swift in Sources */,
 				28376F9D1EC07A7F005B5792 /* OrderAdvance.swift in Sources */,
+				28352E861EF424A9008877ED /* Reachability.swift in Sources */,
 				28FC336E1E9FAB4F00F4A813 /* MenuTableVC.swift in Sources */,
 				28F20F441EB5F20900ED8194 /* ShopMenuTVCell.swift in Sources */,
 				28199A5A1EBF1583003CD7C0 /* OffersIndividualVC.swift in Sources */,

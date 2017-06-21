@@ -121,25 +121,78 @@ class MenuTableVC: UITableViewController {
 			
 		case 1:
 			print("messages")
+			
+			
 			self.revealViewController().revealToggle(animated: true)
-			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
+
+			
+			let alertController = UIAlertController(title: "Coming Soon", message: "Work Under Progress", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				  (result : UIAlertAction) -> Void in
+				    print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+
+
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 2:
 			print("notifications")
 			self.revealViewController().revealToggle(animated: true)
-			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
+			
+			let alertController = UIAlertController(title: "Coming Soon", message: "Work Under Progress", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 3:
 			print("bookmarks")
 			self.revealViewController().revealToggle(animated: true)
-			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
+			
+			let alertController = UIAlertController(title: "Coming Soon", message: "Work Under Progress", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 4:
 			print("discover")
 			self.revealViewController().revealToggle(animated: true)
 			//MARK:- todo
 			//self.performSegue(withIdentifier: "discovernotify", sender: self)
-			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
+			
+			
+			let alertController = UIAlertController(title: "Coming Soon", message: "Work Under Progress", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 			
 			
@@ -159,13 +212,41 @@ class MenuTableVC: UITableViewController {
 		case 5:
 			print("credits")
 			self.revealViewController().revealToggle(animated: true)
-			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
+			
+			
+			
+			let alertController = UIAlertController(title: "Coming Soon", message: "Work Under Progress", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 			
 		case 6:
 			print("report")
 			
 			self.revealViewController().revealToggle(animated: true)
-			UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
+			
+			
+			let alertController = UIAlertController(title: "Coming Soon", message: "Work Under Progress", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			
+			//UIAlertView.init(title: "Coming Soon", message: "Work Under Progress", delegate: self, cancelButtonTitle: "OK").show()
 
 		case 7:
 			print("logout")

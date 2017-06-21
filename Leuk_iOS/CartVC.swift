@@ -55,7 +55,19 @@ class CartVC: UIViewController , UITableViewDelegate, UITableViewDataSource {
 	func checkOut1(_ sender:UITapGestureRecognizer){
 		
 		if subTotalValue1 < Int(cartValues[0].minimumSpending)! {
-			UIAlertView.init(title: "Oh Snap!", message: "Minimum order Price is \(cartValues[0].minimumSpending!)", delegate: self, cancelButtonTitle: "OK").show()
+			
+			
+			let alertController = UIAlertController(title: "Oops!!!", message: "Minimum order Price is  \(cartValues[0].minimumSpending!)", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+			
+			
+			//UIAlertView.init(title: "Oh Snap!", message: "Minimum order Price is \(cartValues[0].minimumSpending!)", delegate: self, cancelButtonTitle: "OK").show()
 			
 		}else{
 			self.performSegue(withIdentifier: "ConfirmOrderVC", sender: self)

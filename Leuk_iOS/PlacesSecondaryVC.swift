@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PlacesSecondaryVC: UIViewController {
 	
@@ -25,6 +26,8 @@ class PlacesSecondaryVC: UIViewController {
 	var photoLink: String!
 	var mainUrl: URL!
 	var secondaryUrl: URL!
+	var lat: String!
+	var long : String!
 	
 	
 	var transitionedId: String!
@@ -51,7 +54,6 @@ class PlacesSecondaryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-	
 	if offerToPlaceTransition == 0{
 		insertValues()
 	}else if offerToPlaceTransition == 1 {
@@ -72,7 +74,14 @@ class PlacesSecondaryVC: UIViewController {
 		offerToPlaceTransition = 0
 	}
 	
+	
     }
+	override func viewDidAppear(_ animated: Bool) {
+		
+		
+		
+		//insertValues()
+	}
 	
 	func haltForaWhile(){
 		
@@ -99,7 +108,8 @@ class PlacesSecondaryVC: UIViewController {
 	 self.placeAddress.text = address
 	 self.placeDescription.text = placeDescriptionValue
 		
-	 self.placeDistance.text = distance
+	 self.placeDistance.text = computeDistance(lat, longitude: long)
+		
 	 self.placeDistance.text?.append(" away from your location")
 	 self.placeRating.text = rating
 	 self.placeType.text = placeTypeValue
@@ -116,6 +126,39 @@ class PlacesSecondaryVC: UIViewController {
 
 	}
 	
+	func computeDistance(_ lati: String,longitude longi: String)-> String{
+		
+		var distance: String!
+		
+		if let d = Float(lati) {
+			if let e = Float(longi) {
+				let coordinate1 = CLLocation(latitude: CLLocationDegrees(d),longitude: CLLocationDegrees(e))
+				let coordinate2 = CLLocation(latitude: userLatitude,longitude: userLongitude)
+				let distanceInMetres = coordinate1.distance(from: coordinate2)
+				
+				var V = Float(distanceInMetres)
+				if(distanceInMetres <= 1000){
+					
+					
+					
+					distance = "\(V)"+" metres"
+				}else {
+					var vOne : Int!
+					 vOne = Int(V / 100)
+					V = Float( vOne ) / 10
+					distance = "\(V)"+" KM"
+				}
+				
+				
+				
+			}
+		}
+		
+		
+		
+		
+		return distance
+	}
 	
 
 	

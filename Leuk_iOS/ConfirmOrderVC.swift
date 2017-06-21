@@ -246,11 +246,37 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 	//MARK:- Razorpay delegates
 	
 	func onPaymentSuccess(_ payment_id: String) {
-		UIAlertView.init(title: "Payment Successful", message: payment_id, delegate: self, cancelButtonTitle: "OK").show()
+		
+		
+		let alertController = UIAlertController(title: "Payment Successful", message: payment_id, preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+		
+		let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+			(result : UIAlertAction) -> Void in
+			//print("OK")
+		}
+		alertController.addAction(okAction)
+		self.present(alertController, animated: true, completion: nil)
+
+		
+		
+		//UIAlertView.init(title: "Payment Successful", message: payment_id, delegate: self, cancelButtonTitle: "OK").show()
 	}
 	
 	func onPaymentError(_ code: Int32, description str: String) {
-		UIAlertView.init(title: "Error", message: str, delegate: self, cancelButtonTitle: "OK").show()
+		
+		
+		let alertController = UIAlertController(title: "Payment Error", message: str, preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+		
+		let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+			(result : UIAlertAction) -> Void in
+			//print("OK")
+		}
+		alertController.addAction(okAction)
+		self.present(alertController, animated: true, completion: nil)
+		
+		
+		
+		//UIAlertView.init(title: "Error", message: str, delegate: self, cancelButtonTitle: "OK").show()
 	}
 	
 
@@ -462,7 +488,25 @@ class ConfirmOrderVC: UIViewController, BEMCheckBoxDelegate , UITextFieldDelegat
 				
 				print("order placed")
                 DispatchQueue.main.async {
-                    				UIAlertView.init(title: "Order SuccessFul", message: "your order has been successfully placed", delegate: self, cancelButtonTitle: "DONE").show()
+			
+			
+			let alertController = UIAlertController(title: "Order SuccessFul", message: "your order has been successfully placed", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+			
+			
+			
+			
+                    			//	UIAlertView.init(title: "Order SuccessFul", message: "your order has been successfully placed", delegate: self, cancelButtonTitle: "DONE").show()
+			
+			
+			//var alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
+
                 }
                 
 			//	UIAlertView.init(title: "Order SuccessFul", message: "your order has been successfully placed", delegate: self, cancelButtonTitle: "DONE").show()

@@ -198,6 +198,14 @@ extension NSDate {
 	
 }
 
+extension UIView {
+	func setRecursiveUserInteraction(_ value: Bool) {
+		isUserInteractionEnabled = value
+		for view: UIView in subviews {
+			view.setRecursiveUserInteraction(value)
+		}
+	}
+}
 
 
 

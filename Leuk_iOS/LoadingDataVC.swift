@@ -32,7 +32,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	
 	//MARK:- User Location
 
-	
+	removeAllValue()
+
 	isAuthorizedtoGetUserLocation()
 	
 	locationManager.delegate = self;
@@ -51,18 +52,20 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	
 	countOfPagesForFirstPage = 0
 
-	
-	firstpageNewsApi()
 	profileApi()
+
+	firstpageNewsApi()
 	
 	getApi()
 	getEventsValue()
 
-	getPlacesValues()
-	
+	getTotalPageCount()
 	
 	
     }
+	
+	
+	// MARK:- Location
 	
 	
 	func isAuthorizedtoGetUserLocation() {
@@ -71,18 +74,67 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 			locationManager.requestWhenInUseAuthorization()
 		}
 	}
-
+	
+	
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		if status == .authorizedWhenInUse {
-			print("User allowed us to access location")
-			//do whatever init activities here.
+		
+		let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+		
+		userLatitude = 28.4595
+		userLongitude = 77.0266
+		
+		switch status {
+		case .notDetermined:
+			
+			
+			break
+		// Do stuff
+		case .authorizedAlways:
+			
+			
+			break
+		// Do stuff
+		case .authorizedWhenInUse:
 			
 			let locValue:CLLocationCoordinate2D = manager.location!.coordinate
 			userLatitude = locValue.latitude
 			userLongitude = locValue.longitude
 			print("locations = \(locValue.latitude) \(locValue.longitude)")
+			
+			break
+			
+		case .restricted:
+			
+			
+			
+			
+			break
+		// Do stuff
+		case .denied:
+			
+			print("Denied")
+			
+			
+			
+			
+			break
+			// Do stuff
 		}
+		
+		
+		
+		
+		//		if status == .authorizedWhenInUse {
+		//			print("User allowed us to access location")
+		//			//do whatever init activities here.
+		//
+		//			let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+		//			userLatitude = locValue.latitude
+		//			userLongitude = locValue.longitude
+		//			print("locations = \(locValue.latitude) \(locValue.longitude)")
+		//		}
 	}
+	
 	
 	
 
@@ -127,6 +179,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 			}
 				
 			else {
+				firstPageNews.removeAll()
+
 				
 				
 				var json = JSON(data: data!)
@@ -210,7 +264,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 				profileImages = json["response"]["data"]["profile_img"].string!
 				totalCredits = json["response"]["data"]["total_credits"].string!
 				remainingCredits = json["response"]["data"]["remaining_credits"].string!
-				//print(Name)
+				print("area \(area)")
 			}
 		}
 		
@@ -219,16 +273,70 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 		
 	}
 	
-	func getPlacesValues(){
+	
+	
+	
+	func getTotalPageCount(){
+		
+		
+		
+		//MARK:- total places count
+		
+		
+		
+		
+		var totalPageNumber = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlacesPage")!)
+		totalPageNumber.httpMethod = "POST"
+		let postString5="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
+		
+		totalPageNumber.httpBody = postString5.data(using: .utf8)
+		
+		let task5 = URLSession.shared.dataTask(with: totalPageNumber) { data, response, error in
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				//print("response = \(response)")
+			}
+				
+			else {
+				
+				var json = JSON(data: data!)
+				//print("hsuhu \(json)")
+				//print()
+				let countOfPlaces =  json["response"]["data"][0]["total_page_count"].int!
+				
+				//print("total \(countOfPlaces)")
+				
+				self.getPlacesValues(countOfPlaces)
+
+				
+				
+
+				
+			}
+		}
+		task5.resume()
+		
+
+	}
+	
+	
+	
+	
+	func getPlacesValues(_ count: Int){
 		
 		
 		
 		// MARK:- places api
+
 		
 		
-			var places = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlaces&pagecount=1")!)
+		for values in 1...count{
+			
+			//print("HEREEEEEEEE")
+		
+			var places = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getPlaces")!)
 			places.httpMethod = "POST"
-			let postString3="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
+			let postString3="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&page=\(values)"
 			
 			
 			places.httpBody = postString3.data(using: .utf8)
@@ -245,7 +353,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 					var json = JSON(data: data!)
 					let numberOfPlaces =  json["response"]["data"].count
 					//print(" haps \(json["response"]["data"])")
-					print(numberOfPlaces)
+					//print("ha \(numberOfPlaces)")
 					if numberOfPlaces > 0
 					{
 						for index in 0...numberOfPlaces-1 {
@@ -254,8 +362,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							placesValue.placeId = json["response"]["data"][index]["id"].string!
 							placesValue.placeName = json["response"]["data"][index]["name"].string!
 							placesValue.placeType = json["response"]["data"][index]["type"].string!
-							let lat = json["response"]["data"][index]["latitude"].string!
-							let long = json["response"]["data"][index]["longitude"].string!
+							placesValue.latFinal = json["response"]["data"][index]["latitude"].string!
+							placesValue.longFinal = json["response"]["data"][index]["longitude"].string!
 							placesValue.phoneNumber = json["response"]["data"][index]["phone"].string!
 							placesValue.placeRating = json["response"]["data"][index]["rating"].string!
 							placesValue.placeDescription = json["response"]["data"][index]["description"].string!
@@ -273,12 +381,14 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							
 						      var openingTimeFInal = openingTime.characters.split{$0 == ":"}.map(String.init)
 							var closingTimeFinal = closingTime.characters.split{$0 == ":"}.map(String.init)
+							if openingTimeFInal.count != 0 && closingTimeFinal.count != 0 {
 							
 							placesValue.openingTimeHour = openingTimeFInal[0]
-							placesValue.openingTimeMinute = openingTimeFInal[1]
 							
+							placesValue.openingTimeMinute = "00"
 							placesValue.closingTimeHour = closingTimeFinal[0]
-							placesValue.closingTimeMinute = closingTimeFinal[0]
+							placesValue.closingTimeMinute = "00"
+							}
 							
 							placesValue.service = json["response"]["data"][index]["service"].string!
 							placesValue.orderType = json["response"]["data"][index]["order_type"].string!
@@ -295,28 +405,28 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							
 					
 
-							var photoLinkArray = placesValue.photoLink.characters.split{$0 == ","}.map(String.init)
-							if (photoLinkArray.count) > 0 {
-								
-								placesValue.placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/gurgaon/\(placesValue.placeId ?? "")/\(photoLinkArray[0] ).png")!
-								
-								
-								
-								
-							}
-							if (photoLinkArray.count) > 1 {
-								
-								placesValue.placeSecondImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/gurgaon/\(placesValue.placeId ?? "")/\(photoLinkArray[1] ).png")!
-								
-								
-								
-								
-							}
+//							var photoLinkArray = placesValue.photoLink.characters.split{$0 == ","}.map(String.init)
+//							if (photoLinkArray.count) > 0 {
+//								
+//								placesValue.placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/DelhiNCR/\(placesValue.placeId ?? "")/\(photoLinkArray[0] ).png")!
+//								
+//								
+//								
+//								
+//							}
+//							if (photoLinkArray.count) > 1 {
+//								
+//								placesValue.placeSecondImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/Delhi NCR/\(placesValue.placeId ?? "")/\(photoLinkArray[1] ).png")!
+//								
+//								
+//								
+//								
+//							}
 
 							
 							
 							
-				//
+				//MARK:- location Places
 							
 							
 							
@@ -325,25 +435,25 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							
 							
 							
-							if let d = Float(lat) {
-								if let e = Float(long) {
-									let coordinate1 = CLLocation(latitude: CLLocationDegrees(d),longitude: CLLocationDegrees(e))
-									let coordinate2 = CLLocation(latitude: userLatitude,longitude: userLongitude)
-									let distanceInMetres = coordinate1.distance(from: coordinate2)
-									
-									var V = Float(distanceInMetres)
-									if(distanceInMetres <= 1000){
-										
-										placesValue.placeDistance = "\(V)"+" metres"
-									}else {
-										V /= 1000
-										placesValue.placeDistance = "\(V)"+" KM"
-									}
-									
-									
-									
-								}
-							}
+//							if let d = Float(lat) {
+//								if let e = Float(long) {
+//									let coordinate1 = CLLocation(latitude: CLLocationDegrees(d),longitude: CLLocationDegrees(e))
+//									let coordinate2 = CLLocation(latitude: userLatitude,longitude: userLongitude)
+//									let distanceInMetres = coordinate1.distance(from: coordinate2)
+//									
+//									var V = Float(distanceInMetres)
+//									if(distanceInMetres <= 1000){
+//										
+//										placesValue.placeDistance = "\(V)"+" metres"
+//									}else {
+//										V /= 1000
+//										placesValue.placeDistance = "\(V)"+" KM"
+//									}
+//									
+//									
+//									
+//								}
+//							}
 						
 							
 // MARK:- Order Now
@@ -460,7 +570,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 			}
 			
 			task4.resume()
-			
+		}
+		
 		}
 		
 		
@@ -698,36 +809,6 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 		task3.resume()
 		
 		
-		// MARK:- total places count
-		
-		
-//		
-//		
-//		var totalPageNumber = URLRequest(url: URL(string: "https://leuk.xyz/leukapi12345/index_v21.php?method=getPlacesPage")!)
-//		totalPageNumber.httpMethod = "POST"
-//		let postString5="key=leuk12&secret=gammayz&sessionid=5bec8d79fad5448d59c4de4c93ad7e8b&token=ff478e0328eb7186dad1a42740375c0f82b80997b79390a177252bc7b21aa405"
-//		
-//		totalPageNumber.httpBody = postString5.data(using: .utf8)
-//		
-//		let task5 = URLSession.shared.dataTask(with: totalPageNumber) { data, response, error in
-//			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-//				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//				//print("response = \(response)")
-//			}
-//				
-//			else {
-//				//let responseString = String(data: data!, encoding: .utf8)
-//				//print("responseString = \(responseString!)")
-//				//print("GET TOTAL COUNT OF PAGES tab over --------------------")
-//				var json = JSON(data: data!)
-//				self.countOfPlaces =  json["response"]["data"][0]["total_page_count"].string!
-//				//print(self.countOfPlaces)
-//				//let a:Int? = countOfPlaces.
-//
-//		      }
-//		}
-//		task5.resume()
-		
 		
 		
 		
@@ -794,10 +875,19 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 
 	override func viewDidAppear(_ animated: Bool) {
 		
+		
+		//restaurantOrder.removeAll()
+		
+		checkConnection()
+		
+		
 		getSessionAndToken()
 
-		update()
+		//update()
 		
+		
+		_ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: false);
+
 		
 		
 		
@@ -822,7 +912,78 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 		
 		
 	}
+	func checkConnection(){
+		
+		if Reachability.isConnectedToNetwork() == true
+		{
+			print("Internet Connection Available!")
+		}
+		else
+		{
+			
+			let alertController = UIAlertController(title: "Internet Connection Not Available", message: "Please connect to Internet", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+
+			
+			
+			//UIAlertView.init(title: "Internet Connection Not Available", message: "Please connect to Internet", delegate: self, cancelButtonTitle: "OK").show()
+			
+			print("Internet Connection not Available!")
+		}
+	}
 	
+	
+	
+	func removeAllValue(){
+		
+		
+		restaurantValues.removeAll()
+		storesValues.removeAll()
+		pubsValues.removeAll()
+		EntertainmentValues.removeAll()
+	       cafeValues.removeAll()
+		MedicalValues.removeAll()
+		
+		
+		
+		
+		restaurantOrder.removeAll()
+		GroceriesOrder.removeAll()
+		MedicineOrder.removeAll()
+		staitionaryOrder.removeAll()
+		
+		
+		
+		pageOneValues.removeAll()
+		pageFourValues.removeAll()
+		pageTwoValues.removeAll()
+		pageThreeValues.removeAll()
+		
+		
+		
+		foodValues.removeAll()
+		socialValues.removeAll()
+		startupValues.removeAll()
+		sportsValues.removeAll()
+		meetupValues.removeAll()
+		partyValues.removeAll()
+		
+		
+		homeOffersBars.removeAll()
+		homeOffersF_B.removeAll()
+		homeOfferesApparels.removeAll()
+		homeOffersHappy.removeAll()
+		homeOffersSports.removeAll()
+		homeOffersSpa.removeAll()
+		
+		
+	}
 	
 	
 	func getSessionAndToken(){

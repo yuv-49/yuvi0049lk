@@ -66,7 +66,18 @@ class ItemsTVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 			self.performSegue(withIdentifier: "CartVC", sender: self)
 		}else{
 			
-			UIAlertView.init(title: "Cart Empty", message: "Add Something to Cart", delegate: self, cancelButtonTitle: "OK").show()
+			let alertController = UIAlertController(title: "Cart Empty", message: "Add Something to Cart", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+			
+			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+				(result : UIAlertAction) -> Void in
+				//print("OK")
+			}
+			alertController.addAction(okAction)
+			self.present(alertController, animated: true, completion: nil)
+			
+			
+			
+			//UIAlertView.init(title: "Cart Empty", message: "Add Something to Cart", delegate: self, cancelButtonTitle: "OK").show()
 		}
 
 		

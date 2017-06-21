@@ -9,12 +9,14 @@
 import UIKit
 import SwiftKeychainWrapper
 import SwiftyJSON
-//import CoreLocation
+import CoreLocation
 
 class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	
 	
-	
+	let locationManager = CLLocationManager()
+
+	@IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
 	
 	
 	
@@ -46,6 +48,7 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	  GIDSignIn.sharedInstance().delegate = self
 	   password = "password"
 	
+	loadingSpinner.isHidden = true
 	
 	
 	
@@ -99,6 +102,11 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 		if(error != nil){
 			print("Signin error: \(error)")
 		}else {
+			
+			
+			loadingSpinner.isHidden = false
+			loadingSpinner.startAnimating()
+			
 			print("the user signed in as \(user)")
 			print(user.profile.email)
 			print(user.profile.name)
@@ -145,8 +153,8 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	//MARK:- keychain
 	
 	func completeSignIn(_ id: String){
-		_ = KeychainWrapper.defaultKeychainWrapper.set(id, forKey: KEY_UID_FOR_KEYCHAIN_FROM_GOOGLE)
-		print("YS: data saved to keychain")
+		//_ = KeychainWrapper.defaultKeychainWrapper.set(id, forKey: KEY_UID_FOR_KEYCHAIN_FROM_GOOGLE)
+		//print("YS: data saved to keychain")
 		apiCallForLogin()
 		
 	}
@@ -207,8 +215,10 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 						
 						SESSION_ID = sessionIdV
 						TOKEN_ID_FROM_LEUK = tokenV
-						
+						print("Hapssss")
+						self.isAuthorizedtoGetUserLocation()
 						self.performSegue(withIdentifier: "sidese", sender: nil)
+
 
 					}
 					
@@ -236,8 +246,75 @@ class SignInVC: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
 	}
 	
 	
+	// MARK:- Location
 	
 	
+	func isAuthorizedtoGetUserLocation() {
+		
+		if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
+			locationManager.requestWhenInUseAuthorization()
+		}
+	}
+	
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		
+		let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+
+		userLatitude = 28.4595
+		userLongitude = 77.0266
+		
+		switch status {
+			 case .notDetermined:
+			
+				
+				    break
+			 // Do stuff
+			 case .authorizedAlways:
+			
+			
+				    break
+			 // Do stuff
+			 case .authorizedWhenInUse:
+			
+				let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+				userLatitude = locValue.latitude
+				userLongitude = locValue.longitude
+				print("locations = \(locValue.latitude) \(locValue.longitude)")
+			
+				break
+
+			 case .restricted:
+			
+			
+			
+			
+				    break
+			 // Do stuff
+			 case .denied:
+			
+				  print("Denied")
+				
+				
+			
+			
+				    break
+				 // Do stuff
+		}
+
+
+		
+
+//		if status == .authorizedWhenInUse {
+//			print("User allowed us to access location")
+//			//do whatever init activities here.
+//			
+//			let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+//			userLatitude = locValue.latitude
+//			userLongitude = locValue.longitude
+//			print("locations = \(locValue.latitude) \(locValue.longitude)")
+//		}
+	}
 	
 	
 	
