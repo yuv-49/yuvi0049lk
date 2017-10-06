@@ -290,7 +290,20 @@ class EventsIndividualVC: UIViewController {
 		
 		if receiverEventValues.eventWebsite != "" {
 			
-			UIApplication.shared.openURL(NSURL(string: receiverEventValues.eventWebsite)! as URL)
+			
+			if #available(iOS 10.0, *) {
+				UIApplication.shared.open(NSURL(string: receiverEventValues.eventWebsite)! as URL, options: [:], completionHandler: nil)
+			} else {
+				UIApplication.shared.openURL(NSURL(string: receiverEventValues.eventWebsite)! as URL)
+			}
+			
+			
+			
+			
+			
+			
+			
+			//UIApplication.shared.openURL(NSURL(string: receiverEventValues.eventWebsite)! as URL)
 
 		}else{
 			// call segue

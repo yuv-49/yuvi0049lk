@@ -10,7 +10,7 @@ target 'Leuk_iOS' do
 	
   # Pods for Leuk_iOS
 
-	
+	pod 'Firebase'	
 	pod 'SwiftKeychainWrapper'
 	pod 'Google/SignIn'
 	pod 'PagingMenuController'

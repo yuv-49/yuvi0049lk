@@ -126,6 +126,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 	
 	
 	
+	
+	
+	
+	
 	//MARK:- Google Signup
 	
 	func application(_ application: UIApplication,
@@ -208,7 +212,8 @@ extension UIView {
 }
 
 
-
+let ad = UIApplication.shared.delegate as! AppDelegate
+let context = ad.persistentContainer.viewContext
 
 
 

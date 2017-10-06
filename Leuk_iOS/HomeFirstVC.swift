@@ -556,7 +556,22 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 
 		if let link = linkToCall {
 			
-			UIApplication.shared.openURL(NSURL(string: link)! as URL)
+			if #available(iOS 10.0, *) {
+				  UIApplication.shared.open(NSURL(string: link)! as URL, options: [:], completionHandler: nil)
+			} else {
+				  UIApplication.shared.openURL(NSURL(string: link)! as URL)
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//UIApplication.shared.open(NSURL(string: link)! as URL, options: [:], completionHandler: nil)
 			
 		}
 		
@@ -564,6 +579,15 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 	}
 	
+	
+	
+	@IBAction func cancelBtnTapped(_ sender: Any) {
+		
+		
+		locationPicker.isHidden = true
+
+		
+	}
 	
 	
 	

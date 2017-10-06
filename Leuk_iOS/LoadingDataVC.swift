@@ -11,7 +11,7 @@ import CoreLocation
 import SwiftyJSON
 import Kingfisher
 
-import CoreLocation
+//import CoreLocation
 
 
 class LoadingDataVC: UIViewController, CLLocationManagerDelegate {

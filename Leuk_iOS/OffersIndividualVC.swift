@@ -35,7 +35,7 @@ class OffersIndividualVC: UIViewController {
 	
 
 	
-	print("\(homeOfferReceived.offerBy)")
+	//print("\(homeOfferReceived.offerBy)")
 	
 	offerPlaceName.text = homeOfferReceived.offerBy
 	offerTitle.text = homeOfferReceived.offerTitle
@@ -216,8 +216,8 @@ class OffersIndividualVC: UIViewController {
 				
 				
 				
-				userLatitude = 28.4595
-				userLongitude = 77.0266
+//				userLatitude = 28.4595
+//				userLongitude = 77.0266
 				
 				
 				
