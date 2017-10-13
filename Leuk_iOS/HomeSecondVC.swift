@@ -221,10 +221,6 @@ class HomeSecondVC: UIViewController , UICollectionViewDataSource, UICollectionV
 		
 		carouselV.reloadData()
 		
-		
-		
-		
-		
 	}
 	
 	

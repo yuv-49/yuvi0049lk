@@ -21,6 +21,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 //	var count: Int!
 	
 	
+	
 	let locationManager = CLLocationManager()
 
 	
@@ -31,6 +32,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 
 	
 	//MARK:- User Location
+	
+	getCurrentTime()
 
 	removeAllValue()
 
@@ -40,6 +43,9 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	locationManager.desiredAccuracy = kCLLocationAccuracyBest
 	locationManager.requestAlwaysAuthorization()
 	locationManager.startUpdatingLocation()
+	
+	
+	
 
 	
 //	if CLLocationManager.locationServicesEnabled() {
@@ -54,12 +60,14 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 
 	profileApi()
 
-	firstpageNewsApi()
+	//////////////////firstpageNewsApi()
 	
 	getApi()
 	getEventsValue()
 
 	getTotalPageCount()
+	getHomeBanners()
+	getFeed()
 	
 	
     }
@@ -157,6 +165,206 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 //			}
 //		}
 //	}
+	
+	//MARK:- time function
+	
+	
+	func getCurrentTime(){
+		
+		
+		
+		let date = Date()
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "HH:mm"
+		let string = dateFormatter.string(from: date as Date)
+		
+		
+		var photoLinkArray = string.characters.split{$0 == ":"}.map(String.init)
+		currentHour = photoLinkArray[0]
+		print("hahahsd \(currentHour)")
+		
+		
+	}
+	
+	
+	//MARK:- Feed values
+	
+	func getFeed(){
+		
+		var feedRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getFeed")!)
+		feedRequest.httpMethod = "POST"
+		let postStringForFeeds="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
+		print("\(postStringForFeeds)")
+		
+		
+		feedRequest.httpBody = postStringForFeeds.data(using: .utf8)
+		
+		let task2 = URLSession.shared.dataTask(with: feedRequest) { data, response, error in
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				//print("response = \(response)")
+			}
+				
+			else {
+				homeFeed.removeAll()
+				
+				
+				
+				var json = JSON(data: data!)
+				let numberOfEvents =  json["response"]["data"].count
+				countOfPagesForFirstPage = numberOfEvents
+				
+				if numberOfEvents > 0
+				{
+					for index in 0...numberOfEvents - 1 {
+						
+						let getFeedArray = Feeds()
+						getFeedArray.id = json["response"]["data"][index]["id"].string!
+						getFeedArray.title = json["response"]["data"][index]["title"].string!
+						getFeedArray.type = json["response"]["data"][index]["type"].string!
+						getFeedArray.tags = json["response"]["data"][index]["tags"].string!
+						getFeedArray.parameters = json["response"]["data"][index]["parameters"].string!
+						getFeedArray.gender = json["response"]["data"][index]["gender"].string!
+						getFeedArray.time = json["response"]["data"][index]["time"].string!
+						getFeedArray.day = json["response"]["data"][index]["day"].string!
+						getFeedArray.priority = json["response"]["data"][index]["priority"].string!
+						getFeedArray.status = json["response"]["data"][index]["status"].string!
+						
+						if currentHour < "11" {
+							if getFeedArray.time == "1" || getFeedArray.time == "6"{
+								homeFeed.append(getFeedArray)
+								print("ht \(getFeedArray.id)")
+							}
+						}else if currentHour > "11" && currentHour < "18" {
+							if getFeedArray.time == "2" || getFeedArray.time == "6"{
+								homeFeed.append(getFeedArray)
+								print("ht \(getFeedArray.id)")
+
+							}
+						}else if currentHour > "18" && currentHour < "21" {
+							if getFeedArray.time == "3" || getFeedArray.time == "6"{
+								homeFeed.append(getFeedArray)
+								print("ht \(getFeedArray.id)")
+
+							}
+						}else if currentHour > "21" && currentHour < "4" {
+							if getFeedArray.time == "4" {
+								homeFeed.append(getFeedArray)
+								print("ht \(getFeedArray.id)")
+
+							}
+						}else if currentHour > "23" && currentHour < "1" {
+							if getFeedArray.time == "5" {
+								homeFeed.append(getFeedArray)
+								print("ht \(getFeedArray.id)")
+
+							}
+						}
+						
+						
+						
+
+
+						
+						
+						
+						
+						
+						
+					}
+				}
+			}
+			
+			
+			
+		}
+		
+		
+		
+		task2.resume()
+		
+		
+		
+		
+		
+	}
+	
+	//MARK:- HomeBanners
+	
+	func getHomeBanners(){
+		
+		
+		
+		var bannerRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getHomeBanner")!)
+		bannerRequest.httpMethod = "POST"
+		let postStringForBanners="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
+		print("\(postStringForBanners)")
+		
+		
+		bannerRequest.httpBody = postStringForBanners.data(using: .utf8)
+		
+		let task2 = URLSession.shared.dataTask(with: bannerRequest) { data, response, error in
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				//print("response = \(response)")
+			}
+				
+			else {
+				homeBanners.removeAll()
+				
+				
+				
+				var json = JSON(data: data!)
+				let numberOfEvents =  json["response"]["data"].count
+				//print("Yhapy \(numberOfEvents)")
+				//DispatchQueue.main.async {
+				countOfPagesForFirstPage = numberOfEvents
+				//}
+				
+				
+				
+			//	print(numberOfEvents)
+				if numberOfEvents > 0
+				{
+					for index in 0...numberOfEvents - 1 {
+						
+						let getBannerArray = Banners()
+						getBannerArray.id = json["response"]["data"][index]["id"].string!
+						getBannerArray.image = json["response"]["data"][index]["image"].string!
+						getBannerArray.url = json["response"]["data"][index]["url"].string!
+						getBannerArray.type = json["response"]["data"][index]["type"].string!
+						getBannerArray.kind = json["response"]["data"][index]["kind"].string!
+						getBannerArray.keyParam = json["response"]["data"][index]["key_param"].string!
+						getBannerArray.displayDate = json["response"]["data"][index]["display_on_day"].string!
+						getBannerArray.location = json["response"]["data"][index]["location"].string!
+						getBannerArray.views = json["response"]["data"][index]["views"].string!
+						getBannerArray.status = json["response"]["data"][index]["status"].string!
+
+						
+						homeBanners.append(getBannerArray)
+						
+						
+						
+
+						
+						
+					}
+				}
+			}
+			
+			
+			
+		}
+		
+		
+		
+		task2.resume()
+		
+		
+		
+	}
+	
 	
 	func firstpageNewsApi(){
 		
@@ -405,23 +613,28 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 							
 					
 
-//							var photoLinkArray = placesValue.photoLink.characters.split{$0 == ","}.map(String.init)
+							var photoLinkArray = placesValue.photoLink.characters.split{$0 == ","}.map(String.init)
 //							if (photoLinkArray.count) > 0 {
-//								
+//
 //								placesValue.placeFirstImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/DelhiNCR/\(placesValue.placeId ?? "")/\(photoLinkArray[0] ).png")!
+//								print("Img \(placesValue.placeFirstImageUrl)")
+//
 //								
-//								
-//								
-//								
+//
+//
 //							}
 //							if (photoLinkArray.count) > 1 {
-//								
-//								placesValue.placeSecondImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/Delhi NCR/\(placesValue.placeId ?? "")/\(photoLinkArray[1] ).png")!
-//								
-//								
-//								
-//								
+//
+//								placesValue.placeSecondImageUrl =  URL(string: "https://leuk.xyz/leukapi12345/images/DelhiNCR/\(placesValue.placeId ?? "")/\(photoLinkArray[1] ).png")!
+//
+//								print("Img \(placesValue.placeFirstImageUrl)")
+//
+//
+//
+//
 //							}
+							
+							//print("Add \(valueForPlaces[indexPath.row].placeFirstImageUrl)")
 
 							
 							
@@ -516,14 +729,15 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 					}
 					else if (placesValue.placeType == "pubs") {
 						
+						
 						if placesValue.recommended == "1" {
-							
 							pageFourValues.append(placesValue)
 						}
 						
 						
 						if(self.checkValue(idValue: placesValue.placeId, arrayName: pubsValues)){
 							pubsValues.append(placesValue)
+
 						}
 					}
 					else if (placesValue.placeType == "entertainment") {
@@ -660,6 +874,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 						}else if eventValuesArray.eventCategory == "Food" {
 							foodValues.append(eventValuesArray)
 						}else if eventValuesArray.eventCategory == "Party" {
+							
 							partyValues.append(eventValuesArray)
 //						}else if eventValuesArray.eventCategory == "Comedy" {
 //							partyValues.append(eventValuesArray)
@@ -703,34 +918,6 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	
 	func getApi(){
 		
-//		var request1 = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=generateSession")!)
-//		request1.httpMethod = "POST"
-//		let postString =  "key=leuk12&secret=gammayz&google_auth_token_id=\(tokenIdFromGoogle!)"
-//		print("hello world \(postString)")
-//		request1.httpBody = postString.data(using: .utf8)
-//		
-//		let task1 = URLSession.shared.dataTask(with: request1) { data, response, error in
-//			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-//				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//				// print("response = \(response)")
-//			}
-//				
-//			else {
-//				//print("RFc")
-//				//let responseString = String(data: data!, encoding: .utf8)
-//				//print("responseString = \(responseString!)")
-//				
-//			 var json = JSON(data: data!)
-//			 sessionId = json["response"]["data"]["session"]["sessionid"].string!
-//			 tokenId = json["response"]["data"]["session"]["token"].string!
-//				// print("sess tok \(sessionId)             \(tokenId)")
-//				
-//				
-//			}
-//		}
-//		task1.resume()
-		
-		
 
 		
 		
@@ -757,9 +944,9 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 				
 		
 				var json = JSON(data: data!)
-				print("Yhapy \(json)")
+				
 				let numberOfPlaces =  json["response"]["data"].count
-				//print(numberOfPlaces)
+				print("ll \(numberOfPlaces)")
 				if numberOfPlaces > 0
 				{  for index in 0...numberOfPlaces-1 {
 					let offerValue = HomeOffers()
@@ -789,6 +976,8 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 					}else if (offerValue.offerCategory == "fnb") {
 						homeOffersF_B.append(offerValue)
 					}else if (offerValue.offerCategory == "Hpy Hrs") {
+						print("haufhd pubs")
+
 						homeOffersHappy.append(offerValue)
 					}else if (offerValue.offerCategory == "Sports") {
 						homeOffersSports.append(offerValue)

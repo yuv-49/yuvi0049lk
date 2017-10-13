@@ -41,7 +41,7 @@ var profileDetailArray = profileSignupMethod()
 
 
 var LEUK_URL = "https://leuk.xyz/leukapi12345/"
-var PHP_INDEX = "index_v22.php?"
+var PHP_INDEX = "index_v23.php?"
 
 
 

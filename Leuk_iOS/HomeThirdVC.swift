@@ -14,7 +14,7 @@ class HomeThirdVC: UIViewController {
 	// this will be for ask leuk protocol
 	
 	
-	@IBOutlet weak var lbl: UILabel!
+//	@IBOutlet weak var lbl: UILabel!
 	var indexValue: Int!
 	
 	var firstView = ["Order Now","Offers","Events","Places","Ask Leuk","Discover","Contests","Subscriptions","Profile"]
@@ -22,7 +22,7 @@ class HomeThirdVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-	 lbl.text =  "\(indexValue)"
+//	 lbl.text =  "\(indexValue)"
 	 setNavTitle()
 	 
         // Do any additional setup after loading the view.

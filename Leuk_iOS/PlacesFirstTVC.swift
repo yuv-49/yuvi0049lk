@@ -220,8 +220,9 @@ class PlacesFirstTVC: UITableViewController {
 
 	
 			TVcell.placeImage.kf.setImage(with: valueForPlaces[indexPath.row].placeFirstImageUrl)
+			print("Add \(valueForPlaces[indexPath.row].placeFirstImageUrl)")
 		} else {
-			print("Add the default image on places")
+			print("Add not found")
 		}
 		TVcell.placeDistance!.text = valueForPlaces[indexPath.row].placeDistance
 		
@@ -332,6 +333,7 @@ class PlacesFirstTVC: UITableViewController {
 		
 		
 		placesSecondaryVC.name = place1.placeName
+		print("HSyt \(placesSecondaryVC.name)")
 		placesSecondaryVC.address = place1.placeAddress
 		placesSecondaryVC.placeDescriptionValue = place1.placeDescription
 		placesSecondaryVC.distance = place1.placeDistance

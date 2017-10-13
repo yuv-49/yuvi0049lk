@@ -12,17 +12,13 @@ import CoreLocation
 
 
 
-class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate ,iCarouselDelegate, iCarouselDataSource, UICollectionViewDelegateFlowLayout ,UIPickerViewDelegate, UIPickerViewDataSource{
+class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate ,iCarouselDelegate, iCarouselDataSource, UICollectionViewDelegateFlowLayout {
 	
 	
 	
 	
 	
-	@IBOutlet weak var currentLocation: UILabel!
-//	@IBOutlet weak var doneBtnTapped: UILabel!
 	
-	
-	@IBOutlet weak var locationPicker: UIPickerView!
 	
 	
 	let locationManager = CLLocationManager()
@@ -39,12 +35,12 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	var numberOfEvent: Int!
 	var valueForList: Int!
 	
-	var linkToCall : String!
+	//var linkToCall : String!
 	
 	var timerDel : Timer!
 	
 	
-	@IBOutlet weak var locationPopup: UIView!
+
 	
 	
 	@IBOutlet weak var open: UIBarButtonItem!
@@ -65,23 +61,16 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-	//	self.title = "LEUK"
-		
-		locationPopup.isHidden = true
-		
-		
-		
-		currentLocation.text = area
+
 		
 		self.setNavBarToTheView()
-		locationPicker.delegate = self
-		locationPicker.dataSource = self
+
 
 		open.target = self.revealViewController()
 		open.action = #selector(SWRevealViewController.revealToggle(_:))
 		
 		revealControllerToggle()
-		//count = 0
+		
 		
 		carouselView.type = .linear
 		carouselView.isPagingEnabled  = true
@@ -91,21 +80,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		isAuthorizedtoGetUserLocation()
 
 		
-		
-//		let gestureForLocation = UITapGestureRecognizer(target: self, action:  #selector (self.changeLoc (_:)))
-//		self.doneBtnTapped.addGestureRecognizer(gestureForLocation)
 
-		
-		//carouselView.autoscroll = 4.0
-		
-//		let rightButtonItem = UIBarButtonItem.init(
-//			title: "Title",
-//			style: .done,
-//			target: self,
-//			action: "rightButtonAction:",
-//			
-//		)
-		
 		
 
 		
@@ -198,94 +173,12 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		//		}
 	}
 	
-	
-	
-	
-	
-	func changeLoc(_ sender:UITapGestureRecognizer){
-		
-		self.locationPopup.isHidden = true
-	//	print("here we are")
-		
-		changeLocApiCall()
-		
-		
-		//	self.performSegue(withIdentifier: "restartAgain", sender: nil)
-		
-		
-	}
-	
-	func changeLocApiCall(){
-		
-		if locationVal == nil {
-			
-			locationVal = pickerDataSource[0]
-
-		}
-		
-		
-		//var value: Int!
-		var locationUpdate = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=editUserDetails")!)
-		locationUpdate.httpMethod = "POST"
-		let postString1="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)&location=\(locationVal!)"
-		print("happy sinn \(postString1)")
-		
-		
-		locationUpdate.httpBody = postString1.data(using: .utf8)
-		
-		let task2 = URLSession.shared.dataTask(with: locationUpdate) { data, response, error in
-			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				//print("response = \(response)")
-			}
-				
-			else {
-				//print("RFcss")
-				//let responseString = String(data: data!, encoding: .utf8)
-				//print("responseString = \(responseString!)")
-				
-				
-
-//				var json = JSON(data: data!)
-//				print("HSA \(json)")
-				
-				
-				
-				
-//				DispatchQueue.main.async {
-//					
-//					value = 1
-//					
-//					
-//				}
-				
-				
-				print("successful")
-				
-				
-				
-				
-			}
-			
-		}
-		
-		task2.resume()
-		
-
-		self.performSegue(withIdentifier: "restartAgain", sender: nil)
-		
-		
-		
-		
-	}
-	
 	func setNavBarToTheView() {
 		self.navBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
 		self.navBar.backgroundColor = (UIColor.white)
 		self.navBar.titleTextAttributes =  [NSForegroundColorAttributeName: UIColor.leukRed()]
 
-		//self.navBar.barTintColor = UIColor.leukRed()
-		//self.navBar.isTranslucent = false
+	
 		self.navBar.isOpaque = true
 		self.view.addSubview(navBar)
 	}
@@ -302,103 +195,20 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	}
 	
 	
-	
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
-	
-	
-	
-	//MARK:- Picker delegates
-	
-	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		return 1
-	}
- 
-	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		
-
-		if pickerDataSource.count == 0 {
-			Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(pickerCall), userInfo: nil, repeats: false)
-		}
-		return pickerDataSource.count
-	}
- 
-	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		return pickerDataSource[row]
-	}
-	
-	
-	
-	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-	{
-
-		if(row == 0)
-		{
-			locationVal = pickerDataSource[row]
-			
-		}
-		else if(row == 1)
-		{
-			print(pickerDataSource[row])
-			locationVal =  pickerDataSource[row]
-			
-		}
-		else if(row == 2)
-		{
-			print(pickerDataSource[row])
-			locationVal = pickerDataSource[row]
-		}
-	   }
-	
-
-	func pickerCall(){
-		
-		if pickerDataSource.count != 0 {
-			
-			locationPicker.reloadAllComponents()
-		}else{
-			Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.pickerCall), userInfo: nil, repeats: false)
-		}
-		
-		
-	}
-	
-	
-	
-	
 	//MARK:- iCarouselView
 	
 	
 	
 	func numberOfItems(in carousel: iCarousel) -> Int {
-
-
-		
-
-		
-		
-		return firstPageNews.count
+	
+		return homeBanners.count
 	}
 	
 	
 	func reloadCarousel(){
-		
-		
-		
 		carouselView.reloadData()
 
-		
-		
-
-		
 	}
-	
-	
-	
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -423,88 +233,38 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		carouselView.scrollToItem(at: carouselView.currentItemIndex + 1, animated: true)
 
 		
-		if carouselView.currentItemIndex ==  firstPageNews.count - 1{
+		if carouselView.currentItemIndex ==  homeBanners.count - 1{
 		
 			Timer.scheduledTimer(timeInterval: 4.5, target: self, selector: #selector(self.runMethod1), userInfo: nil, repeats: false)
 		}else{
 			
 			
 		}
-		
-
 	}
-	
-	
-	
-
 	
 	func runMethod1(){
 		carouselView.scrollToItem(at: 0, animated: true)
 	}
 	
-	
-//	func checkForData(){
-//		
-//		
-//		if firstPageNews.count == 0 {
-//		
-//		
-//		let timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.checkForData), userInfo: nil, repeats: false)
-//		}
-//	}
+
 	
 	
 	func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
 		
 		
-		let tempView = UIView(frame: CGRect(x: 5, y: 0, width: self.view.frame.width - 10, height: self.view.frame.height * 0.50))
+		let tempView = UIView(frame: CGRect(x: 0, y: 50, width: self.view.frame.width  , height: self.view.frame.height * 0.33))
 		tempView.backgroundColor = UIColor.white
 		print("IMP \(self.view.frame.height * 0.10)")
 		
 
 		let imageView = UIImageView()
-		let link = URL(string: firstPageNews[index].imageLink)!
+		let link = URL(string: homeBanners[index].image)!
 		imageView.kf.setImage(with: link)
-		imageView.frame = CGRect(x: 1, y: 50 , width: self.view.frame.width - 12, height: self.view.frame.height * 0.317)
+		imageView.frame = CGRect(x: 5, y: 50, width: self.view.frame.width - 10, height: self.view.frame.height * 0.33)
+		//imageView.contentMode = .scaleAspect
 		tempView.addSubview(imageView)
 		
 		
-		let label0 = UILabel()
-		label0.frame = CGRect(x: 4, y: self.view.frame.height * 0.395, width: self.view.frame.width/3, height: self.view.frame.height * 0.05)
-		label0.textAlignment = NSTextAlignment.left
-		label0.textColor = UIColor.lightGray
-		label0.adjustsFontSizeToFitWidth = true
-		label0.font = UIFont(name: "Avenir Next", size: label0.font.pointSize)
-		let stringUpper = firstPageNews[index].newsSource.uppercased()
-		//firstPageNews[index].newsSource..uppercased
-		label0.text = stringUpper
-		tempView.addSubview(label0)
-		
-		let label1 = UILabel()
-		label1.frame = CGRect(x: 4, y: self.view.frame.height * 0.427, width: self.view.frame.width * 0.95, height: self.view.frame.height * 0.04)
-		label1.textAlignment = NSTextAlignment.left
-		label1.adjustsFontSizeToFitWidth = true
-		label1.text = firstPageNews[index].newsTitle!
-		label1.font = UIFont(name: "Avenir Next", size: 12)
-		tempView.addSubview(label1)
-		
-		
-		let dot = UIImageView(frame: CGRect(x: 4, y: self.view.frame.height * 0.463, width: 25, height: 25))
-		dot.image = UIImage(named: "bell")
-		tempView.addSubview(dot)
-		
-		let label2 = UILabel()
-		label2.frame = CGRect(x: 26, y: self.view.frame.height * 0.464, width: self.view.frame.width , height: self.view.frame.height * 0.03)
-		label2.textAlignment = NSTextAlignment.left
-		label2.adjustsFontSizeToFitWidth = true
-		label2.font = UIFont(name: label2.font.fontName, size: 13)
-		label2.text = "\(firstPageNews[index].hits!) people have viewed this"
-		tempView.addSubview(label2)
-		
-		
-		
-//		let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.getNewPageOpened (_:)))
-//		tempView.addGestureRecognizer(gesture)
 		
 		
 		
@@ -514,85 +274,36 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		tempView.layer.shadowRadius = 2.0
 		tempView.layer.shadowOpacity = 0.6
 		tempView.layer.masksToBounds = false
-		//tempView.layer.shadowPath = UIBezierPath(roundedRect: tempView.bounds, cornerRadius: tempView.contentView.layer.cornerRadius).cgPathlayer.borderColor = UIColor.lightGray.cgColor
 		
-		//tempView.layer.shadowPath = UIBezierPath(roundedRect: tempView.bounds, cornerRadius: tempView.layer.cornerRadius).cgPa
 		
 		return tempView
 		
-		
-		
-		
-		
-		
-
-
-		
-		
-
 	}
 	
 	func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
 		
-		linkToCall = firstPageNews[index].pageLink
+		//linkToCall = homeBanners[index].pageLink
 		callLinkFunc()
 		
 	}
 	
       func getNewPageOpened(_ sender:UITapGestureRecognizer){
-	// do other task
-	
-	
-//	if let link = linkToCall {
-//		
-//	//	UIApplication.shared.openURL(NSURL(string: link)! as URL)
-//
-//	}
+
 		print("Hello world")
 	}
 	
 	
 	func callLinkFunc(){
 
-		if let link = linkToCall {
-			
-			if #available(iOS 10.0, *) {
-				  UIApplication.shared.open(NSURL(string: link)! as URL, options: [:], completionHandler: nil)
-			} else {
-				  UIApplication.shared.openURL(NSURL(string: link)! as URL)
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			//UIApplication.shared.open(NSURL(string: link)! as URL, options: [:], completionHandler: nil)
-			
-		}
-		
-		
-		
+//		if let link = linkToCall {
+//			
+//			if #available(iOS 10.0, *) {
+//				  UIApplication.shared.open(NSURL(string: link)! as URL, options: [:], completionHandler: nil)
+//			} else {
+//				  UIApplication.shared.openURL(NSURL(string: link)! as URL)
+//			}
+//		}
 	}
-	
-	
-	
-	@IBAction func cancelBtnTapped(_ sender: Any) {
-		
-		
-		locationPicker.isHidden = true
-
-		
-	}
-	
-	
-	
-	
-	
 	
 	func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
 		if option == iCarouselOption.spacing{
@@ -601,23 +312,16 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		return value
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	// MARK: UICollectionViewDataSource
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		// #warning Incomplete implementation, return the number of sections
+		
 		return 1
 	}
 	
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		// #warning Incomplete implementation, return the number of items
+		
 		return firstView.count
 	}
 	
@@ -643,22 +347,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	}
 
 	
-	// MARK: UICollectionViewDelegate
-	
-//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//
-//		return CGSize(width: collectionView.frame.width * 0.30, height: collectionView.frame.height * 0.28)
-//	}
-//	
-	
-	
-	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		
-		
-//		let selectedCell:UICollectionViewCell = collectionView.cellForItem(at: indexPath)!  // collectionView.cellForRowAtIndexPath(indexPath)!
-//		selectedCell.contentView.backgroundColor = UIColor.red
-		
 		
 		if (indexPath.row >= 0 && indexPath.row <= 3)
 		{
@@ -668,7 +357,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 
 		
 		} else if(indexPath.row == 8){
-			//indexValue = indexPath.row
+			
 			self.performSegue(withIdentifier: "profilevc", sender: self)
 			
 		}
@@ -679,17 +368,13 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 			
 			let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
 				(result : UIAlertAction) -> Void in
-				//print("OK")
+				
 			}
 			alertController.addAction(okAction)
 			self.present(alertController, animated: true, completion: nil)
 
 			
-			//UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
-			
-			
-			// MARK:- todo
-			//self.performSegue(withIdentifier: "discoverfromhome", sender: self)
+		
 		}
 		
 		
@@ -707,10 +392,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 			self.present(alertController, animated: true, completion: nil)
 
 			
-			//UIAlertView.init(title: "Coming Soon", message: "Hold on For a While", delegate: self, cancelButtonTitle: "OK").show()
 			
-			// MARK:- todo
-			//self.performSegue(withIdentifier: "RestCell", sender: self)
 
 		}
 		
@@ -724,36 +406,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	}
 	
 	
-	// MARK:- location change tapped
-	
-	
-	@IBAction func changeLocationPopup(_ sender: Any) {
-		
-		getLocationValues()
-		
-		
-		locationPopup.isHidden = false
-		
-		//locationPopup.layer.cornerRadius = 10
-		locationPopup.layer.shadowColor = UIColor.darkGray.cgColor
-		locationPopup.layer.shadowOffset = CGSize(width: 0.5, height: 2.0)
-		locationPopup.layer.shadowRadius = 320.0
-		locationPopup.layer.shadowOpacity = 6.0
-		locationPopup.layer.masksToBounds = false
-		
-		
-		
-		firstCollectionView.setRecursiveUserInteraction(false)
-		carouselView.setRecursiveUserInteraction(false)
-		
-//		firstCollectionView.isAccessibilityElement = false
-		
-//		view.setRecursiveUserInteraction(false)
-//		locationPopup.setRecursiveUserInteraction(true)
-		
-		
-				
-	}
+
 	
 	func getLocationValues(){
 		
@@ -766,15 +419,13 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		profileRequest.httpBody = postString1.data(using: .utf8)
 		
 		let task2 = URLSession.shared.dataTask(with: profileRequest) { data, response, error in
-			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
 				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				//print("response = \(response)")
+				
 			}
 				
 			else {
-				//print("RFcss")
-				//let responseString = String(data: data!, encoding: .utf8)
-				//print("responseString = \(responseString!)")
+				
 				
 				
 				
@@ -807,18 +458,7 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 		
 		
 	}
-	
-//	@IBOutlet weak var doneBtnTappedHere: UIButton!
-	
-	@IBAction func doneBtnTappedHere(_ sender: Any) {
-		
-		self.locationPopup.isHidden = true
-		print("here we are")
-		
-		changeLocApiCall()
 
-	}
-	
 	
 	
 	// MARK: - Navigation
@@ -833,38 +473,8 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 			
 			
 		}
-			
-		// MARK: todo
-//		else if (segue.identifier == "RestCell") {
-//			
-//			timerDel.invalidate()
-//			
-//			let homeThirdVC = segue.destination as! HomeThirdVC
-//			homeThirdVC.indexValue = indexValue
-//			
-//			
-//		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		else if (segue.identifier == "profilevc"){
-//			let profilevc = segue.destination as! ProfileVC
-//			
-//		}
-//
+
 		
 	}
-	
-	
-	
-	
-
 }
 
