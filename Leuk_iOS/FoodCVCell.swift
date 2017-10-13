@@ -24,7 +24,7 @@ class FoodCVCell: UICollectionViewCell {
 		super.awakeFromNib()
 		
 		foodPlaceImage.backgroundColor = UIColor.leukRed()
-		foodPlaceImage.image = UIImage(named: "dinnerPlace")
+		//foodPlaceImage.image = UIImage(named: "dinnerPlace")
 		foodPlaceImage.layer.cornerRadius = 8.0
 		foodPlaceImage.clipsToBounds = true
 		// Initialization code

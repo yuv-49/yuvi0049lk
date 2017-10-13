@@ -44,11 +44,15 @@ class EventsIndividualVC: UIViewController {
 	
 	func updateUI(){
 		
-		let link = URL(string: receiverEventValues.eventImageLink)!
-		eventImage.kf.setImage(with: link)
-		let link1 = URL(string: receiverEventValues.eventLogo)!
-		eventLogo.kf.setImage(with: link1)
+		if let link = URL(string: receiverEventValues.eventImageLink)
+		{
+			eventImage.kf.setImage(with: link)
 		
+		}
+		if let link1 = URL(string: receiverEventValues.eventLogo)
+		{
+			eventLogo.kf.setImage(with: link1)
+		}
 		eventHostedBy.text = receiverEventValues.eventHostedBy
 		eventFee.text = "₹ \(receiverEventValues.eventFee!)"
 		eventName.text = receiverEventValues.eventName

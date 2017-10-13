@@ -11,7 +11,7 @@ import SwiftyJSON
 import CoreLocation
 import Kingfisher
 
-class PlacesFirstTVC: UITableViewController {
+class PlacesFirstTVC: UICollectionViewController {
 
 	//var indexValue: Int!
 	var place1 = Places()
@@ -19,12 +19,23 @@ class PlacesFirstTVC: UITableViewController {
 	var indexValuePlacesDescription: Int!
 	//var placesSecondIndexImage: UIImage!
 	
+	
+	@IBOutlet var myCollectionView: UICollectionView!
+	private let reuseIdentifier = "Cell"
+
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 	
 	setTitleForNotification()
 	
-
+	let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+	layout.itemSize = CGSize(width: self.view.frame.width * 0.485, height: self.view.frame.height * 0.33)
+	layout.minimumLineSpacing = 10
+	
+	myCollectionView.collectionViewLayout = layout
+	
+	self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 	
 	//setPlacesValues()
 
@@ -104,7 +115,7 @@ class PlacesFirstTVC: UITableViewController {
 	
 	func  do_table_refresh(){
 		
-		self.tableView.reloadData()
+		self.myCollectionView.reloadData()
 		
 	}
 	
@@ -128,13 +139,11 @@ class PlacesFirstTVC: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
+		return 1
+	}
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        // #warning Incomplete implementation, return the number of rows
 	
 	
 	  if(indexValueSecond == 0){
@@ -160,8 +169,17 @@ class PlacesFirstTVC: UITableViewController {
 	}
 
 	
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "placesfirsttvc", for: indexPath) as! PlacesFirstTVCell
+ override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "placesfirsttvc", for: indexPath) as! PlacesFirstTVCell
+	let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "placesfirsttvc", for: indexPath) as! PlacesFirstTVCell
+	
+	cell.layer.shadowColor = UIColor.gray.cgColor
+	cell.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+	cell.layer.shadowRadius = 2.0
+	cell.layer.shadowOpacity = 0.6
+	cell.layer.masksToBounds = false
+	cell.layer.shadowPath = UIBezierPath(roundedRect:cell.bounds, cornerRadius:cell.contentView.layer.cornerRadius).cgPath
+	
 
 	if(indexValueSecond == 0){
 		updateValues(restaurantValues, cellForRow: indexPath, TableCell: cell)
@@ -227,9 +245,9 @@ class PlacesFirstTVC: UITableViewController {
 		TVcell.placeDistance!.text = valueForPlaces[indexPath.row].placeDistance
 		
 		
-		if valueForPlaces[indexPath.row].featured == "0"{
-			TVcell.placePremium.isHidden = true
-		}
+//		if valueForPlaces[indexPath.row].featured == "0"{
+//			TVcell.placePremium.isHidden = true
+//		}
 
 		
 	}
@@ -268,27 +286,27 @@ class PlacesFirstTVC: UITableViewController {
 	
 	
 	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		//indexValuePlacesDescription = indexPath.row
-		let indexPathValues = tableView.indexPathForSelectedRow
+override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {		//indexValuePlacesDescription = indexPath.row
+		//let indexPathValues = collectionView.indexPathsForSelectedItems
+	       let indexPathValues = indexPath
 		
 		if(indexValueSecond == 0){
-			updateValuesForSegue(restaurantValues, cellForRow: indexPathValues!)
+			updateValuesForSegue(restaurantValues, cellForRow: indexPathValues)
 		}
 		else if(indexValueSecond == 1){
-			updateValuesForSegue(EntertainmentValues, cellForRow: indexPathValues!)
+			updateValuesForSegue(EntertainmentValues, cellForRow: indexPathValues)
 		}
 		else if(indexValueSecond == 2){
-			updateValuesForSegue(pubsValues, cellForRow: indexPathValues!)
+			updateValuesForSegue(pubsValues, cellForRow: indexPathValues)
 		}
 		else if(indexValueSecond == 3){
-			updateValuesForSegue(cafeValues, cellForRow: indexPathValues!)
+			updateValuesForSegue(cafeValues, cellForRow: indexPathValues)
 		}
 		else if(indexValueSecond == 4){
-			updateValuesForSegue(storesValues, cellForRow: indexPathValues!)
+			updateValuesForSegue(storesValues, cellForRow: indexPathValues)
 		}
 		else {
-			updateValuesForSegue(MedicalValues, cellForRow: indexPathValues!)
+			updateValuesForSegue(MedicalValues, cellForRow: indexPathValues)
 		}
 		
 		
@@ -299,22 +317,22 @@ class PlacesFirstTVC: UITableViewController {
 	
 	func updateValuesForSegue(_ valueForPlaces:[Places],cellForRow indexPath: IndexPath ){
 		
-		let indexPath = tableView.indexPathForSelectedRow
+		//let indexPath = tableView.indexPathForSelectedRow
 		//let currentCell = tableView.cellForRow(at: indexPath!) as! PlacesRestaurantTVCell
 		//place1.placeImage = placesSecondIndexImage   //valueForPlaces[(indexPath?.row)!].placeImage
-		place1.placeName = valueForPlaces[(indexPath?.row)!].placeName
-		place1.placeAddress = valueForPlaces[(indexPath?.row)!].placeAddress
-		place1.placeDescription = valueForPlaces[(indexPath?.row)!].placeDescription
-		place1.placeDistance = valueForPlaces[(indexPath?.row)!].placeDistance
-		place1.placeRating = valueForPlaces[(indexPath?.row)!].placeRating
-		place1.phoneNumber = valueForPlaces[(indexPath?.row)!].phoneNumber
-		place1.mapURL = valueForPlaces[(indexPath?.row)!].mapURL
-		place1.placeType = valueForPlaces[(indexPath?.row)!].placeType
-		place1.photoLink = valueForPlaces[(indexPath?.row)!].photoLink
-		place1.placeFirstImageUrl = valueForPlaces[(indexPath?.row)!].placeFirstImageUrl
-		place1.placeSecondImageUrl = valueForPlaces[(indexPath?.row)!].placeSecondImageUrl
-		place1.latFinal = valueForPlaces[(indexPath?.row)!].latFinal
-		place1.longFinal = valueForPlaces[(indexPath?.row)!].longFinal
+		place1.placeName = valueForPlaces[(indexPath.row)].placeName
+		place1.placeAddress = valueForPlaces[(indexPath.row)].placeAddress
+		place1.placeDescription = valueForPlaces[(indexPath.row)].placeDescription
+		place1.placeDistance = valueForPlaces[(indexPath.row)].placeDistance
+		place1.placeRating = valueForPlaces[(indexPath.row)].placeRating
+		place1.phoneNumber = valueForPlaces[(indexPath.row)].phoneNumber
+		place1.mapURL = valueForPlaces[(indexPath.row)].mapURL
+		place1.placeType = valueForPlaces[(indexPath.row)].placeType
+		place1.photoLink = valueForPlaces[(indexPath.row)].photoLink
+		place1.placeFirstImageUrl = valueForPlaces[(indexPath.row)].placeFirstImageUrl
+		place1.placeSecondImageUrl = valueForPlaces[(indexPath.row)].placeSecondImageUrl
+		place1.latFinal = valueForPlaces[(indexPath.row)].latFinal
+		place1.longFinal = valueForPlaces[(indexPath.row)].longFinal
 	}
 
 

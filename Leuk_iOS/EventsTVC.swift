@@ -143,8 +143,11 @@ class EventsTVC: UITableViewController {
 //		TVcell.imageLink.image = valueForPlaces[indexPath.row].eventImageOriginal
 //		print(TVcell.imageLink.image)
 		print("\(valueForPlaces[indexPath.row].eventImageLink)")
-		let link = URL(string: valueForPlaces[indexPath.row].eventImageLink)!
-		TVcell.imageLink.kf.setImage(with: link)
+		if let val = URL(string: valueForPlaces[indexPath.row].eventImageLink)
+		{
+			TVcell.imageLink.kf.setImage(with: val)
+		}
+		
 		let link2 = URL(string: valueForPlaces[indexPath.row].eventLogo)!
 		TVcell.logo.kf.setImage(with: link2)
 		

@@ -22,7 +22,7 @@ class FoodCVC: UICollectionViewController {
 	var statusLocal: String!
 
 	@IBOutlet var myCollectionView: UICollectionView!
-    override func viewDidLoad() {
+       override func viewDidLoad() {
         super.viewDidLoad()
 
 	valueForSecondApiCall = 1000
