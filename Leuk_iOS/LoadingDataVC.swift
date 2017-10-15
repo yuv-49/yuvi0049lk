@@ -59,15 +59,18 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	countOfPagesForFirstPage = 0
 
 	profileApi()
+	getFeed()
 
 	//////////////////firstpageNewsApi()
 	
 	getApi()
 	getEventsValue()
+	
+	getPlacesValues()
 
 	getTotalPageCount()
 	getHomeBanners()
-	getFeed()
+	
 	
 	
     }
@@ -192,7 +195,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	
 	func getFeed(){
 		
-		var feedRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getFeed")!)
+		var feedRequest = URLRequest(url: URL(string: "\(LEUK_URL)\(PHP_INDEX)method=getiOSFeed")!)
 		feedRequest.httpMethod = "POST"
 		let postStringForFeeds="key=\(UNIVERSAL_KEY)&secret=\(SECRET)&sessionid=\(SESSION_ID!)&token=\(TOKEN_ID_FROM_LEUK!)"
 		print("\(postStringForFeeds)")
@@ -212,6 +215,7 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 				
 				
 				var json = JSON(data: data!)
+				print(json)
 				let numberOfEvents =  json["response"]["data"].count
 				countOfPagesForFirstPage = numberOfEvents
 				
@@ -260,11 +264,159 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 								print("ht \(getFeedArray.id)")
 
 							}
+							
+				
+							
 						}
+						
+						// Code here..
+						
+						let noOfEvents = json["response"]["data"][index]["inner_data"].count
+						
+						print("hpy \(noOfEvents)")
+						if noOfEvents > 1 {
+
+							
+								
+								if getFeedArray.type == "1" {
+									
+									for indexVal in 0...noOfEvents-1
+									{
+									
+									let placesValue = Places()
+									placesValue.placeId = json["response"]["data"][index]["inner_data"][indexVal]["id"].string!
+									placesValue.placeName = json["response"]["data"][index]["inner_data"][indexVal]["name"].string!
+									placesValue.placeType = json["response"]["data"][index]["inner_data"][indexVal]["type"].string!
+									placesValue.latFinal = json["response"]["data"][index]["inner_data"][indexVal]["latitude"].string!
+									placesValue.longFinal = json["response"]["data"][index]["inner_data"][indexVal]["longitude"].string!
+									placesValue.placeRating = json["response"]["data"][index]["inner_data"][indexVal]["rating"].string!
+									placesValue.placeDescription = json["response"]["data"][index]["inner_data"][indexVal]["description"].string!
+									placesValue.placeAddress = json["response"]["data"][index]["inner_data"][indexVal]["address"].string!
+									placesValue.placeArea = json["response"]["data"][index]["inner_data"][indexVal]["location"].string!
+									placesValue.placeImageFullLink = json["response"]["data"][index]["inner_data"][indexVal]["photo_link"].string!
+									placesValue.mapURL = json["response"]["data"][index]["inner_data"][indexVal]["maps_url"].string!
+									placesValue.lastUpdate = json["response"]["data"][index]["inner_data"][indexVal]["last_update"].string!
+									
+									placesValue.featured = json["response"]["data"][index]["inner_data"][indexVal]["featured"].string!
+									placesValue.recommended = json["response"]["data"][index]["inner_data"][indexVal]["recommended"].string!
+									
+									var openingTime = json["response"]["data"][index]["inner_data"][indexVal]["opening_hour"].string!
+									var closingTime = json["response"]["data"][index]["inner_data"][indexVal]["closing_hour"].string!
+									
+									var openingTimeFInal = openingTime.characters.split{$0 == ":"}.map(String.init)
+									var closingTimeFinal = closingTime.characters.split{$0 == ":"}.map(String.init)
+									if openingTimeFInal.count != 0 && closingTimeFinal.count != 0 {
+										
+										placesValue.openingTimeHour = openingTimeFInal[0]
+										
+										placesValue.openingTimeMinute = "00"
+										placesValue.closingTimeHour = closingTimeFinal[0]
+										placesValue.closingTimeMinute = "00"
+									}
+									
+									placesValue.service = json["response"]["data"][index]["inner_data"][indexVal]["service"].string!
+									placesValue.orderType = json["response"]["data"][index]["inner_data"][indexVal]["order_type"].string!
+									
+									placesValue.views = json["response"]["data"][index]["inner_data"][indexVal]["views"].string!
+									
+									
+									
+									if(placesValue.placeRating == ""){
+										placesValue.placeRating = "3.0"
+									}
+									
+									placesValue.photoLink = json["response"]["data"][index]["inner_data"][indexVal]["photo_link"].string!
+									
+									
+									getFeedArray.placeParam.append(placesValue)
+									
+									
+									}
+									
+									
+									
+									
+								}else if getFeedArray.type == "2" {
+									
+									
+									for indexVal in 0...noOfEvents-1
+									{
+										
+										let eventValuesArray = homeEvents()
+										
+										eventValuesArray.eventId = json["response"]["data"][index]["inner_data"][indexVal]["id"].string!
+										eventValuesArray.eventLogo = json["response"]["data"][index]["inner_data"][indexVal]["logo"].string!
+										eventValuesArray.eventName = json["response"]["data"][index]["inner_data"][indexVal]["name"].string!
+										eventValuesArray.eventHostedBy = json["response"]["data"][index]["inner_data"][indexVal]["hosted_by"].string!
+										eventValuesArray.eventCategory = json["response"]["data"][index]["inner_data"][indexVal]["category"].string!
+										eventValuesArray.eventDate = json["response"]["data"][index]["inner_data"][indexVal]["date"].string!
+										eventValuesArray.eventTime = json["response"]["data"][index]["inner_data"][indexVal]["time"].string!
+										eventValuesArray.eventImageLink = json["response"]["data"][index]["inner_data"][indexVal]["image_link"].string!
+										
+										eventValuesArray.eventTicketBasecode = json["response"]["data"][index]["inner_data"][indexVal]["ticket_basecode"].string!
+										
+										
+										eventValuesArray.eventDesc = json["response"]["data"][index]["inner_data"][indexVal]["description"].string!
+										eventValuesArray.eventFee = json["response"]["data"][index]["inner_data"][indexVal]["fee"].string!
+										eventValuesArray.eventPhoneNumber = json["response"]["data"][index]["inner_data"][indexVal]["phone"].string!
+										eventValuesArray.eventAddress = json["response"]["data"][index]["inner_data"][indexVal]["address"].string!
+										eventValuesArray.eventLat = json["response"]["data"][index]["inner_data"][indexVal]["latitude"].string!
+										eventValuesArray.eventLong = json["response"]["data"][index]["inner_data"][indexVal]["longitude"].string!
+										eventValuesArray.eventSingleLimit = json["response"]["data"][index]["inner_data"][indexVal]["individual_ticket_limit"].string!
+										eventValuesArray.eventTicketSales = json["response"]["data"][index]["inner_data"][indexVal]["ticket_sales"].string!
+										eventValuesArray.eventTicketLimit = json["response"]["data"][index]["inner_data"][indexVal]["ticket_limit"].string!
+										eventValuesArray.eventWebsite = json["response"]["data"][index]["inner_data"][indexVal]["website"].string!
+										
+										eventValuesArray.recommended = json["response"]["data"][index]["inner_data"][indexVal]["recommended"].string!
+										
+										eventValuesArray.views = json["response"]["data"][index]["inner_data"][indexVal]["views"].string!
+										
+										
+										getFeedArray.eventParam.append(eventValuesArray)
+									}
+									
+									
+									
+									
+									
+								}else if getFeedArray.type == "3"{
+									
+									for indexVal in 0...noOfEvents-1
+									{
+										
+										let offerValue = HomeOffers()
+										offerValue.offerDiscount = json["response"]["data"][index]["inner_data"][indexVal]["offer_title"].string!
+										offerValue.offerImage = json["response"]["data"][index]["inner_data"][indexVal]["offer_image_link"].string!
+										offerValue.offerBy = json["response"]["data"][index]["inner_data"][indexVal]["offer_by"].string!
+										offerValue.offerCategory = json["response"]["data"][index]["inner_data"][indexVal]["category"].string!
+										offerValue.offerDeal = json["response"]["data"][index]["inner_data"][indexVal]["coupon_basecode"].string!
+										offerValue.offerById = json["response"]["data"][index]["inner_data"][indexVal]["offer_by_id"].string!
+										offerValue.offerDesc = json["response"]["data"][index]["inner_data"][indexVal]["offer_desc"].string!
+										offerValue.offerExpiry = json["response"]["data"][index]["inner_data"][indexVal]["offer_expiry"].string!
+										offerValue.offerTiming = json["response"]["data"][index]["inner_data"][indexVal]["offer_time"].string!
+										offerValue.offerTitle = json["response"]["data"][index]["inner_data"][indexVal]["offer_title"].string!
+										offerValue.recommended = json["response"]["data"][index]["inner_data"][indexVal]["recommended"].string!
+										
+										
+										getFeedArray.offerParam.append(offerValue)
+										
+										
+										
+									}
+									
+								}
+							
+							}
+							
+						
+
+						
 						
 						
 						
 
+						
+						
 
 						
 						
@@ -283,11 +435,6 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 		
 		
 		task2.resume()
-		
-		
-		
-		
-		
 	}
 	
 	//MARK:- HomeBanners
@@ -510,11 +657,11 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 				var json = JSON(data: data!)
 				//print("hsuhu \(json)")
 				//print()
-				let countOfPlaces =  json["response"]["data"][0]["total_page_count"].int!
+				placesPagesCount =  json["response"]["data"][0]["total_page_count"].int!
 				
 				//print("total \(countOfPlaces)")
 				
-				self.getPlacesValues(countOfPlaces)
+				//self.getPlacesValues()
 
 				
 				
@@ -530,15 +677,19 @@ class LoadingDataVC: UIViewController, CLLocationManagerDelegate {
 	
 	
 	
-	func getPlacesValues(_ count: Int){
+	func getPlacesValues(){
 		
+		
+		
+		
+		//call for the rest of pages with value placesPagesCount in any other place than this
 		
 		
 		// MARK:- places api
 
 		
 		
-		for values in 1...count{
+		for values in 1...5{
 			
 			//print("HEREEEEEEEE")
 		

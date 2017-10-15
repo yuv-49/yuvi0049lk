@@ -478,3 +478,12 @@ class HomeFirstVC: UIViewController , UICollectionViewDataSource, UICollectionVi
 	}
 }
 
+
+
+
+
+
+
+
+
+

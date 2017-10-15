@@ -24,6 +24,10 @@ class Feeds
 	var priority: String!
 	var location: String!
 	var status: String!
+	var placeParam : [Places] = []
+	var eventParam: [homeEvents] = []
+	var offerParam : [HomeOffers] = []
+	
 	
 	
 	

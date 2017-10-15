@@ -37,6 +37,8 @@ var userLongitude: Double!
 
 
 
+
+
 class HomeOffers{
 	var offerBy : String!
 	var offerById: String!
@@ -148,6 +150,8 @@ var pageOneValues = [Places]()
 var pageFourValues = [Places]()
 
 var orderDetailsForUser = Places()
+
+var placesPagesCount : Int!
 
 
 
